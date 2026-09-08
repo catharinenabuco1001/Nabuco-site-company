@@ -5,6 +5,12 @@ import type { Video } from "@/types";
 // YouTube Data API for ativada (ver src/lib/youtube.ts), os vídeos com
 // platform: "youtube" poderão vir dessa API em vez deste arquivo, sem
 // precisar alterar nenhum componente de UI.
+//
+// Para adicionar um vídeo real do canal: basta "title" + "url" (o link do
+// YouTube) + "category" + "platform". Não é preciso subir uma imagem de
+// capa — o VideoCard deriva a thumbnail automaticamente a partir do próprio
+// link (ver getVideoThumbnail em src/lib/utils.ts). Só use "thumbnail" se
+// quiser forçar uma imagem específica.
 
 export const videos: Video[] = [
   {

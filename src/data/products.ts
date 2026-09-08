@@ -34,6 +34,7 @@ export const products: Product[] = [
     ctaLabel: "Comprar na Amazon",
     ctaUrl: "", // preenchido dinamicamente a partir de siteConfig.links.amazonCartas
     badge: "Livro",
+    coverImage: "images/cartas-vestibulando.jpg",
   },
 ];
 

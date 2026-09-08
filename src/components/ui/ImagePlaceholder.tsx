@@ -22,7 +22,7 @@ export function ImagePlaceholder({
       role="img"
       aria-label={label ?? "Imagem em breve"}
     >
-      <span className="image-placeholder-label font-serif text-cream/70 text-sm tracking-widest2 uppercase px-6 text-center">
+      <span className="image-placeholder-label font-serif text-ink-900/70 text-sm tracking-widest2 uppercase px-6 text-center">
         {label ?? "Imagem em breve"}
       </span>
     </div>

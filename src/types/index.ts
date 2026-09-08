@@ -31,6 +31,7 @@ export type Product = {
   ctaUrl: string;
   href?: string; // link interno para página de detalhe (ex.: /pac)
   badge?: string;
+  coverImage?: string; // caminho relativo a /public, ex.: "images/cartas-vestibulando.jpg"
 };
 
 export type Talk = {

@@ -6,7 +6,7 @@ import { ImagePlaceholder } from "@/components/ui/ImagePlaceholder";
 export const metadata: Metadata = {
   title: "Método PAC",
   description:
-    "Um método para transformar estudo desorganizado em execução consciente. Pare. Analise. Conquiste.",
+    "Pense antes de calcular. Um método para transformar estudo desorganizado em execução consciente.",
 };
 
 const steps = [
@@ -41,7 +41,7 @@ export default function PacPage() {
                 MÉTODO PAC
               </h1>
               <p className="mt-4 font-serif italic text-2xl sm:text-3xl text-plum-600">
-                Pare. Analise. Conquiste.
+                Pense antes de calcular.
               </p>
               <p className="mt-6 max-w-lg text-base sm:text-lg text-ink-700/80 leading-relaxed">
                 Um método para transformar estudo desorganizado em execução consciente.
@@ -92,7 +92,11 @@ export default function PacPage() {
             </h2>
             <p className="mt-4 text-cream/60 text-sm">TODO: inserir preço e informações de acesso</p>
             <div className="mt-8">
-              <CTA href="/produtos" variant="primary" className="bg-cream text-ink-900 hover:bg-gold-500">
+              <CTA
+                href="/produtos"
+                variant="primary"
+                className="bg-cream text-ink-900 hover:bg-gold-500 hover:text-cream-900"
+              >
                 Conhecer o PAC
               </CTA>
             </div>

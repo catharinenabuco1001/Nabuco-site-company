@@ -9,34 +9,41 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
+        // Paleta PAC — trocar os valores aqui já atualiza o site inteiro,
+        // sem tocar nos componentes. Os nomes ("cream", "ink"...) são só
+        // identificadores herdados; o que importa é o papel de cada um:
+        //   cream = fundo (verde escuro)      ink  = texto/painéis invertidos (off-white)
+        //   plum  = destaque secundário (dourado envelhecido, para links e textos)
+        //   gold  = destaque principal (dourado metálico vivo, botões/badges)
         cream: {
-          DEFAULT: "#F7F4EE",
-          50: "#FDFCFA",
-          100: "#F7F4EE",
-          200: "#EFEAE0",
+          DEFAULT: "#0F2E22", // fundo principal do site
+          50: "#173B2C", // superfícies elevadas (cards, inputs)
+          100: "#112F23", // faixas de seção alternadas
+          200: "#0A2117",
+          900: "#081910", // texto escuro sobre superfícies claras/douradas
         },
         ink: {
-          DEFAULT: "#141212",
-          900: "#0F0D0D",
-          800: "#1A1717",
-          700: "#2B2626",
+          DEFAULT: "#F2F0EB", // off-white — texto principal e painéis invertidos
+          900: "#F2F0EB",
+          800: "#F2F0EB",
+          700: "#F2F0EB",
         },
         plum: {
-          DEFAULT: "#4A1030",
-          50: "#F6ECF1",
-          100: "#E4C2D2",
-          400: "#7A2650",
-          500: "#5C1B3C",
-          600: "#4A1030",
-          700: "#380A24",
-          900: "#230515",
+          DEFAULT: "#B8903E", // dourado envelhecido — destaque secundário (links, eyebrows)
+          50: "#F7F0DE",
+          100: "#EAD9AE",
+          400: "#D9B66A",
+          500: "#C49A46",
+          600: "#B8903E",
+          700: "#8C6B2A",
+          900: "#5C4419",
         },
         gold: {
-          DEFAULT: "#C9A227",
-          100: "#F3E7BE",
-          300: "#DDBA5C",
-          500: "#C9A227",
-          700: "#96771A",
+          DEFAULT: "#C9A24C", // dourado metálico — destaque principal (botões, badges)
+          100: "#F3E9C9",
+          300: "#DEBD6E",
+          500: "#C9A24C",
+          700: "#96751F",
         },
       },
       fontFamily: {

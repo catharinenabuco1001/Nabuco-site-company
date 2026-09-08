@@ -44,7 +44,7 @@ export default function PalestrasPage() {
               <CTA
                 href={siteConfig.contact.email ? `mailto:${siteConfig.contact.email}` : "#"}
                 variant="primary"
-                className="bg-cream text-ink-900 hover:bg-gold-500"
+                className="bg-cream text-ink-900 hover:bg-gold-500 hover:text-cream-900"
               >
                 Levar Catharine para meu evento
               </CTA>
