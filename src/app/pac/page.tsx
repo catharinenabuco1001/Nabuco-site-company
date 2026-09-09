@@ -2,30 +2,13 @@ import type { Metadata } from "next";
 import { Container } from "@/components/ui/Container";
 import { CTA } from "@/components/ui/CTA";
 import { ImagePlaceholder } from "@/components/ui/ImagePlaceholder";
+import { pacSteps } from "@/components/PacBlock";
 
 export const metadata: Metadata = {
   title: "Método PAC",
   description:
-    "Pense antes de calcular. Um método para transformar estudo desorganizado em execução consciente.",
+    "Pense Antes de Calcular. A aula te faz aprender; o PAC garante que o aprendizado se consolide.",
 };
-
-const steps = [
-  {
-    letter: "P",
-    word: "Parar",
-    description: "Entender onde você está antes de sair fazendo.",
-  },
-  {
-    letter: "A",
-    word: "Analisar",
-    description: "Diagnosticar erros, prioridades, rotina e estratégia.",
-  },
-  {
-    letter: "C",
-    word: "Conquistar",
-    description: "Transformar análise em execução e resultado.",
-  },
-];
 
 export default function PacPage() {
   return (
@@ -41,10 +24,11 @@ export default function PacPage() {
                 MÉTODO PAC
               </h1>
               <p className="mt-4 font-serif italic text-2xl sm:text-3xl text-plum-600">
-                Pense antes de calcular.
+                Pense Antes de Calcular.
               </p>
               <p className="mt-6 max-w-lg text-base sm:text-lg text-ink-700/80 leading-relaxed">
-                Um método para transformar estudo desorganizado em execução consciente.
+                A aula te faz aprender. O PAC garante que o aprendizado se consolide — porque não
+                adianta dominar a matéria e perder a questão na última linha da conta.
               </p>
               <div className="mt-10">
                 <CTA href="#conhecer" variant="primary">
@@ -61,36 +45,25 @@ export default function PacPage() {
 
       <section id="conhecer" className="py-20 sm:py-28 border-t border-ink-900/10 bg-cream-100/50">
         <Container>
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-px bg-ink-900/10 rounded-2xl overflow-hidden">
-            {steps.map((step) => (
-              <div key={step.letter} className="bg-cream p-10 flex flex-col">
-                <span className="font-serif text-6xl text-plum-600/30">{step.letter}</span>
-                <h2 className="mt-4 font-serif text-2xl text-ink-900">{step.word.toUpperCase()}</h2>
-                <p className="mt-3 text-sm text-ink-700/80 leading-relaxed">{step.description}</p>
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-px bg-ink-900/10">
+            {pacSteps.map((step) => (
+              <div key={step.n} className="bg-cream p-10 flex flex-col">
+                <span className="font-serif text-6xl text-plum-600/30">{step.n}</span>
+                <h2 className="mt-4 font-serif text-2xl text-ink-900">{step.title.toUpperCase()}</h2>
+                <p className="mt-3 text-sm text-ink-700/80 leading-relaxed">{step.desc}</p>
               </div>
             ))}
           </div>
         </Container>
       </section>
 
-      <section className="py-24 sm:py-32">
-        <Container>
-          <div className="max-w-3xl mx-auto text-center">
-            <p className="font-serif italic text-2xl sm:text-3xl lg:text-4xl text-ink-900 text-balance leading-snug">
-              &ldquo;Não é mais uma técnica para estudar. É uma forma de pensar sobre o seu
-              próprio desempenho.&rdquo;
-            </p>
-          </div>
-        </Container>
-      </section>
-
       <section className="py-20 border-t border-ink-900/10">
         <Container>
-          <div className="rounded-3xl bg-ink-900 text-cream px-8 py-16 sm:px-16 sm:py-20 text-center">
+          <div className="bg-ink-900 text-cream px-8 py-16 sm:px-16 sm:py-20 text-center">
             <h2 className="font-serif text-3xl sm:text-4xl max-w-xl mx-auto text-balance">
               Pronta para aplicar o PAC na sua rotina?
             </h2>
-            <p className="mt-4 text-cream/60 text-sm">TODO: inserir preço e informações de acesso</p>
+            <p className="mt-4 text-cream/60 text-sm">Valor e turmas em breve.</p>
             <div className="mt-8">
               <CTA
                 href="/produtos"

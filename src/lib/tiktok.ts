@@ -1,4 +1,6 @@
 import "server-only";
+import type { Video } from "@/types";
+import { publicImageExists } from "@/lib/media";
 
 // Busca a capa real de um vídeo do TikTok usando o oEmbed público oficial
 // (developers.tiktok.com/doc/embed-videos) — não exige API key nem login,
@@ -27,4 +29,15 @@ export async function getTikTokThumbnail(videoUrl: string): Promise<string | und
     console.error("[tiktok] Falha ao buscar capa via oEmbed:", error);
     return undefined;
   }
+}
+
+// Resolve a capa de um TikTok considerando as duas fontes possíveis, na
+// ordem certa: arquivo manual primeiro (public/images/tiktok/<id>.jpg, ver
+// README daquela pasta), depois a busca automática via oEmbed.
+export async function getTikTokCover(video: Pick<Video, "id" | "url">): Promise<string | undefined> {
+  const manualCoverPath = `images/tiktok/${video.id}.jpg`;
+  if (publicImageExists(manualCoverPath)) {
+    return `/${manualCoverPath}`;
+  }
+  return getTikTokThumbnail(video.url);
 }

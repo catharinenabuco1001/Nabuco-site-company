@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { siteConfig } from "@/data/site";
 import { cn } from "@/lib/utils";
@@ -35,11 +36,18 @@ export function Header() {
     >
       <div className="mx-auto w-full max-w-8xl px-5 sm:px-8 lg:px-12">
         <div className="flex h-16 sm:h-20 items-center justify-between">
-          <Link
-            href="/"
-            className="font-serif text-lg sm:text-xl tracking-wide text-ink-900"
-          >
-            CATHARINE NABUCO
+          <Link href="/" className="flex items-center gap-3 min-w-0">
+            <Image
+              src={siteConfig.headerAvatar}
+              alt=""
+              width={34}
+              height={34}
+              className="h-[34px] w-[34px] shrink-0 rounded-full object-cover"
+              style={{ objectPosition: "73% 30%" }}
+            />
+            <span className="font-serif text-lg sm:text-xl tracking-wide text-ink-900 truncate">
+              CATHARINE NABUCO
+            </span>
           </Link>
 
           <nav className="hidden lg:flex items-center gap-8" aria-label="Navegação principal">

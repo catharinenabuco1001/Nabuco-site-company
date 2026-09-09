@@ -1,29 +1,29 @@
 import Link from "next/link";
 import Image from "next/image";
 import type { Video } from "@/types";
-import { publicImageExists } from "@/lib/media";
-import { getTikTokThumbnail } from "@/lib/tiktok";
+import { getTikTokCover } from "@/lib/tiktok";
+import { cn } from "@/lib/utils";
 
-// Capa do TikTok, em ordem de prioridade:
-// 1. Arquivo manual em public/images/tiktok/<id>.jpg, se você quiser forçar
-//    uma imagem específica (ver public/images/tiktok/README.md).
-// 2. Capa real do vídeo, buscada automaticamente via oEmbed do TikTok.
-// 3. Placeholder "TikTok em breve", se as duas anteriores falharem.
-export async function TikTokCard({ video }: { video: Video }) {
-  const manualCoverPath = `images/tiktok/${video.id}.jpg`;
-  const hasManualCover = publicImageExists(manualCoverPath);
-  const autoThumbnail = hasManualCover ? undefined : await getTikTokThumbnail(video.url);
-
-  const coverSrc = hasManualCover ? `/${manualCoverPath}` : autoThumbnail;
+// Capa do TikTok: arquivo manual em public/images/tiktok/<id>.jpg tem
+// prioridade (ver README daquela pasta); senão busca automática via oEmbed;
+// senão o placeholder "TikTok em breve" — nunca quebra.
+export async function TikTokCard({
+  video,
+  className,
+}: {
+  video: Video;
+  className?: string;
+}) {
+  const coverSrc = await getTikTokCover(video);
 
   return (
     <Link
       href={video.url}
       target={video.url === "#" ? undefined : "_blank"}
       rel={video.url === "#" ? undefined : "noopener noreferrer"}
-      className="group block w-40 sm:w-48 shrink-0"
+      className={cn("group block w-[172px] shrink-0", className)}
     >
-      <div className="relative aspect-[9/16] rounded-xl overflow-hidden image-placeholder">
+      <div className="relative aspect-[9/16] overflow-hidden image-placeholder">
         {coverSrc ? (
           <Image
             src={coverSrc}

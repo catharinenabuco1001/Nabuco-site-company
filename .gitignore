@@ -32,6 +32,10 @@ yarn-error.log*
 # Claude Code local tooling
 .claude/
 
+# Material de referência de design (não é código de produção)
+/design_handoff_home_pac/
+*.zip
+
 # typescript
 *.tsbuildinfo
 next-env.d.ts

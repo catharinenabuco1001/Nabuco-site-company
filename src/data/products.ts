@@ -6,7 +6,7 @@ export const products: Product[] = [
   {
     id: "pac",
     name: "Método PAC",
-    tagline: "Pare. Analise. Conquiste.",
+    tagline: "Pense Antes de Calcular.",
     description: "Método de estudo e execução.",
     price: null,
     ctaLabel: "Conhecer o PAC",

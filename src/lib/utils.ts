@@ -35,6 +35,10 @@ export function getVideoThumbnail(
   return undefined;
 }
 
+export function formatDuration(duration: string | null | undefined): string {
+  return duration && duration.trim().length > 0 ? duration : "em breve";
+}
+
 export function formatPrice(price: number | null | undefined): string {
   if (price === null || price === undefined) return "TODO: definir preço";
   return price.toLocaleString("pt-BR", { style: "currency", currency: "BRL" });

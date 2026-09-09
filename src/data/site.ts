@@ -3,7 +3,7 @@
 
 export const siteConfig = {
   name: "Catharine Nabuco",
-  tagline: "Estudar. Criar. Executar.",
+  tagline: "Estudar melhor, não mais.",
   description:
     "Educação, vestibular, performance, inteligência artificial, livros e ideias que estou construindo pelo caminho.",
   url: "https://catharinenabuco.com", // TODO: inserir domínio real
@@ -18,7 +18,10 @@ export const siteConfig = {
     { label: "Sobre", href: "/sobre" },
   ],
 
-  navCta: { label: "Explorar Conteúdos", href: "/aulas" },
+  navCta: { label: "Entrar no PAC", href: "/pac" },
+
+  // Avatar circular no header (ao lado do wordmark).
+  headerAvatar: "/images/hero-retrato.jpeg",
 
   footerLinks: [
     { label: "Aulas", href: "/aulas" },

@@ -56,7 +56,7 @@ export function Footer() {
                     </a>
                   ) : (
                     <span className="text-sm text-cream/40">
-                      {social.label} — TODO: inserir link
+                      {social.label} — em breve
                     </span>
                   )}
                 </li>
@@ -69,7 +69,7 @@ export function Footer() {
           <p className="text-xs text-cream/40">
             © {new Date().getFullYear()} Catharine Nabuco. Todos os direitos reservados.
           </p>
-          <p className="text-xs text-cream/40">Estudar. Criar. Executar.</p>
+          <p className="text-xs text-cream/40">{siteConfig.tagline}</p>
         </div>
       </Container>
     </footer>
