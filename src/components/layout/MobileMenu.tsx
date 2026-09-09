@@ -36,7 +36,7 @@ export function MobileMenu({ open, onClose }: { open: boolean; onClose: () => vo
       aria-label="Menu de navegação"
     >
       <div
-        className="absolute inset-0 bg-ink-900/40 backdrop-blur-sm"
+        className="absolute inset-0 bg-black/40 backdrop-blur-sm"
         onClick={onClose}
         aria-hidden="true"
       />

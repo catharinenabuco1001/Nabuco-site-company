@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import { Container } from "@/components/ui/Container";
 import { ImagePlaceholder } from "@/components/ui/ImagePlaceholder";
 import { Badge } from "@/components/ui/Badge";
+import { publicImageExists } from "@/lib/media";
 
 export const metadata: Metadata = {
   title: "Sobre",
@@ -11,12 +13,26 @@ export const metadata: Metadata = {
 const roles = ["Autora", "Palestrante", "Estudante", "Criadora"];
 
 export default function SobrePage() {
+  const hasPhoto = publicImageExists("images/sobre.jpg");
+
   return (
     <section className="pt-12 sm:pt-16 pb-24">
       <Container>
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
           <div className="lg:col-span-5 lg:sticky lg:top-28">
-            <ImagePlaceholder label="Foto de Catharine — em breve" ratio="aspect-[4/5]" />
+            <div className="relative aspect-[4/5] w-full rounded-2xl overflow-hidden">
+              {hasPhoto ? (
+                <Image
+                  src="/images/sobre.jpg"
+                  alt="Catharine Nabuco"
+                  fill
+                  sizes="(min-width: 1024px) 40vw, 90vw"
+                  className="object-cover"
+                />
+              ) : (
+                <ImagePlaceholder label="Foto de Catharine — em breve" ratio="aspect-[4/5]" />
+              )}
+            </div>
             <div className="mt-6 flex flex-wrap gap-2">
               {roles.map((role) => (
                 <Badge key={role} tone="outline">

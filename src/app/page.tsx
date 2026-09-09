@@ -58,7 +58,7 @@ export default async function HomePage() {
               className="absolute -top-24 -right-24 h-64 w-64 rounded-full bg-plum-600/40 blur-3xl"
               aria-hidden="true"
             />
-            <p className="text-xs font-sans font-semibold uppercase tracking-widest2 text-gold-500 mb-4 relative">
+            <p className="text-xs font-sans font-semibold uppercase tracking-widest2 text-gold-700 mb-4 relative">
               Método PAC
             </p>
             <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl max-w-2xl mx-auto text-balance relative">
@@ -69,7 +69,11 @@ export default async function HomePage() {
               desempenho.
             </p>
             <div className="mt-8 relative">
-              <CTA href="/pac" variant="primary" className="bg-cream text-ink-900 hover:bg-gold-500">
+              <CTA
+                href="/pac"
+                variant="primary"
+                className="bg-cream text-ink-900 hover:bg-gold-500 hover:text-cream-900"
+              >
                 Conhecer o PAC
               </CTA>
             </div>

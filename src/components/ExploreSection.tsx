@@ -50,7 +50,7 @@ export function ExploreSection() {
                 <p className="text-sm text-ink-700/70 group-hover:text-cream/70 transition-colors leading-relaxed">
                   {u.description}
                 </p>
-                <span className="mt-4 inline-flex items-center gap-1.5 text-xs font-sans font-semibold uppercase tracking-wide text-plum-600 group-hover:text-gold-500 transition-colors">
+                <span className="mt-4 inline-flex items-center gap-1.5 text-xs font-sans font-semibold uppercase tracking-wide text-plum-600 group-hover:text-gold-700 transition-colors">
                   Explorar
                   <svg width="12" height="10" viewBox="0 0 12 10" fill="none" aria-hidden="true">
                     <path

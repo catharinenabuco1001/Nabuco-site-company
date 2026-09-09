@@ -1,13 +1,27 @@
+import Image from "next/image";
 import type { Product } from "@/types";
 import { Badge } from "@/components/ui/Badge";
 import { CTA } from "@/components/ui/CTA";
 import { formatPrice } from "@/lib/utils";
+import { publicImageExists } from "@/lib/media";
 
 export function ProductCard({ product }: { product: Product }) {
   const isExternal = product.ctaUrl.startsWith("http");
+  const hasCover = Boolean(product.coverImage && publicImageExists(product.coverImage));
 
   return (
     <div className="group flex flex-col h-full rounded-2xl border border-ink-900/10 bg-cream-50 p-8 transition-all duration-300 hover:border-plum-500/40 hover:shadow-[0_20px_45px_-30px_rgba(20,18,18,0.4)]">
+      {hasCover && product.coverImage && (
+        <div className="relative aspect-[3/4] w-full rounded-xl overflow-hidden mb-6">
+          <Image
+            src={`/${product.coverImage}`}
+            alt={product.name}
+            fill
+            sizes="(min-width: 1024px) 20vw, 40vw"
+            className="object-cover"
+          />
+        </div>
+      )}
       {product.badge && (
         <Badge tone="outline" className="self-start mb-6">
           {product.badge}

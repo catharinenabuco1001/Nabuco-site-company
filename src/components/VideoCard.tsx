@@ -3,9 +3,11 @@ import Image from "next/image";
 import type { Video } from "@/types";
 import { categoryLabels } from "@/data/videos";
 import { Badge } from "@/components/ui/Badge";
-import { cn } from "@/lib/utils";
+import { cn, getVideoThumbnail } from "@/lib/utils";
 
 export function VideoCard({ video, featured = false }: { video: Video; featured?: boolean }) {
+  const thumbnail = getVideoThumbnail(video);
+
   return (
     <Link
       href={video.url}
@@ -19,22 +21,22 @@ export function VideoCard({ video, featured = false }: { video: Video; featured?
           featured ? "aspect-video" : "aspect-video"
         )}
       >
-        {video.thumbnail ? (
+        {thumbnail ? (
           <Image
-            src={video.thumbnail}
+            src={thumbnail}
             alt={video.title}
             fill
             className="object-cover transition-transform duration-500 ease-out group-hover:scale-105"
           />
         ) : (
           <div className="image-placeholder absolute inset-0 flex items-center justify-center">
-            <span className="image-placeholder-label font-serif text-cream/60 text-xs tracking-widest2 uppercase">
+            <span className="image-placeholder-label font-serif text-ink-900/60 text-xs tracking-widest2 uppercase">
               Thumbnail em breve
             </span>
           </div>
         )}
 
-        <div className="absolute inset-0 bg-gradient-to-t from-ink-900/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
 
         <div className="absolute top-3 left-3">
           <Badge tone="gold">{categoryLabels[video.category]}</Badge>
@@ -47,7 +49,7 @@ export function VideoCard({ video, featured = false }: { video: Video; featured?
         )}
 
         <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-          <span className="h-14 w-14 rounded-full bg-cream/95 flex items-center justify-center">
+          <span className="h-14 w-14 rounded-full bg-ink-900/95 flex items-center justify-center">
             <svg width="16" height="18" viewBox="0 0 16 18" fill="none" aria-hidden="true">
               <path d="M0 0L16 9L0 18V0Z" fill="#141212" />
             </svg>

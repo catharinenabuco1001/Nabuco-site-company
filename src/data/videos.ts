@@ -1,10 +1,15 @@
 import type { Video } from "@/types";
 
-// CONTEÚDO DE EXEMPLO — substitua pelos vídeos reais (YouTube/TikTok) da Catharine.
-// Esta é a fonte de dados consumida por /aulas. Quando a integração com a
-// YouTube Data API for ativada (ver src/lib/youtube.ts), os vídeos com
-// platform: "youtube" poderão vir dessa API em vez deste arquivo, sem
-// precisar alterar nenhum componente de UI.
+// Os vídeos do YouTube já vêm automaticamente do canal real via RSS (ver
+// src/lib/youtube.ts) — não precisa editar nada aqui pra isso funcionar.
+// Este array só entra em cena como FALLBACK, se o feed do YouTube falhar
+// por algum motivo (rede fora do ar, formato mudou, etc.), então mantenha
+// como conteúdo de exemplo genérico, não real.
+//
+// Se algum dia quiser adicionar um vídeo manualmente aqui: basta "title" +
+// "url" (o link do YouTube) + "category" + "platform". Não é preciso subir
+// imagem de capa — o VideoCard deriva a thumbnail automaticamente a partir
+// do próprio link (ver getVideoThumbnail em src/lib/utils.ts).
 
 export const videos: Video[] = [
   {
@@ -84,37 +89,46 @@ export const videos: Video[] = [
   },
 ];
 
-// CONTEÚDO DE EXEMPLO — TikToks reais devem substituir estas entradas.
-// Arquitetura simples baseada em URL: quando o vídeo tiver sido publicado,
-// preencha "url" com o link do TikTok e "thumbnail" com a imagem de capa.
+// TikToks reais (@cathynabuuco). Não existe API pública do TikTok, então
+// isso é sempre manual. Nenhum tem capa ainda — o card mostra o placeholder
+// "TikTok em breve" sozinho até você colocar um arquivo em
+// public/images/tiktok/<id>.jpg (mesmo nome do "id" abaixo). Ver
+// public/images/tiktok/README.md para o passo a passo.
 export const tiktoks: Video[] = [
   {
-    id: "tiktok-exemplo-01",
-    title: "TODO: legenda/título do TikTok",
+    id: "bhaskara-soma-e-produto",
+    title: "Bhaskara, Soma e Produto",
     category: "estudos",
     platform: "tiktok",
-    url: "#",
+    url: "https://www.tiktok.com/@cathynabuuco/video/7662869929246395655",
   },
   {
-    id: "tiktok-exemplo-02",
-    title: "TODO: legenda/título do TikTok",
-    category: "produtividade",
+    id: "circunferencia-formula",
+    title: "Circunferência: fórmula",
+    category: "estudos",
     platform: "tiktok",
-    url: "#",
+    url: "https://www.tiktok.com/@cathynabuuco/video/7677033288388611335",
   },
   {
-    id: "tiktok-exemplo-03",
-    title: "TODO: legenda/título do TikTok",
-    category: "vestibular",
+    id: "historia-aprovacao-neurociencia",
+    title: "Minha história de aprovação na Neurociência",
+    category: "performance",
     platform: "tiktok",
-    url: "#",
+    url: "https://www.tiktok.com/@cathynabuuco/video/7600750606688603400",
   },
   {
-    id: "tiktok-exemplo-04",
-    title: "TODO: legenda/título do TikTok",
-    category: "ia",
+    id: "forca-eletrica-lei-de-coulomb",
+    title: "Força Elétrica — Lei de Coulomb",
+    category: "estudos",
     platform: "tiktok",
-    url: "#",
+    url: "https://www.tiktok.com/@cathynabuuco/video/7623218032831188231",
+  },
+  {
+    id: "mu-e-mruv",
+    title: "MU e MRUV",
+    category: "estudos",
+    platform: "tiktok",
+    url: "https://www.tiktok.com/@cathynabuuco/video/7623590596837461256",
   },
 ];
 

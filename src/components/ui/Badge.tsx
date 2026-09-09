@@ -11,7 +11,7 @@ export function Badge({
 }) {
   const styles = {
     dark: "bg-ink-900 text-cream",
-    gold: "bg-gold-500 text-ink-900",
+    gold: "bg-gold-500 text-cream-900",
     outline: "border border-ink-900/25 text-ink-800",
   };
 

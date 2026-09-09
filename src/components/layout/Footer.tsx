@@ -29,7 +29,7 @@ export function Footer() {
                 <li key={link.href}>
                   <Link
                     href={link.href}
-                    className="text-sm text-cream/80 hover:text-gold-500 transition-colors underline-grow"
+                    className="text-sm text-cream/80 hover:text-gold-700 transition-colors underline-grow"
                   >
                     {link.label}
                   </Link>
@@ -50,7 +50,7 @@ export function Footer() {
                       href={social.href}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-sm text-cream/80 hover:text-gold-500 transition-colors underline-grow"
+                      className="text-sm text-cream/80 hover:text-gold-700 transition-colors underline-grow"
                     >
                       {social.label}
                     </a>

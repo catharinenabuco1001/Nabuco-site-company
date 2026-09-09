@@ -1,9 +1,13 @@
+import Image from "next/image";
 import { siteConfig } from "@/data/site";
 import { Container } from "@/components/ui/Container";
 import { CTA } from "@/components/ui/CTA";
 import { ImagePlaceholder } from "@/components/ui/ImagePlaceholder";
+import { publicImageExists } from "@/lib/media";
 
 export function Hero() {
+  const hasHeroPhoto = publicImageExists("images/hero.jpg");
+
   return (
     <section className="relative overflow-hidden pt-10 sm:pt-16 pb-20">
       <Container>
@@ -35,11 +39,20 @@ export function Hero() {
           </div>
 
           <div className="lg:col-span-5 relative animate-fadeInSlow">
-            <ImagePlaceholder
-              label="Foto de Catharine — em breve"
-              ratio="aspect-[4/5]"
-              className="shadow-[0_30px_60px_-25px_rgba(20,18,18,0.35)]"
-            />
+            <div className="relative aspect-[4/5] w-full rounded-2xl overflow-hidden shadow-[0_30px_60px_-25px_rgba(20,18,18,0.35)]">
+              {hasHeroPhoto ? (
+                <Image
+                  src="/images/hero.jpg"
+                  alt="Catharine Nabuco"
+                  fill
+                  priority
+                  sizes="(min-width: 1024px) 40vw, 90vw"
+                  className="object-cover"
+                />
+              ) : (
+                <ImagePlaceholder label="Foto de Catharine — em breve" ratio="aspect-[4/5]" />
+              )}
+            </div>
             <div
               className="hidden sm:block absolute -bottom-6 -left-6 h-24 w-24 rounded-full border border-gold-500/50"
               aria-hidden="true"
