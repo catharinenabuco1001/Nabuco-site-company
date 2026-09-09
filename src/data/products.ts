@@ -16,13 +16,14 @@ export const products: Product[] = [
   },
   {
     id: "ebook-alimentacao",
-    name: "Ebook de Alimentação",
-    tagline: "Material criado por Catharine.",
-    description: "Material criado por Catharine.",
+    name: "O Que Comer Para o Cérebro Não Travar na Hora da Prova?",
+    tagline: "Como manter seu cérebro ligado do início ao fim, de acordo com a neurociência.",
+    description: "Ebook da Editora Nabuco (Método NEM) escrito por Catharine.",
     price: null,
     ctaLabel: "Conhecer Ebook",
     ctaUrl: "#", // TODO: inserir link real de checkout
     badge: "Ebook",
+    coverImage: "images/ebook-alimentacao.jpg",
   },
   {
     id: "cartas-vestibulando",

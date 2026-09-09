@@ -31,9 +31,15 @@ export const siteConfig = {
   ],
 
   social: {
-    youtube: "", // TODO: inserir link real
-    tiktok: "", // TODO: inserir link real
+    youtube: "https://www.youtube.com/@catharinenabuco",
+    tiktok: "https://www.tiktok.com/@cathynabuuco",
     instagram: "", // TODO: inserir link real
+  },
+
+  // Usado por src/lib/youtube.ts para buscar os vídeos reais via RSS
+  // público (sem API key, sem login). Ver ali para detalhes.
+  youtube: {
+    channelId: "UCUAm2wtrMQKJZPKynlLQlVg",
   },
 
   contact: {
