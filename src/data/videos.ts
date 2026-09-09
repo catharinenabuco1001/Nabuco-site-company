@@ -89,11 +89,11 @@ export const videos: Video[] = [
   },
 ];
 
-// TikToks reais (@cathynabuuco). Não existe API pública do TikTok, então
-// isso é sempre manual. Nenhum tem capa ainda — o card mostra o placeholder
-// "TikTok em breve" sozinho até você colocar um arquivo em
-// public/images/tiktok/<id>.jpg (mesmo nome do "id" abaixo). Ver
-// public/images/tiktok/README.md para o passo a passo.
+// TikToks reais (@cathynabuuco). Só precisa de "id" + "title" + "url" — a
+// capa é buscada automaticamente do próprio TikTok (ver
+// src/lib/tiktok.ts). Dá pra forçar uma capa manual em
+// public/images/tiktok/<id>.jpg se quiser, ver
+// public/images/tiktok/README.md.
 export const tiktoks: Video[] = [
   {
     id: "bhaskara-soma-e-produto",

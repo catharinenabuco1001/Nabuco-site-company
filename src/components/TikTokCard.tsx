@@ -2,12 +2,19 @@ import Link from "next/link";
 import Image from "next/image";
 import type { Video } from "@/types";
 import { publicImageExists } from "@/lib/media";
+import { getTikTokThumbnail } from "@/lib/tiktok";
 
-// Capa do TikTok: convenção por nome de arquivo, sem precisar editar nada
-// além de src/data/videos.ts. Ver public/images/tiktok/README.md.
-export function TikTokCard({ video }: { video: Video }) {
-  const coverPath = `images/tiktok/${video.id}.jpg`;
-  const hasCover = publicImageExists(coverPath);
+// Capa do TikTok, em ordem de prioridade:
+// 1. Arquivo manual em public/images/tiktok/<id>.jpg, se você quiser forçar
+//    uma imagem específica (ver public/images/tiktok/README.md).
+// 2. Capa real do vídeo, buscada automaticamente via oEmbed do TikTok.
+// 3. Placeholder "TikTok em breve", se as duas anteriores falharem.
+export async function TikTokCard({ video }: { video: Video }) {
+  const manualCoverPath = `images/tiktok/${video.id}.jpg`;
+  const hasManualCover = publicImageExists(manualCoverPath);
+  const autoThumbnail = hasManualCover ? undefined : await getTikTokThumbnail(video.url);
+
+  const coverSrc = hasManualCover ? `/${manualCoverPath}` : autoThumbnail;
 
   return (
     <Link
@@ -17,9 +24,9 @@ export function TikTokCard({ video }: { video: Video }) {
       className="group block w-40 sm:w-48 shrink-0"
     >
       <div className="relative aspect-[9/16] rounded-xl overflow-hidden image-placeholder">
-        {hasCover ? (
+        {coverSrc ? (
           <Image
-            src={`/${coverPath}`}
+            src={coverSrc}
             alt={video.title}
             fill
             sizes="200px"

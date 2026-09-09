@@ -17,6 +17,16 @@ const nextConfig = {
         protocol: "https",
         hostname: "img.youtube.com",
       },
+      {
+        // Capas de TikTok vêm do oEmbed público (ver src/lib/tiktok.ts),
+        // servidas por subdomínios numerados do CDN da TikTok.
+        protocol: "https",
+        hostname: "*.tiktokcdn.com",
+      },
+      {
+        protocol: "https",
+        hostname: "*.tiktokcdn-us.com",
+      },
     ],
   },
 };

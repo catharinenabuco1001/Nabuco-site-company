@@ -1,19 +1,24 @@
 # Capas de TikTok
 
-Não existe forma pública de puxar vídeos do TikTok automaticamente, então
-essa pasta funciona por **convenção de nome de arquivo**: o nome do arquivo
-tem que ser igual ao `id` da entrada correspondente em
+A capa de cada vídeo é **buscada automaticamente** a partir do próprio
+TikTok (via oEmbed público, sem API key nem login) — na maioria dos casos
+você não precisa fazer nada aqui.
+
+Essa pasta só serve para **forçar uma capa manual** quando você quiser (por
+exemplo, uma imagem com um recorte melhor, ou pra um vídeo específico onde a
+automática não ficou boa). Nesse caso, o nome do arquivo tem que ser igual
+ao `id` da entrada correspondente em
 [`src/data/videos.ts`](../../../src/data/videos.ts) (array `tiktoks`), com
-extensão `.jpg`.
+extensão `.jpg`. Um arquivo manual aqui sempre tem prioridade sobre a capa
+automática.
 
 ## Passo a passo pra adicionar um TikTok novo
 
 1. Em `src/data/videos.ts`, adicione uma entrada no array `tiktoks` com um
    `id` curto e descritivo (kebab-case), `title` e `url` reais.
-2. Se tiver uma imagem de capa, salve o arquivo aqui como
+2. Pronto — a capa aparece sozinha assim que der o refresh na página.
+3. Só se quiser trocar por uma imagem sua: salve o arquivo aqui como
    `<id-que-voce-escolheu>.jpg` — exatamente o mesmo texto do `id`.
-3. Pronto. O card detecta o arquivo sozinho (não precisa mexer em nenhum
-   outro lugar do código).
 
 ### Exemplo
 
@@ -28,7 +33,5 @@ extensão `.jpg`.
 }
 ```
 
-→ arquivo de capa: `public/images/tiktok/como-estudar-2h-por-dia.jpg`
-
-Sem capa ainda? Sem problema — o card mostra o placeholder "TikTok em breve"
-até o arquivo aparecer aqui.
+→ capa automática já funciona. Capa manual (opcional):
+`public/images/tiktok/como-estudar-2h-por-dia.jpg`
