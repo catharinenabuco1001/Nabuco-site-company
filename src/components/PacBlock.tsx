@@ -1,5 +1,6 @@
 import { Container } from "@/components/ui/Container";
 import { CTA } from "@/components/ui/CTA";
+import { siteConfig } from "@/data/site";
 
 export const pacSteps = [
   {
@@ -68,7 +69,9 @@ export function PacBlock({ compact = false }: { compact?: boolean }) {
                 >
                   Entrar no PAC
                 </CTA>
-                <span className="text-sm text-cream/60">Valor e turmas em breve.</span>
+                <span className="text-sm text-cream/60">
+                  {siteConfig.pacCohort ?? "Valor e turmas em breve."}
+                </span>
               </div>
             ) : (
               <div className="min-w-0 flex flex-col gap-px bg-cream/15">

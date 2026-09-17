@@ -53,5 +53,10 @@ export const siteConfig = {
 
   links: {
     amazonCartas: "", // TODO: inserir link real do livro na Amazon
+    pacCheckout: "https://pay.kiwify.com.br/eUCaiLK",
   },
+
+  // Texto curto sobre a turma aberta no momento. Atualize (ou volte para
+  // null) quando a turma mudar — aparece no /pac.
+  pacCohort: "Turma de outubro com inscrições abertas.",
 } as const;

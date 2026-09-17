@@ -1,16 +1,21 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import { Container } from "@/components/ui/Container";
 import { CTA } from "@/components/ui/CTA";
 import { ImagePlaceholder } from "@/components/ui/ImagePlaceholder";
 import { pacSteps } from "@/components/PacBlock";
+import { siteConfig } from "@/data/site";
+import { publicImageExists } from "@/lib/media";
 
 export const metadata: Metadata = {
   title: "Método PAC",
   description:
-    "Pense Antes de Calcular. A aula te faz aprender; o PAC garante que o aprendizado se consolide.",
+    "Pense Antes de Calcular. A aula te faz aprender; o PAC garante que o aprendizado se consolide. Turma de outubro com inscrições abertas.",
 };
 
 export default function PacPage() {
+  const hasHeroImage = publicImageExists("images/pac-hero.jpg");
+
   return (
     <>
       <section className="pt-12 sm:pt-16 pb-20">
@@ -30,14 +35,36 @@ export default function PacPage() {
                 A aula te faz aprender. O PAC garante que o aprendizado se consolide — porque não
                 adianta dominar a matéria e perder a questão na última linha da conta.
               </p>
-              <div className="mt-10">
-                <CTA href="#conhecer" variant="primary">
-                  Conhecer o PAC
+
+              {siteConfig.pacCohort && (
+                <p className="mt-6 text-sm font-sans font-semibold uppercase tracking-wide text-gold-700">
+                  {siteConfig.pacCohort}
+                </p>
+              )}
+
+              <div className="mt-8 flex flex-wrap gap-4">
+                <CTA href={siteConfig.links.pacCheckout} variant="primary" external>
+                  Garantir minha vaga
+                </CTA>
+                <CTA href="#conhecer" variant="secondary">
+                  Conhecer o método
                 </CTA>
               </div>
             </div>
             <div className="lg:col-span-5">
-              <ImagePlaceholder label="Método PAC" ratio="aspect-square" />
+              {hasHeroImage ? (
+                <div className="relative aspect-square w-full overflow-hidden">
+                  <Image
+                    src="/images/pac-hero.jpg"
+                    alt="Método PAC"
+                    fill
+                    sizes="(min-width: 1024px) 40vw, 90vw"
+                    className="object-cover"
+                  />
+                </div>
+              ) : (
+                <ImagePlaceholder label="Método PAC" ratio="aspect-square" />
+              )}
             </div>
           </div>
         </Container>
@@ -63,14 +90,17 @@ export default function PacPage() {
             <h2 className="font-serif text-3xl sm:text-4xl max-w-xl mx-auto text-balance">
               Pronta para aplicar o PAC na sua rotina?
             </h2>
-            <p className="mt-4 text-cream/60 text-sm">Valor e turmas em breve.</p>
+            <p className="mt-4 text-cream/60 text-sm">
+              {siteConfig.pacCohort ?? "Valor e turmas em breve."}
+            </p>
             <div className="mt-8">
               <CTA
-                href="/produtos"
+                href={siteConfig.links.pacCheckout}
                 variant="primary"
+                external
                 className="bg-cream text-ink-900 hover:bg-gold-500 hover:text-cream-900"
               >
-                Conhecer o PAC
+                Garantir minha vaga
               </CTA>
             </div>
           </div>
