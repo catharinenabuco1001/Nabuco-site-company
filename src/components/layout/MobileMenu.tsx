@@ -28,18 +28,14 @@ export function MobileMenu({ open, onClose }: { open: boolean; onClose: () => vo
   return (
     <div
       className={cn(
-        "fixed inset-0 z-50 lg:hidden transition-opacity duration-300",
+        "fixed inset-0 z-50 lg:hidden bg-cream transition-opacity duration-300",
         open ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
       )}
       role="dialog"
       aria-modal="true"
       aria-label="Menu de navegação"
     >
-      <div
-        className="absolute inset-0 bg-black/40 backdrop-blur-sm"
-        onClick={onClose}
-        aria-hidden="true"
-      />
+      <div className="absolute inset-0" onClick={onClose} aria-hidden="true" />
       <div
         className={cn(
           "absolute right-0 top-0 h-full w-[86%] max-w-sm bg-cream shadow-2xl transition-transform duration-300 ease-out flex flex-col",

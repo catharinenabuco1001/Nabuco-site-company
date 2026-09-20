@@ -8,6 +8,7 @@ import { PacBlock } from "@/components/PacBlock";
 import { TikTokCard } from "@/components/TikTokCard";
 import { Container } from "@/components/ui/Container";
 import { CTA } from "@/components/ui/CTA";
+import { siteConfig } from "@/data/site";
 import { getLibraryItems } from "@/lib/library";
 import { tiktoks } from "@/data/videos";
 import { videoOverrides } from "@/data/video-overrides";
@@ -65,7 +66,11 @@ export default async function HomePage() {
                 segue o mesmo raciocínio.
               </p>
               <div className="mt-6 flex flex-wrap items-center gap-3.5">
-                <CTA href="/aulas" variant="primary">
+                <CTA
+                  href={featured?.url ?? "https://www.youtube.com/watch?v=M2JMZYi7jg4"}
+                  variant="primary"
+                  external
+                >
                   Assistir agora
                 </CTA>
                 <CTA href="/aulas" variant="ghost">
@@ -147,9 +152,14 @@ export default async function HomePage() {
                 <p className="mt-2 font-serif text-xl leading-snug text-ink-900">
                   Cartas para um Vestibulando
                 </p>
-                <p className="mt-2.5 text-sm leading-relaxed text-ink-900/72">
-                  Link de compra em breve.
-                </p>
+                <CTA
+                  href={siteConfig.links.amazonCartas}
+                  variant="ghost"
+                  className="mt-2.5"
+                  external
+                >
+                  Comprar na Amazon →
+                </CTA>
               </div>
             </div>
           </div>

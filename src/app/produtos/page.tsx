@@ -64,10 +64,10 @@ export default function ProdutosPage() {
                 ))}
               </ul>
 
-              <p className="mt-6 text-xs text-ink-700/50">TODO: definir preço</p>
+              <p className="mt-6 text-xs text-ink-700/50">Valores sob consulta</p>
 
               <div className="mt-6">
-                <CTA href={siteConfig.contact.whatsapp || "#"} variant="primary" external>
+                <CTA href={siteConfig.contact.whatsapp} variant="primary" external>
                   {aulaParticular.ctaLabel}
                 </CTA>
               </div>

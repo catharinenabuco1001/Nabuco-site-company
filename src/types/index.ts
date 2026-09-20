@@ -26,7 +26,7 @@ export type Product = {
   name: string;
   tagline: string;
   description: string;
-  price?: number | null; // null/undefined = "TODO: definir preço"
+  price?: number | null; // null/undefined = "Valores sob consulta"
   ctaLabel: string;
   ctaUrl: string;
   href?: string; // link interno para página de detalhe (ex.: /pac)
@@ -60,7 +60,7 @@ export type AITool = {
   name: string;
   description: string;
   url: string;
-  howIUse: string;
+  howIUse?: string; // undefined = seção "Como eu uso" fica escondida
   frequency: AIToolFrequency;
   category: string;
 };

@@ -40,7 +40,7 @@ export function formatDuration(duration: string | null | undefined): string {
 }
 
 export function formatPrice(price: number | null | undefined): string {
-  if (price === null || price === undefined) return "TODO: definir preço";
+  if (price === null || price === undefined) return "Valores sob consulta";
   return price.toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
 }
 

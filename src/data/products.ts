@@ -1,7 +1,7 @@
 import type { Product } from "@/types";
 
 // Preços e links são configuráveis aqui — nunca no componente.
-// price: null = ainda não definido (a UI mostra "TODO: definir preço").
+// price: null = ainda não definido (a UI mostra "Valores sob consulta").
 export const products: Product[] = [
   {
     id: "pac",
@@ -13,17 +13,6 @@ export const products: Product[] = [
     ctaUrl: "/pac",
     href: "/pac",
     badge: "Método",
-  },
-  {
-    id: "ebook-alimentacao",
-    name: "O Que Comer Para o Cérebro Não Travar na Hora da Prova?",
-    tagline: "Como manter seu cérebro ligado do início ao fim, de acordo com a neurociência.",
-    description: "Ebook da Editora Nabuco (Método NEM) escrito por Catharine.",
-    price: null,
-    ctaLabel: "Conhecer Ebook",
-    ctaUrl: "#", // TODO: inserir link real de checkout
-    badge: "Ebook",
-    coverImage: "images/ebook-alimentacao.jpg",
   },
   {
     id: "cartas-vestibulando",
