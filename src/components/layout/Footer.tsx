@@ -2,11 +2,11 @@ import Link from "next/link";
 import { siteConfig } from "@/data/site";
 import { Container } from "@/components/ui/Container";
 
-const socialLinks = [
+const socialLinks: { key: string; label: string; href: string }[] = [
   { key: "youtube", label: "YouTube", href: siteConfig.social.youtube },
   { key: "tiktok", label: "TikTok", href: siteConfig.social.tiktok },
   { key: "instagram", label: "Instagram", href: siteConfig.social.instagram },
-] as const;
+];
 
 export function Footer() {
   return (
@@ -55,9 +55,7 @@ export function Footer() {
                       {social.label}
                     </a>
                   ) : (
-                    <span className="text-sm text-cream/40">
-                      {social.label} — em breve
-                    </span>
+                    <span className="text-sm text-cream/40">{social.label} — em breve</span>
                   )}
                 </li>
               ))}
