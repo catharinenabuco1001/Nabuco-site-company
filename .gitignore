@@ -34,6 +34,7 @@ yarn-error.log*
 
 # Material de referência de design (não é código de produção)
 /design_handoff_home_pac/
+/design_handoff_pac_landing/
 *.zip
 
 # typescript

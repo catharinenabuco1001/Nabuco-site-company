@@ -8,7 +8,7 @@ export const products: Product[] = [
     name: "Método PAC",
     tagline: "Pense Antes de Calcular.",
     description: "Método de estudo e execução.",
-    price: null,
+    price: 297.9,
     ctaLabel: "Conhecer o PAC",
     ctaUrl: "/pac",
     href: "/pac",
