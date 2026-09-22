@@ -67,13 +67,13 @@ export function HomeHero({ novidade }: { novidade?: Video }) {
                 href={novidade.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="absolute bottom-5 left-5 right-5 block bg-[rgba(8,25,16,0.86)] p-5 text-cream transition-colors hover:bg-cream-900"
+                className="absolute bottom-5 left-5 right-5 block bg-gold-500 p-5 text-cream-900 transition-colors hover:bg-gold-700"
               >
-                <p className="text-[11px] font-sans font-semibold uppercase tracking-[0.22em] text-plum-500">
+                <p className="text-[11px] font-sans font-semibold uppercase tracking-[0.22em] text-cream-900/70">
                   Novidade da semana
                 </p>
-                <p className="mt-2 font-serif text-xl leading-snug">{novidade.title}</p>
-                <p className="mt-2 text-xs uppercase tracking-widest2 text-cream/70">
+                <p className="mt-2 font-serif text-xl leading-snug text-cream-900">{novidade.title}</p>
+                <p className="mt-2 text-xs uppercase tracking-widest2 text-cream-900/70">
                   TikTok · assistir aqui →
                 </p>
               </Link>

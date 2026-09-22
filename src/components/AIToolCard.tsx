@@ -18,12 +18,14 @@ export function AIToolCard({ tool }: { tool: AITool }) {
 
       <p className="mt-4 text-sm text-ink-700/80 leading-relaxed">{tool.description}</p>
 
-      <div className="mt-4 rounded-xl bg-ink-900/[0.03] p-4">
-        <p className="text-xs font-sans font-semibold uppercase tracking-wide text-ink-700/50 mb-1.5">
-          Como eu uso
-        </p>
-        <p className="text-sm text-ink-800 leading-relaxed">{tool.howIUse}</p>
-      </div>
+      {tool.howIUse && (
+        <div className="mt-4 rounded-xl bg-ink-900/[0.03] p-4">
+          <p className="text-xs font-sans font-semibold uppercase tracking-wide text-ink-700/50 mb-1.5">
+            Como eu uso
+          </p>
+          <p className="text-sm text-ink-800 leading-relaxed">{tool.howIUse}</p>
+        </div>
+      )}
 
       <a
         href={tool.url}

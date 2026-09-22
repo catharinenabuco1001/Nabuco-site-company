@@ -36,7 +36,7 @@ export const siteConfig = {
   social: {
     youtube: "https://www.youtube.com/@catharinenabuco",
     tiktok: "https://www.tiktok.com/@cathynabuuco",
-    instagram: "", // TODO: inserir link real
+    instagram: "https://www.instagram.com/catharinenabuco/reels/",
   },
 
   // Usado por src/lib/youtube.ts para buscar os vídeos reais via RSS
@@ -46,14 +46,19 @@ export const siteConfig = {
   },
 
   contact: {
-    // Usado pelos CTAs de aula particular e palestras.
-    email: "", // TODO: inserir e-mail real
-    whatsapp: "", // TODO: inserir link real (wa.me/...)
+    // Usado pelo CTA de aula particular em /produtos.
+    whatsapp:
+      "https://wa.me/5571996025791?text=Oi%2C%20Catharine!%20Vi%20seu%20site%20e%20quero%20saber%20mais%20sobre%20aula%20particular",
+    // Usado pelo CTA "Levar Catharine para meu evento" em /palestras.
+    whatsappPalestras:
+      "https://wa.me/5571996025791?text=Oi%2C%20Catharine!%20Quero%20te%20convidar%20para%20uma%20palestra",
   },
 
   links: {
-    amazonCartas: "", // TODO: inserir link real do livro na Amazon
+    amazonCartas: "https://www.amazon.com.br/dp/6598829801/?tag=nabuco01-20",
     pacCheckout: "https://pay.kiwify.com.br/eUCaiLK",
+    // Ainda não usado em nenhum botão do site — ver observação na resposta.
+    pacWhatsappGroup: "https://chat.whatsapp.com/DXENAsQbSBh7ux8ubr6HHB",
   },
 
   // Texto curto sobre a turma aberta no momento. Atualize (ou volte para

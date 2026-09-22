@@ -42,8 +42,9 @@ export default function PalestrasPage() {
             </h2>
             <div className="mt-8">
               <CTA
-                href={siteConfig.contact.email ? `mailto:${siteConfig.contact.email}` : "#"}
+                href={siteConfig.contact.whatsappPalestras}
                 variant="primary"
+                external
                 className="bg-cream text-ink-900 hover:bg-gold-500 hover:text-cream-900"
               >
                 Levar Catharine para meu evento
