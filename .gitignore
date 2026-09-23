@@ -35,6 +35,9 @@ yarn-error.log*
 # Material de referência de design (não é código de produção)
 /design_handoff_home_pac/
 /design_handoff_pac_landing/
+
+# Material sensível pendente de revisão (nunca deve ir pro repositório)
+/_precisa-revisao/
 *.zip
 
 # typescript
