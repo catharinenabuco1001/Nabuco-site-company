@@ -512,22 +512,27 @@ export default function PacPage() {
               <p className="text-center text-xs font-semibold uppercase tracking-widest2 text-ink-900/45">
                 Os prints, pra quem gosta de ver com os próprios olhos
               </p>
-              <div className="mt-8 flex gap-4 overflow-x-auto no-scrollbar snap-x snap-mandatory pt-4 pb-8 -mx-5 px-5 sm:mx-0 sm:px-0 sm:justify-center">
+              <div className="mt-8 flex items-start gap-5 overflow-x-auto no-scrollbar snap-x snap-mandatory pt-4 pb-8 -mx-5 px-5 lg:mx-0 lg:px-0 lg:justify-center">
                 {prints.map((p, i) => (
-                  <div
+                  <a
                     key={p.file}
-                    className={`relative shrink-0 snap-center w-[190px] sm:w-[210px] aspect-[9/16] overflow-hidden rounded-[1.6rem] border-[6px] border-[#07170f] shadow-xl shadow-black/40 ${
-                      i % 2 === 0 ? "sm:-rotate-2" : "sm:rotate-2 sm:translate-y-4"
+                    href={`/images/pac/prints/${p.file}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={`Ver print em tamanho real: ${p.alt}`}
+                    className={`shrink-0 snap-center w-[220px] sm:w-[240px] lg:w-[196px] overflow-hidden rounded-[1.4rem] border-[5px] border-[#07170f] bg-[#07170f] shadow-xl shadow-black/40 transition-transform duration-300 hover:rotate-0 hover:scale-[1.03] ${
+                      i % 2 === 0 ? "lg:-rotate-2" : "lg:rotate-2 lg:mt-6"
                     }`}
                   >
                     <Image
                       src={`/images/pac/prints/${p.file}`}
                       alt={p.alt}
-                      fill
-                      sizes="210px"
-                      className="object-cover object-top"
+                      width={p.w}
+                      height={p.h}
+                      sizes="240px"
+                      className="block h-auto w-full rounded-[1rem]"
                     />
-                  </div>
+                  </a>
                 ))}
               </div>
             </div>

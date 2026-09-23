@@ -237,12 +237,12 @@ export const pacChats: PacChat[] = [
 // dá pra subir aos poucos. Antes de subir: borrar nome/foto/número de quem
 // não autorizou.
 export const pacPrints = [
-  { file: "tirei-8.jpg", alt: "Aluna contando que tirou 8 em matemática depois do PAC" },
-  { file: "caderno.jpg", alt: "Caderno de aluna com anotações do Método PAC" },
-  { file: "matheus-modulo-0.jpg", alt: "Aluno dizendo que o Módulo 0 está perfeito" },
-  { file: "diagnostica.jpg", alt: "Prova diagnóstica resolvida à mão por uma aluna" },
-  { file: "clara.jpg", alt: "Mensagens de aluna elogiando as aulas" },
-  { file: "bianca.jpg", alt: "Aluna contando que a lista ajudou a relembrar a base" },
+  { file: "tirei-8.jpg", w: 720, h: 1033, alt: "Aluna contando que tirou 8 em matemática depois do PAC" },
+  { file: "caderno.jpg", w: 720, h: 762, alt: "Caderno de aluna com anotações do Método PAC" },
+  { file: "matheus-modulo-0.jpg", w: 720, h: 517, alt: "Aluno dizendo que o Módulo 0 está perfeito" },
+  { file: "diagnostica.jpg", w: 720, h: 1159, alt: "Prova diagnóstica resolvida à mão por uma aluna" },
+  { file: "clara.jpg", w: 720, h: 1207, alt: "Mensagens de aluna elogiando as aulas" },
+  { file: "bianca.jpg", w: 720, h: 1393, alt: "Aluna contando que a lista ajudou a relembrar a base" },
 ];
 
 // Depoimentos em vídeo (YouTube). Suba o vídeo (pode ser "Não listado") e
