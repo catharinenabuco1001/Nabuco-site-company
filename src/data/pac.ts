@@ -141,3 +141,93 @@ export const pacFaq = [
     a: "Você tem 7 dias de garantia. Pediu dentro do prazo, recebe o valor de volta.",
   },
 ];
+
+// Depoimentos reais — transcritos dos prints da pasta "PROVAS SOCIAIS PAC"
+// (Drive). Só primeiro nome. Pra esconder alguém, troque `name` por
+// "Aluna do PAC" / "Aluno do PAC". `from: "cathy"` = mensagem da Cathy.
+export type PacChat = {
+  name: string;
+  context: string;
+  highlight?: boolean;
+  messages: { from: "aluno" | "cathy"; text: string; time: string }[];
+};
+
+export const pacChats: PacChat[] = [
+  {
+    name: "Aluna do PAC",
+    context: "depois da prova",
+    highlight: true,
+    messages: [
+      { from: "aluno", text: "Caaaathyyy", time: "18:38" },
+      { from: "aluno", text: "Tirei 8 em matemática", time: "18:38" },
+      { from: "aluno", text: "tinha tirado 5 na outra prova antes de vc", time: "19:15" },
+      { from: "aluno", text: "KKKKKKKKK tudo graças a vc", time: "19:15" },
+    ],
+  },
+  {
+    name: "Matheus",
+    context: "terminou o Módulo 0",
+    messages: [
+      {
+        from: "aluno",
+        text: "Oii Cathy, já terminei de assistir o módulo 0 e tá perfeito. Se o primeiro já está assim, imagina os outros kkk. Já estou ansioso para começar o próximo módulo.",
+        time: "14:19",
+      },
+    ],
+  },
+  {
+    name: "Clara",
+    context: "assistindo a aula de mentalidade",
+    messages: [
+      { from: "aluno", text: "Sim, Cathy, eu me senti muito burra. Como vc sabia?", time: "00:58" },
+      { from: "aluno", text: "“A matemática pode ser linda!!” Em vc eu acredito, diva.", time: "01:01" },
+    ],
+  },
+  {
+    name: "Bianca",
+    context: "depois da prova diagnóstica e da lista",
+    messages: [
+      {
+        from: "aluno",
+        text: "Ajudou mtoo, relembrei algumas coisinhas q eu tava esquecendo já, e ela foi super de boa e legal de fazer ameiiii",
+        time: "20:42",
+      },
+      { from: "aluno", text: "Tá de parabéns professora Cathy", time: "20:43" },
+    ],
+  },
+  {
+    name: "Rodrigo",
+    context: "voltando da prova",
+    messages: [
+      { from: "cathy", text: "Como foram de prova???", time: "12:10" },
+      { from: "aluno", text: "a prova tava bem mais fácil q a lista", time: "12:30" },
+    ],
+  },
+  {
+    name: "Clara",
+    context: "Módulo 0",
+    messages: [
+      { from: "aluno", text: "É um chacoalhão atrás do outro, q de fato faz vc pensar em toodaa a sua existência", time: "01:18" },
+      { from: "aluno", text: "Poucas pessoas q eu conheci tem essa dinâmica que realmente te prende a atenção!!", time: "01:20" },
+    ],
+  },
+  {
+    name: "Aluna do PAC",
+    context: "depois da prova diagnóstica",
+    messages: [
+      {
+        from: "aluno",
+        text: "Essa prova falou muito sobre o meu potencial e sobre minha base! Ao olhar ela pela primeira vez fiquei assustada, mas percebi que consigo desenvolver",
+        time: "11:30",
+      },
+      { from: "aluno", text: "tenho certeza que o PAC vai ser minha melhor escolha para o agora", time: "11:32" },
+    ],
+  },
+  {
+    name: "Bianca",
+    context: "na área de aulas",
+    messages: [
+      { from: "aluno", text: "Gente esse site é um arraso, me sinto mais inteligente só de entrar nele kkkkkk", time: "18:15" },
+    ],
+  },
+];

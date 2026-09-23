@@ -7,7 +7,8 @@ import { siteConfig } from "@/data/site";
 import {
   pacPricing,
   pacFit,
-  pacTestimonial,
+  pacChats,
+  type PacChat,
   pacAuthorBio,
   pacAuthorStats,
   pacMistakes,
@@ -116,6 +117,49 @@ function PhoneMockup() {
         </div>
       </div>
     </div>
+  );
+}
+
+function ChatCard({ chat }: { chat: PacChat }) {
+  return (
+    <figure
+      className={`mb-4 break-inside-avoid rounded-3xl border p-5 sm:p-6 ${
+        chat.highlight
+          ? "border-gold-500/50 bg-gold-500/[0.07]"
+          : "border-ink-900/10 bg-cream-50/60"
+      }`}
+    >
+      <figcaption className="flex items-center gap-3 pb-4 border-b border-ink-900/10">
+        <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-gold-500/20 font-serif text-gold-300">
+          {chat.name.startsWith("Alun") ? "★" : chat.name[0]}
+        </span>
+        <span className="min-w-0">
+          <span className="block text-sm font-semibold text-ink-900">{chat.name}</span>
+          <span className="block text-[11px] text-ink-900/45">{chat.context}</span>
+        </span>
+      </figcaption>
+      <div className="mt-4 flex flex-col gap-2">
+        {chat.messages.map((m, j) => (
+          <p
+            key={j}
+            className={`max-w-[88%] rounded-2xl px-4 py-2.5 text-sm leading-relaxed ${
+              m.from === "cathy"
+                ? "self-end rounded-br-md bg-gold-500 text-cream-900"
+                : "self-start rounded-bl-md bg-ink-900/[0.08] text-ink-900"
+            }`}
+          >
+            {m.text}
+            <span
+              className={`ml-2 align-bottom text-[10px] ${
+                m.from === "cathy" ? "text-cream-900/60" : "text-ink-900/40"
+              }`}
+            >
+              {m.time}
+            </span>
+          </p>
+        ))}
+      </div>
+    </figure>
   );
 }
 
@@ -440,20 +484,25 @@ export default function PacPage() {
         </Container>
       </section>
 
-      {/* ------------------------------------------------------------ DEPOIMENTO */}
-      <section className="py-20 sm:py-28 border-t border-ink-900/10">
+      {/* ------------------------------------------------------------ DEPOIMENTOS */}
+      <section id="depoimentos" className="py-20 sm:py-28 border-t border-ink-900/10">
         <Container>
-          <figure className="max-w-3xl mx-auto text-center">
-            <span className="font-serif text-7xl leading-none text-gold-500/40" aria-hidden>
-              &ldquo;
-            </span>
-            <blockquote className="-mt-4 font-serif italic text-3xl sm:text-5xl leading-tight text-ink-900 text-balance">
-              {pacTestimonial.quote}
-            </blockquote>
-            <figcaption className="mt-6 text-xs font-semibold uppercase tracking-widest2 text-plum-500">
-              {pacTestimonial.attribution}
-            </figcaption>
-          </figure>
+          <div className="text-center max-w-2xl mx-auto">
+            <Eyebrow>Quem já está no PAC</Eyebrow>
+            <h2 className="font-serif text-3xl sm:text-5xl text-ink-900 leading-tight text-balance">
+              Não sou eu que tô dizendo.{" "}
+              <span className="italic text-plum-500">São eles.</span>
+            </h2>
+            <p className="mt-4 text-sm text-ink-900/55">
+              Mensagens reais que recebi de alunos no WhatsApp.
+            </p>
+          </div>
+
+          <div className="mt-14 columns-1 sm:columns-2 lg:columns-3 gap-4 [column-fill:_balance]">
+            {pacChats.map((chat, i) => (
+              <ChatCard key={i} chat={chat} />
+            ))}
+          </div>
         </Container>
       </section>
 
