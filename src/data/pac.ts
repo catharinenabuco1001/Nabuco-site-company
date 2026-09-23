@@ -231,3 +231,23 @@ export const pacChats: PacChat[] = [
     ],
   },
 ];
+
+// Prints reais (imagens). Coloque os arquivos em public/images/pac/prints/
+// com EXATAMENTE esses nomes. Só aparece na página o que existir na pasta —
+// dá pra subir aos poucos. Antes de subir: borrar nome/foto/número de quem
+// não autorizou.
+export const pacPrints = [
+  { file: "tirei-8.jpg", alt: "Aluna contando que tirou 8 em matemática depois do PAC" },
+  { file: "caderno.jpg", alt: "Caderno de aluna com anotações do Método PAC" },
+  { file: "matheus-modulo-0.jpg", alt: "Aluno dizendo que o Módulo 0 está perfeito" },
+  { file: "diagnostica.jpg", alt: "Prova diagnóstica resolvida à mão por uma aluna" },
+  { file: "clara.jpg", alt: "Mensagens de aluna elogiando as aulas" },
+  { file: "bianca.jpg", alt: "Aluna contando que a lista ajudou a relembrar a base" },
+];
+
+// Depoimentos em vídeo (YouTube). Suba o vídeo (pode ser "Não listado") e
+// cole só o ID — o que vem depois de "v=" ou "youtu.be/" ou "shorts/".
+// Lista vazia = seção não aparece.
+export const pacVideos: { youtubeId: string; name: string; caption: string; vertical?: boolean }[] = [
+  // { youtubeId: "XXXXXXXXXXX", name: "Clara", caption: "Como o PAC mudou minha relação com a conta", vertical: true },
+];

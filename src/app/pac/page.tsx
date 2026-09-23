@@ -8,6 +8,8 @@ import {
   pacPricing,
   pacFit,
   pacChats,
+  pacPrints,
+  pacVideos,
   type PacChat,
   pacAuthorBio,
   pacAuthorStats,
@@ -168,6 +170,7 @@ export default function PacPage() {
     ? "/images/pac-hero.jpg"
     : "/images/hero-retrato.jpeg";
   const authorSrc = publicImageExists("images/sobre.jpg") ? "/images/sobre.jpg" : heroSrc;
+  const prints = pacPrints.filter((p) => publicImageExists(`images/pac/prints/${p.file}`));
   const discount = Math.round((1 - pacPricing.price / pacPricing.originalPrice) * 100);
 
   return (
@@ -503,6 +506,67 @@ export default function PacPage() {
               <ChatCard key={i} chat={chat} />
             ))}
           </div>
+
+          {prints.length > 0 && (
+            <div className="mt-16">
+              <p className="text-center text-xs font-semibold uppercase tracking-widest2 text-ink-900/45">
+                Os prints, pra quem gosta de ver com os próprios olhos
+              </p>
+              <div className="mt-8 flex gap-4 overflow-x-auto no-scrollbar snap-x snap-mandatory pt-4 pb-8 -mx-5 px-5 sm:mx-0 sm:px-0 sm:justify-center">
+                {prints.map((p, i) => (
+                  <div
+                    key={p.file}
+                    className={`relative shrink-0 snap-center w-[190px] sm:w-[210px] aspect-[9/16] overflow-hidden rounded-[1.6rem] border-[6px] border-[#07170f] shadow-xl shadow-black/40 ${
+                      i % 2 === 0 ? "sm:-rotate-2" : "sm:rotate-2 sm:translate-y-4"
+                    }`}
+                  >
+                    <Image
+                      src={`/images/pac/prints/${p.file}`}
+                      alt={p.alt}
+                      fill
+                      sizes="210px"
+                      className="object-cover object-top"
+                    />
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {pacVideos.length > 0 && (
+            <div className="mt-16">
+              <p className="text-center text-xs font-semibold uppercase tracking-widest2 text-ink-900/45">
+                Em vídeo
+              </p>
+              <div className="mt-8 flex flex-wrap justify-center gap-6">
+                {pacVideos.map((v) => (
+                  <figure
+                    key={v.youtubeId}
+                    className={v.vertical ? "w-[260px]" : "w-full max-w-2xl"}
+                  >
+                    <div
+                      className={`relative w-full overflow-hidden rounded-3xl border border-gold-500/30 bg-cream-50 ${
+                        v.vertical ? "aspect-[9/16]" : "aspect-video"
+                      }`}
+                    >
+                      <iframe
+                        src={`https://www.youtube-nocookie.com/embed/${v.youtubeId}?rel=0&modestbranding=1`}
+                        title={`Depoimento de ${v.name} sobre o Método PAC`}
+                        loading="lazy"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowFullScreen
+                        className="absolute inset-0 h-full w-full"
+                      />
+                    </div>
+                    <figcaption className="mt-3 text-center">
+                      <span className="block text-sm font-semibold text-ink-900">{v.name}</span>
+                      <span className="block text-xs text-ink-900/55">{v.caption}</span>
+                    </figcaption>
+                  </figure>
+                ))}
+              </div>
+            </div>
+          )}
         </Container>
       </section>
 
