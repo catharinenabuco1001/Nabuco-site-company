@@ -14,7 +14,7 @@ export const siteConfig = {
     { label: "Aulas", href: "/aulas" },
     { label: "PAC", href: "/pac" },
     { label: "Produtos", href: "/produtos" },
-    { label: "Palestras", href: "/palestras" },
+    { label: "Palestras & Mídia", href: "/palestras" },
     { label: "Sobre", href: "/sobre" },
   ],
 
@@ -27,7 +27,7 @@ export const siteConfig = {
     { label: "Aulas", href: "/aulas" },
     { label: "PAC", href: "/pac" },
     { label: "Produtos", href: "/produtos" },
-    { label: "Palestras", href: "/palestras" },
+    { label: "Palestras & Mídia", href: "/palestras" },
     { label: "Modelos", href: "/modelos" },
     { label: "IA", href: "/ia" },
     { label: "Sobre", href: "/sobre" },
