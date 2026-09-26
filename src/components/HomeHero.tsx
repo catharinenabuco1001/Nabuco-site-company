@@ -7,7 +7,9 @@ import { publicImageExists } from "@/lib/media";
 import type { Video } from "@/types";
 
 export function HomeHero({ novidade }: { novidade?: Video }) {
-  const heroSrc = publicImageExists("images/hero-retrato.jpeg")
+  const heroSrc = publicImageExists("images/hero-lendo.png")
+    ? "/images/hero-lendo.png"
+    : publicImageExists("images/hero-retrato.jpeg")
     ? "/images/hero-retrato.jpeg"
     : publicImageExists("images/hero.jpg")
       ? "/images/hero.jpg"
@@ -48,12 +50,12 @@ export function HomeHero({ novidade }: { novidade?: Video }) {
                 <>
                   <Image
                     src={heroSrc}
-                    alt="Catharine Nabuco"
+                    alt="Catharine Nabuco lendo um livro"
                     fill
                     priority
                     sizes="(min-width: 1024px) 45vw, 90vw"
                     className="object-cover"
-                    style={{ objectPosition: "72% 28%" }}
+                    style={{ objectPosition: "50% 25%" }}
                   />
                   <div className="absolute inset-0 bg-gradient-to-b from-transparent from-40% to-[rgba(8,25,16,0.75)]" />
                 </>
