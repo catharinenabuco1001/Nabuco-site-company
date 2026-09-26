@@ -41,8 +41,33 @@ export const pastTalks: PastTalk[] = [
   { id: "sao-jorge", place: "Colégio São Jorge" },
 ];
 
-// TODO(Cathy): adicionar os podcasts (nome do programa, episódio, link).
-export const podcasts: Podcast[] = [];
+// Ordem = ordem na página. Datas opcionais (formato "2026-05").
+export const podcasts: Podcast[] = [
+  {
+    id: "poder-abc-ep7",
+    show: "Poder ABC Podcast",
+    title: "Não é sobre estar pronta. É sobre ir mesmo assim — lançamento do meu 2º livro",
+    youtubeId: "ukxKJKIuIOs",
+  },
+  {
+    id: "podfex-ep46",
+    show: "PodFex",
+    title: "Educação, estudos e criação de conteúdo — Ep. 46",
+    youtubeId: "syEJJqm7GZg",
+  },
+  {
+    id: "cost-flow-ep3",
+    show: "Cost Flow",
+    title: "O método para se apaixonar por estudar + meus erros no vestibular que você deve evitar",
+    youtubeId: "vqsHZiDCdqY",
+  },
+  {
+    id: "do-vestibular-ao-primeiro-livro",
+    show: "Canal Catharine Nabuco",
+    title: "Do vestibular ao meu primeiro livro — lançamento do 1º livro",
+    youtubeId: "sgMdaz_HaUc",
+  },
+];
 
 // TODO(Cathy): link e data da matéria.
 export const press: PressItem[] = [
