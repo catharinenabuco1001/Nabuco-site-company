@@ -72,6 +72,16 @@ function TalkTile({ talk }: { talk: PastTalk }) {
         <h3 className="mt-2 font-serif text-2xl text-ink-900">{talk.place}</h3>
         {talk.theme && <p className="mt-2 text-sm text-ink-900/75 leading-relaxed">{talk.theme}</p>}
         {talk.audience && <p className="mt-1 text-xs text-ink-900/50">{talk.audience}</p>}
+        {talk.instagramUrl && !talk.youtubeId && (
+          <a
+            href={talk.instagramUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-auto pt-5 inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-wide text-gold-300 hover:text-gold-500"
+          >
+            ▶ Ver trecho no Instagram
+          </a>
+        )}
         {talk.youtubeId && (
           <a
             href={`https://www.youtube.com/watch?v=${talk.youtubeId}`}

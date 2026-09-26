@@ -14,6 +14,7 @@ export type PastTalk = {
   // Fotos em public/images/palestras/ — a primeira vira a capa.
   photos?: string[];
   youtubeId?: string; // vídeo da palestra, se tiver
+  instagramUrl?: string; // reel/post da palestra, se tiver
 };
 
 export type Podcast = {
@@ -38,7 +39,14 @@ export type PressItem = {
 // TODO(Cathy): completar cidade, data, tema, público, fotos e vídeo.
 export const pastTalks: PastTalk[] = [
   { id: "bernoulli", place: "Colégio Bernoulli" },
-  { id: "sao-jorge", place: "Colégio São Jorge" },
+  {
+    id: "sao-jorge",
+    place: "Colégio São Jorge dos Ilhéus",
+    city: "Ilhéus, BA",
+    date: "2026-05",
+    theme: "Aulão de física: movimento oblíquo",
+    instagramUrl: "https://www.instagram.com/reel/DYSe05_ONyn/",
+  },
 ];
 
 // Ordem = ordem na página. Datas opcionais (formato "2026-05").
