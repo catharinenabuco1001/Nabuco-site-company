@@ -79,7 +79,7 @@ function TalkTile({ talk }: { talk: PastTalk }) {
             rel="noopener noreferrer"
             className="mt-auto pt-5 inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-wide text-gold-300 hover:text-gold-500"
           >
-            ▶ Ver trecho no Instagram
+            ↗ Ver no Instagram
           </a>
         )}
         {talk.youtubeId && (
