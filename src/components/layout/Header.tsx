@@ -50,7 +50,7 @@ export function Header() {
             </span>
           </Link>
 
-          <nav className="hidden lg:flex items-center gap-8" aria-label="Navegação principal">
+          <nav className="hidden xl:flex items-center gap-7 whitespace-nowrap" aria-label="Navegação principal">
             {siteConfig.nav.map((item) => {
               const active =
                 item.href === "/" ? pathname === "/" : pathname.startsWith(item.href);
@@ -70,7 +70,7 @@ export function Header() {
             })}
           </nav>
 
-          <div className="hidden lg:block">
+          <div className="hidden xl:block">
             <CTA href={siteConfig.navCta.href} variant="primary" className="text-xs px-5 py-2.5">
               {siteConfig.navCta.label}
             </CTA>
@@ -79,7 +79,7 @@ export function Header() {
           <button
             type="button"
             onClick={() => setMenuOpen(true)}
-            className="lg:hidden inline-flex items-center justify-center h-10 w-10 rounded-full border border-ink-900/20 text-ink-900"
+            className="xl:hidden inline-flex items-center justify-center h-10 w-10 rounded-full border border-ink-900/20 text-ink-900"
             aria-label="Abrir menu"
             aria-expanded={menuOpen}
           >

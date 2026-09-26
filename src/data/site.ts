@@ -15,6 +15,7 @@ export const siteConfig = {
     { label: "PAC", href: "/pac" },
     { label: "Produtos", href: "/produtos" },
     { label: "Palestras & Mídia", href: "/palestras" },
+    { label: "Blog", href: "/blog" },
     { label: "Sobre", href: "/sobre" },
   ],
 
@@ -28,6 +29,7 @@ export const siteConfig = {
     { label: "PAC", href: "/pac" },
     { label: "Produtos", href: "/produtos" },
     { label: "Palestras & Mídia", href: "/palestras" },
+    { label: "Blog", href: "/blog" },
     { label: "Modelos", href: "/modelos" },
     { label: "IA", href: "/ia" },
     { label: "Sobre", href: "/sobre" },

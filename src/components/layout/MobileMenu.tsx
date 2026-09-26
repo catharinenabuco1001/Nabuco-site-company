@@ -28,7 +28,7 @@ export function MobileMenu({ open, onClose }: { open: boolean; onClose: () => vo
   return (
     <div
       className={cn(
-        "fixed inset-0 z-50 lg:hidden bg-cream transition-opacity duration-300",
+        "fixed inset-0 z-50 xl:hidden bg-cream transition-opacity duration-300",
         open ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
       )}
       role="dialog"
