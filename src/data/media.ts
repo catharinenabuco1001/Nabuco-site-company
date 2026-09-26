@@ -38,7 +38,12 @@ export type PressItem = {
 
 // TODO(Cathy): completar cidade, data, tema, público, fotos e vídeo.
 export const pastTalks: PastTalk[] = [
-  { id: "bernoulli", place: "Colégio Bernoulli" },
+  {
+    id: "bernoulli",
+    place: "Colégio Bernoulli",
+    date: "2025-12", // data do post no Instagram — confirmar
+    instagramUrl: "https://www.instagram.com/p/DRwgDwqDsEX/",
+  },
   {
     id: "sao-jorge",
     place: "Colégio São Jorge dos Ilhéus",
@@ -75,14 +80,28 @@ export const podcasts: Podcast[] = [
     title: "Do vestibular ao meu primeiro livro — lançamento do 1º livro",
     youtubeId: "sgMdaz_HaUc",
   },
+  {
+    id: "radio-sociedade-bahia",
+    show: "Rádio Sociedade da Bahia",
+    title: "Conexão Sociedade: entrevista sobre o livro Cartas para um Vestibulando",
+    date: "2025-09",
+    url: "https://open.spotify.com/episode/4zThPAYXq9lORGuBDC6MJj",
+  },
 ];
 
-// TODO(Cathy): link e data da matéria.
 export const press: PressItem[] = [
   {
     id: "anota-bahia-livro",
     outlet: "Anota Bahia",
-    title: "Jovem baiana estreia como escritora",
-    url: "",
+    title: "Jovem baiana estreia como escritora ao transformar dores do vestibular em livro",
+    date: "2025-09",
+    url: "https://anotabahia.com/jovem-baiana-estreia-como-escritora-ao-transformar-dores-do-vestibular-em-livro/",
+  },
+  {
+    id: "bnews-livro",
+    outlet: "BNews",
+    title: "Baiana transforma dificuldades com vestibular em livro: “Foi o meu campo de batalha”",
+    date: "2025-09",
+    url: "https://www.bnews.com.br/noticias/geral/baiana-transforma-dificuldades-com-vestibular-em-livro-foi-o-meu-campo-de-batalha.html",
   },
 ];
