@@ -42,6 +42,7 @@ export const pastTalks: PastTalk[] = [
     id: "bernoulli",
     place: "Colégio Bernoulli",
     date: "2025-12", // data do post no Instagram — confirmar
+    photos: ["/images/palestras/bernoulli-1.jpg", "/images/palestras/bernoulli-2.jpg"],
     instagramUrl: "https://www.instagram.com/p/DRwgDwqDsEX/",
   },
   {
@@ -50,6 +51,8 @@ export const pastTalks: PastTalk[] = [
     city: "Ilhéus, BA",
     date: "2026-05",
     theme: "Aulão de física: movimento oblíquo",
+    audience: "Terceirão 2026",
+    photos: ["/images/palestras/sao-jorge-1.jpg", "/images/palestras/sao-jorge-2.jpg"],
     instagramUrl: "https://www.instagram.com/reel/DYSe05_ONyn/",
   },
 ];

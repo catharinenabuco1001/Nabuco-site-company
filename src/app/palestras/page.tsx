@@ -36,7 +36,11 @@ function formatMonth(date?: string) {
 }
 
 function TalkTile({ talk }: { talk: PastTalk }) {
-  const cover = talk.photos?.find((p) => publicImageExists(p.replace(/^\//, "")));
+  const photos = (talk.photos ?? []).filter((p) =>
+    publicImageExists(p.replace(/^\//, "")),
+  );
+  const cover = photos[0];
+  const extras = photos.slice(1);
   const meta = [talk.city, formatMonth(talk.date)].filter(Boolean).join(" · ");
 
   return (
@@ -65,13 +69,42 @@ function TalkTile({ talk }: { talk: PastTalk }) {
           </span>
         )}
       </div>
+      {extras.length > 0 && (
+        <div className="flex gap-2 px-6 pt-4">
+          {extras.map((src) => (
+            <a
+              key={src}
+              href={src}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="relative h-16 w-24 overflow-hidden rounded-lg border border-ink-900/10"
+            >
+              <Image
+                src={src}
+                alt={`Mais uma foto da palestra no ${talk.place}`}
+                fill
+                sizes="96px"
+                className="object-cover"
+              />
+            </a>
+          ))}
+        </div>
+      )}
       <div className="flex flex-1 flex-col p-6">
         {meta && (
-          <p className="text-[11px] font-semibold uppercase tracking-widest2 text-plum-500">{meta}</p>
+          <p className="text-[11px] font-semibold uppercase tracking-widest2 text-plum-500">
+            {meta}
+          </p>
         )}
         <h3 className="mt-2 font-serif text-2xl text-ink-900">{talk.place}</h3>
-        {talk.theme && <p className="mt-2 text-sm text-ink-900/75 leading-relaxed">{talk.theme}</p>}
-        {talk.audience && <p className="mt-1 text-xs text-ink-900/50">{talk.audience}</p>}
+        {talk.theme && (
+          <p className="mt-2 text-sm text-ink-900/75 leading-relaxed">
+            {talk.theme}
+          </p>
+        )}
+        {talk.audience && (
+          <p className="mt-1 text-xs text-ink-900/50">{talk.audience}</p>
+        )}
         {talk.instagramUrl && !talk.youtubeId && (
           <a
             href={talk.instagramUrl}
@@ -99,10 +132,19 @@ function TalkTile({ talk }: { talk: PastTalk }) {
 
 export default function PalestrasPage() {
   const liveVideos = pastTalks.filter((t) => t.youtubeId);
+  const heroPhoto = publicImageExists("images/palestras/bernoulli-1.jpg")
+    ? "/images/palestras/bernoulli-1.jpg"
+    : undefined;
   const counters = [
-    { v: pastTalks.length, l: pastTalks.length === 1 ? "palestra realizada" : "palestras realizadas" },
+    {
+      v: pastTalks.length,
+      l: pastTalks.length === 1 ? "palestra realizada" : "palestras realizadas",
+    },
     { v: podcasts.length, l: podcasts.length === 1 ? "podcast" : "podcasts" },
-    { v: press.length, l: press.length === 1 ? "matéria na imprensa" : "matérias na imprensa" },
+    {
+      v: press.length,
+      l: press.length === 1 ? "matéria na imprensa" : "matérias na imprensa",
+    },
   ].filter((c) => c.v > 0);
 
   const jsonLd = {
@@ -117,7 +159,9 @@ export default function PalestrasPage() {
         "@type": "PodcastEpisode",
         name: p.title,
         partOfSeries: { "@type": "PodcastSeries", name: p.show },
-        url: p.youtubeId ? `https://www.youtube.com/watch?v=${p.youtubeId}` : p.url,
+        url: p.youtubeId
+          ? `https://www.youtube.com/watch?v=${p.youtubeId}`
+          : p.url,
       })),
       ...press
         .filter((a) => a.url)
@@ -140,19 +184,43 @@ export default function PalestrasPage() {
       {/* ------------------------------------------------ TOPO */}
       <section className="pt-12 sm:pt-16 pb-16 sm:pb-20">
         <Container>
-          <Eyebrow>Palestras &amp; Mídia</Eyebrow>
-          <h1 className="font-serif text-4xl sm:text-6xl text-ink-900 leading-[1.05] max-w-3xl text-balance">
-            Ideias que saem da tela e <span className="italic text-plum-500">chegam ao palco.</span>
-          </h1>
-          <p className="mt-6 max-w-2xl text-base sm:text-lg text-ink-900/70 leading-relaxed">
-            Levo pra escolas e eventos o que vivi no vestibular e o que estudo na neurociência:
-            como aprender de verdade, como lidar com a pressão e como construir uma rotina que
-            sustenta resultado.
-          </p>
-          <div className="mt-8 flex flex-wrap items-center gap-4">
-            <CTA href={siteConfig.contact.whatsappPalestras} variant="primary" external>
-              Levar a Catharine para meu evento
-            </CTA>
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
+            <div className="lg:col-span-7">
+              <Eyebrow>Palestras &amp; Mídia</Eyebrow>
+              <h1 className="font-serif text-4xl sm:text-6xl text-ink-900 leading-[1.05] max-w-3xl text-balance">
+                Ideias que saem da tela e{" "}
+                <span className="italic text-plum-500">chegam ao palco.</span>
+              </h1>
+              <p className="mt-6 max-w-2xl text-base sm:text-lg text-ink-900/70 leading-relaxed">
+                Levo pra escolas e eventos o que vivi no vestibular e o que
+                estudo na neurociência: como aprender de verdade, como lidar com
+                a pressão e como construir uma rotina que sustenta resultado.
+              </p>
+              <div className="mt-8 flex flex-wrap items-center gap-4">
+                <CTA
+                  href={siteConfig.contact.whatsappPalestras}
+                  variant="primary"
+                  external
+                >
+                  Levar a Catharine para meu evento
+                </CTA>
+              </div>
+            </div>
+            {heroPhoto && (
+              <div className="lg:col-span-5">
+                <div className="relative aspect-[4/3] overflow-hidden rounded-[2rem] border border-gold-500/25">
+                  <Image
+                    src={heroPhoto}
+                    alt="Catharine Nabuco palestrando para estudantes do ensino médio"
+                    fill
+                    priority
+                    sizes="(min-width: 1024px) 38vw, 90vw"
+                    className="object-cover"
+                    style={{ objectPosition: "60% 30%" }}
+                  />
+                </div>
+              </div>
+            )}
           </div>
 
           {counters.length > 0 && (
@@ -160,7 +228,9 @@ export default function PalestrasPage() {
               {counters.map((c) => (
                 <div key={c.l}>
                   <p className="font-serif text-4xl text-gold-300">{c.v}</p>
-                  <p className="mt-1 text-xs uppercase tracking-wide text-ink-900/55">{c.l}</p>
+                  <p className="mt-1 text-xs uppercase tracking-wide text-ink-900/55">
+                    {c.l}
+                  </p>
                 </div>
               ))}
             </div>
@@ -173,7 +243,9 @@ export default function PalestrasPage() {
         <section className="py-20 sm:py-24 border-t border-ink-900/10 bg-cream-100/50">
           <Container>
             <Eyebrow>Onde já estive</Eyebrow>
-            <h2 className="font-serif text-3xl sm:text-4xl text-ink-900">Palestras realizadas</h2>
+            <h2 className="font-serif text-3xl sm:text-4xl text-ink-900">
+              Palestras realizadas
+            </h2>
             <div className="mt-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
               {pastTalks.map((t) => (
                 <TalkTile key={t.id} talk={t} />
@@ -194,7 +266,9 @@ export default function PalestrasPage() {
                         className="absolute inset-0 h-full w-full"
                       />
                     </div>
-                    <figcaption className="mt-3 text-sm text-ink-900/60">{t.place}</figcaption>
+                    <figcaption className="mt-3 text-sm text-ink-900/60">
+                      {t.place}
+                    </figcaption>
                   </figure>
                 ))}
               </div>
@@ -208,10 +282,14 @@ export default function PalestrasPage() {
         <section className="py-20 sm:py-24 border-t border-ink-900/10">
           <Container>
             <Eyebrow>Podcasts &amp; entrevistas</Eyebrow>
-            <h2 className="font-serif text-3xl sm:text-4xl text-ink-900">Onde já conversei</h2>
+            <h2 className="font-serif text-3xl sm:text-4xl text-ink-900">
+              Onde já conversei
+            </h2>
             <div className="mt-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
               {podcasts.map((p) => {
-                const href = p.youtubeId ? `https://www.youtube.com/watch?v=${p.youtubeId}` : p.url;
+                const href = p.youtubeId
+                  ? `https://www.youtube.com/watch?v=${p.youtubeId}`
+                  : p.url;
                 const thumb = p.youtubeId
                   ? `https://i.ytimg.com/vi/${p.youtubeId}/hqdefault.jpg`
                   : p.cover;
@@ -239,9 +317,13 @@ export default function PalestrasPage() {
                     </div>
                     <div className="p-6">
                       <p className="text-[11px] font-semibold uppercase tracking-widest2 text-plum-500">
-                        {[p.show, formatMonth(p.date)].filter(Boolean).join(" · ")}
+                        {[p.show, formatMonth(p.date)]
+                          .filter(Boolean)
+                          .join(" · ")}
                       </p>
-                      <h3 className="mt-2 font-serif text-xl text-ink-900 leading-snug">{p.title}</h3>
+                      <h3 className="mt-2 font-serif text-xl text-ink-900 leading-snug">
+                        {p.title}
+                      </h3>
                     </div>
                   </a>
                 );
@@ -256,7 +338,9 @@ export default function PalestrasPage() {
         <section className="py-20 sm:py-24 border-t border-ink-900/10 bg-cream-100/50">
           <Container>
             <Eyebrow>Na imprensa</Eyebrow>
-            <h2 className="font-serif text-3xl sm:text-4xl text-ink-900">O que já saiu por aí</h2>
+            <h2 className="font-serif text-3xl sm:text-4xl text-ink-900">
+              O que já saiu por aí
+            </h2>
             <div className="mt-10 flex flex-col">
               {press.map((a) => {
                 const inner = (
@@ -276,7 +360,13 @@ export default function PalestrasPage() {
                 const cls =
                   "group flex flex-col sm:flex-row sm:items-baseline gap-2 sm:gap-8 py-6 border-b border-ink-900/10 first:border-t";
                 return a.url ? (
-                  <a key={a.id} href={a.url} target="_blank" rel="noopener noreferrer" className={cls}>
+                  <a
+                    key={a.id}
+                    href={a.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={cls}
+                  >
                     {inner}
                   </a>
                 ) : (
@@ -303,8 +393,12 @@ export default function PalestrasPage() {
                 <span className="font-serif text-2xl text-gold-500/60">
                   {String(i + 1).padStart(2, "0")}
                 </span>
-                <h3 className="mt-3 font-serif text-xl text-ink-900">{t.title}</h3>
-                <p className="mt-2 text-sm text-ink-900/65 leading-relaxed">{t.description}</p>
+                <h3 className="mt-3 font-serif text-xl text-ink-900">
+                  {t.title}
+                </h3>
+                <p className="mt-2 text-sm text-ink-900/65 leading-relaxed">
+                  {t.description}
+                </p>
               </div>
             ))}
           </div>
@@ -319,8 +413,8 @@ export default function PalestrasPage() {
               Quer levar a Catharine para o seu evento?
             </h2>
             <p className="mt-4 text-cream/65 max-w-md mx-auto">
-              Escolas, cursinhos, universidades e empresas. Me chama que a gente monta o formato
-              ideal pro seu público.
+              Escolas, cursinhos, universidades e empresas. Me chama que a gente
+              monta o formato ideal pro seu público.
             </p>
             <div className="mt-8">
               <CTA
