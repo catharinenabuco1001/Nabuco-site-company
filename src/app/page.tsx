@@ -5,6 +5,7 @@ import { DoorsSection } from "@/components/DoorsSection";
 import { VideoCard } from "@/components/VideoCard";
 import { VideoPlayerFrame } from "@/components/VideoPlayerFrame";
 import { PacBlock } from "@/components/PacBlock";
+import { AsSeenIn, HomeAuthority } from "@/components/HomeAuthority";
 import { TikTokCard } from "@/components/TikTokCard";
 import { Container } from "@/components/ui/Container";
 import { CTA } from "@/components/ui/CTA";
@@ -47,6 +48,8 @@ export default async function HomePage() {
   return (
     <>
       <HomeHero novidade={novidade} />
+
+      <AsSeenIn />
 
       <DoorsSection eyebrow="Onde você travou?" title="" doors={doors} />
 
@@ -165,6 +168,8 @@ export default async function HomePage() {
           </div>
         </Container>
       </section>
+
+      <HomeAuthority />
 
       <PacBlock />
 
