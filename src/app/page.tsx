@@ -38,7 +38,7 @@ const doors = [
 
 export default async function HomePage() {
   const items = await getLibraryItems();
-  const youtubeItems = items.filter((i) => i.platform === "youtube");
+  const youtubeItems = items.filter((i) => i.platform === "youtube" && i.isLesson);
   const featured = youtubeItems.find((i) => i.featured);
   const recent = youtubeItems.slice(0, 5);
 

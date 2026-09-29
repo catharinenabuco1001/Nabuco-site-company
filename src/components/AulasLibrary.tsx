@@ -17,7 +17,7 @@ type Group = { subject: Subject; name: string; items: LibraryItem[] };
 // qualquer aula do YouTube troca o vídeo do player (estado local); TikToks
 // sempre abrem no próprio TikTok, nunca tentam tocar aqui dentro.
 export function AulasLibrary({ items }: { items: LibraryItem[] }) {
-  const youtubeItems = useMemo(() => items.filter((i) => i.platform === "youtube"), [items]);
+  const youtubeItems = useMemo(() => items.filter((i) => i.platform === "youtube" && i.isLesson), [items]);
   const initialId = youtubeItems.find((i) => i.featured)?.id ?? youtubeItems[0]?.id;
   const [currentId, setCurrentId] = useState<string | undefined>(initialId);
   const [query, setQuery] = useState("");
