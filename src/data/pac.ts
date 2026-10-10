@@ -26,12 +26,12 @@ export const pacTestimonial = {
 };
 
 export const pacAuthorBio =
-  'Eu era ruim em matemática. Não era um talento natural, nem "a nerd da sala". Eu travava em conta como qualquer pessoa. Foi treinando a base, do zero, que passei a gostar da matéria e a entender de verdade. Hoje sou aprovada nas provas de física da FUVEST e da UNICAMP, tirei 800+ pontos em matemática no ENEM, estudo Neurociência na UFABC e dou aula de física e matemática há mais de um ano e meio.';
+  'Eu era ruim em matemática. Não era um talento natural, nem "a nerd da sala". Eu travava em conta como qualquer pessoa. Foi treinando a base, do zero, que passei a gostar da matéria e a entender de verdade. Gabaritei física na FUVEST e na UNICAMP, tirei 800+ pontos em matemática no ENEM, hoje estudo Neurociência na UFABC e dou aula de física e matemática há mais de um ano e meio.';
 
 export const pacAuthorStats = [
   { value: "+60 mil", label: "nas redes sociais" },
   { value: "800+", label: "pontos em matemática no ENEM" },
-  { value: "FUVEST · UNICAMP", label: "aprovada nas provas de física" },
+  { value: "FUVEST · UNICAMP", label: "gabaritei física" },
 ];
 
 export const pacCurriculum = [
