@@ -10,8 +10,15 @@ export async function loadOgFonts() {
       { headers: { "User-Agent": "Mozilla/5.0" } }
     ).then((res) => res.text());
 
-    const urls = [...css.matchAll(/url\((https:\/\/fonts\.gstatic\.com\/[^)]+)\)/g)].map((m) => m[1]);
-    const [normalUrl, italicUrl] = urls;
+    // O Google não garante a ordem dos blocos @font-face (a itálica pode vir
+    // primeiro), então lemos o font-style de cada um.
+    const fontUrl = (style: string) =>
+      css
+        .split("@font-face")
+        .find((block) => block.includes(`font-style: ${style}`))
+        ?.match(/url\((https:\/\/fonts\.gstatic\.com\/[^)]+)\)/)?.[1];
+    const normalUrl = fontUrl("normal");
+    const italicUrl = fontUrl("italic");
     if (!normalUrl || !italicUrl) return [];
 
     const [normal, italic] = await Promise.all([
