@@ -1,6 +1,5 @@
 import { ImageResponse } from "next/og";
-import { readFile } from "fs/promises";
-import path from "path";
+import { loadPublicImage } from "@/lib/og-image";
 
 // Imagem que aparece quando o link do /pac é compartilhado
 // (WhatsApp, Instagram, LinkedIn…).
@@ -35,11 +34,10 @@ async function loadInterFonts(): Promise<{ normal: ArrayBuffer; italic: ArrayBuf
 }
 
 export default async function Image() {
-  const [photo, interFonts] = await Promise.all([
-    readFile(path.join(process.cwd(), "public/images/hero-retrato.jpeg")),
+  const [photoSrc, interFonts] = await Promise.all([
+    loadPublicImage("images/hero-retrato.jpeg", "image/jpeg"),
     loadInterFonts(),
   ]);
-  const photoSrc = `data:image/jpeg;base64,${photo.toString("base64")}`;
 
   return new ImageResponse(
     (

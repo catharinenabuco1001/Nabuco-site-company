@@ -1,7 +1,6 @@
 import { ImageResponse } from "next/og";
-import { readFile } from "fs/promises";
-import path from "path";
 import { loadOgFonts } from "@/lib/og-fonts";
+import { loadPublicImage } from "@/lib/og-image";
 
 // "Capa" do link do site: a imagem que aparece quando alguém compartilha
 // catharinenabuco.com no WhatsApp, Instagram, LinkedIn, etc.
@@ -11,11 +10,10 @@ export const contentType = "image/png";
 export const dynamic = "force-dynamic";
 
 export default async function Image() {
-  const [photo, fonts] = await Promise.all([
-    readFile(path.join(process.cwd(), "public/images/hero-lendo.png")),
+  const [photoSrc, fonts] = await Promise.all([
+    loadPublicImage("images/hero-lendo.png", "image/png"),
     loadOgFonts(),
   ]);
-  const photoSrc = `data:image/png;base64,${photo.toString("base64")}`;
 
   return new ImageResponse(
     (
