@@ -24,7 +24,7 @@ export default function BlogPage() {
           O que eu penso sobre <span className="italic text-plum-500">aprender de verdade.</span>
         </h1>
         <p className="mt-6 max-w-2xl text-base sm:text-lg text-ink-900/65 leading-relaxed">
-          Reflexões da sala de aula, do vestibular e da neurociência — pra quem estuda, pra quem
+          Reflexões da sala de aula, do vestibular e da neurociência. Pra quem estuda, pra quem
           ensina e pra quem acredita que educação não precisa ser decoreba.
         </p>
 

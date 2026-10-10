@@ -24,7 +24,7 @@ export default function ProdutosPage() {
             eyebrow="Produtos"
             title="Produtos"
             as="h1"
-            description="Método, materiais e livros criados por Catharine — cada um para um momento diferente da sua jornada."
+            description="Método, materiais e livros criados por Catharine, cada um para um momento diferente da sua jornada."
           />
         </Container>
       </section>

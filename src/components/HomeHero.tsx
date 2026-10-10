@@ -27,7 +27,7 @@ export function HomeHero({ novidade }: { novidade?: Video }) {
               Você não precisa estudar mais. Precisa estudar melhor.
             </h1>
             <p className="mt-6 max-w-[52ch] text-base sm:text-lg leading-relaxed text-ink-900/82">
-              Escolha o ponto onde você está travando. Eu te mostro a aula que resolve aquilo — e,
+              Escolha o ponto onde você está travando. Eu te mostro a aula que resolve aquilo. E,
               se quiser consolidar de vez, o PAC cuida da parte que faz você perder ponto na hora
               da conta.
             </p>
@@ -60,7 +60,7 @@ export function HomeHero({ novidade }: { novidade?: Video }) {
                   <div className="absolute inset-0 bg-gradient-to-b from-transparent from-40% to-[rgba(8,25,16,0.75)]" />
                 </>
               ) : (
-                <ImagePlaceholder label="Foto de Catharine — em breve" ratio="aspect-[4/5]" />
+                <ImagePlaceholder label="Foto de Catharine em breve" ratio="aspect-[4/5]" />
               )}
             </div>
 

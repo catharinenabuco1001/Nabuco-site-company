@@ -23,11 +23,11 @@ import { publicImageExists } from "@/lib/media";
 import { formatPrice } from "@/lib/utils";
 
 export const metadata: Metadata = {
-  title: "Método PAC — Pense Antes de Calcular",
+  title: "Método PAC: Pense Antes de Calcular",
   description:
     "Você entende a matéria, mas trava na conta? O Método PAC reconstrói a matemática básica em mini-aulas de 10 minutos, pra você calcular com segurança no ENEM e no vestibular.",
   openGraph: {
-    title: "Método PAC — Pense Antes de Calcular",
+    title: "Método PAC: Pense Antes de Calcular",
     description:
       "Você entende a matéria, mas trava na conta? Recupere a base de matemática em mini-aulas de 10 minutos.",
   },
@@ -197,7 +197,7 @@ export default function PacPage() {
               </h1>
               <p className="mt-6 max-w-xl text-base sm:text-lg text-ink-700/80 leading-relaxed">
                 O <strong className="text-ink-900 font-semibold">Método PAC</strong> reconstrói a
-                matemática básica que ficou pra trás — fração, potência, radiciação, fatoração — em
+                matemática básica que ficou pra trás (fração, potência, radiciação, fatoração) em
                 mini-aulas de 10 minutos. Pra você parar de perder questão na última linha da conta.
               </p>
 
@@ -288,7 +288,7 @@ export default function PacPage() {
               Qual desses você já fez numa prova?
             </h2>
             <p className="mt-4 text-ink-900/65 leading-relaxed">
-              Quase todo mundo já errou pelo menos um. Não é falta de inteligência — é base que
+              Quase todo mundo já errou pelo menos um. Não é falta de inteligência, é base que
               ficou com buraco. E cada um desses tem uma aula no PAC.
             </p>
           </div>
@@ -328,7 +328,7 @@ export default function PacPage() {
             <div className="lg:col-span-7 space-y-5 text-base sm:text-lg text-ink-900/75 leading-relaxed">
               <p>
                 Nossa relação com os números se forma cedo, lá no fundamental. Se ficou um buraco
-                ali — um professor que passou rápido, a pandemia, a vergonha de perguntar — ele
+                ali (um professor que passou rápido, a pandemia, a vergonha de perguntar), ele
                 não some. Ele aparece anos depois, no meio de uma questão de cinemática ou de
                 função.
               </p>

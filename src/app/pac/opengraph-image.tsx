@@ -4,7 +4,7 @@ import path from "path";
 
 // Imagem que aparece quando o link do /pac é compartilhado
 // (WhatsApp, Instagram, LinkedIn…).
-export const alt = "Método PAC — Pense Antes de Calcular";
+export const alt = "Método PAC: Pense Antes de Calcular";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 // Gera sob demanda (na primeira visita) em vez de tentar prerenderizar no

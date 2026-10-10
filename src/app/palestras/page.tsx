@@ -12,7 +12,7 @@ export const metadata: Metadata = {
   description:
     "Palestras de Catharine Nabuco em escolas e eventos, participações em podcasts e matérias na imprensa. Leve a Catharine para o seu evento.",
   openGraph: {
-    title: "Palestras & Mídia — Catharine Nabuco",
+    title: "Palestras & Mídia | Catharine Nabuco",
     description:
       "Palestras em escolas e eventos, podcasts e imprensa. Educação, vestibular, neurociência e alta performance nos estudos.",
   },

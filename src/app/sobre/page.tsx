@@ -30,7 +30,7 @@ export default function SobrePage() {
                   className="object-cover"
                 />
               ) : (
-                <ImagePlaceholder label="Foto de Catharine — em breve" ratio="aspect-[4/5]" />
+                <ImagePlaceholder label="Foto de Catharine em breve" ratio="aspect-[4/5]" />
               )}
             </div>
             <div className="mt-6 flex flex-wrap gap-2">
@@ -53,7 +53,7 @@ export default function SobrePage() {
             <div className="mt-8 space-y-6 max-w-xl text-base sm:text-lg text-ink-700/85 leading-relaxed">
               <p>
                 Sou movida pela ideia de que podemos construir uma vida intelectualmente
-                interessante — e que disciplina não precisa significar uma vida sem prazer.
+                interessante. E que disciplina não precisa significar uma vida sem prazer.
               </p>
               <p>
                 Estudo, escrevo, crio projetos, dou palestras, testo ferramentas e compartilho

@@ -19,7 +19,7 @@ export const products: Product[] = [
     name: "Cartas para um Vestibulando",
     tagline: "Um livro para quem está atravessando o vestibular.",
     description:
-      "Um livro para quem está atravessando o vestibular — e precisa lembrar por que começou.",
+      "Um livro para quem está atravessando o vestibular e precisa lembrar por que começou.",
     price: null,
     ctaLabel: "Comprar na Amazon",
     ctaUrl: "", // preenchido dinamicamente a partir de siteConfig.links.amazonCartas

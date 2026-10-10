@@ -62,13 +62,13 @@ export const podcasts: Podcast[] = [
   {
     id: "poder-abc-ep7",
     show: "Poder ABC Podcast",
-    title: "Não é sobre estar pronta. É sobre ir mesmo assim — lançamento do meu 2º livro",
+    title: "Não é sobre estar pronta. É sobre ir mesmo assim (lançamento do meu 2º livro)",
     youtubeId: "ukxKJKIuIOs",
   },
   {
     id: "podfex-ep46",
     show: "PodFex",
-    title: "Educação, estudos e criação de conteúdo — Ep. 46",
+    title: "Educação, estudos e criação de conteúdo (Ep. 46)",
     youtubeId: "syEJJqm7GZg",
   },
   {
@@ -80,7 +80,7 @@ export const podcasts: Podcast[] = [
   {
     id: "do-vestibular-ao-primeiro-livro",
     show: "Canal Catharine Nabuco",
-    title: "Do vestibular ao meu primeiro livro — lançamento do 1º livro",
+    title: "Do vestibular ao meu primeiro livro (lançamento do 1º livro)",
     youtubeId: "sgMdaz_HaUc",
   },
   {

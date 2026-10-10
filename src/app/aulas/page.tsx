@@ -50,7 +50,7 @@ export default async function AulasPage() {
             </h1>
             <p className="max-w-[46ch] text-base leading-relaxed text-ink-900/78">
               Tudo toca aqui na página. Escolha pelo problema que você quer resolver ou pela
-              matéria — sem cadastro.
+              matéria. Sem cadastro.
             </p>
           </div>
         </Container>

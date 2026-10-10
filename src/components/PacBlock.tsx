@@ -11,7 +11,7 @@ export const pacSteps = [
   {
     n: "A",
     title: "Antes",
-    desc: "Conferir estratégia, unidades e sinais — é aí que a questão costuma se perder.",
+    desc: "Conferir estratégia, unidades e sinais: é aí que a questão costuma se perder.",
   },
   {
     n: "C",
@@ -44,7 +44,7 @@ export function PacBlock({ compact = false }: { compact?: boolean }) {
                 Pense Antes de Calcular.
               </h2>
               <p className="mt-5 max-w-xl text-base sm:text-lg leading-relaxed text-cream/78">
-                A aula te faz aprender. O PAC garante que o aprendizado se consolide — porque não
+                A aula te faz aprender. O PAC garante que o aprendizado se consolide. Porque não
                 adianta dominar a matéria e perder a questão na última linha da conta.
               </p>
               {!compact && (

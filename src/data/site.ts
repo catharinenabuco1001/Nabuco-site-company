@@ -5,7 +5,7 @@ export const siteConfig = {
   name: "Catharine Nabuco",
   tagline: "Estudar melhor, não mais.",
   description:
-    "Educação, vestibular, performance, inteligência artificial, livros e ideias que estou construindo pelo caminho.",
+    "Aulas gratuitas de matemática e física, método de estudo para o vestibular, o Método PAC e palestras. Catharine Nabuco é professora, autora de 2 livros e estuda neurociência na UFABC.",
   url: "https://catharinenabuco.com", // TODO: inserir domínio real
   locale: "pt_BR",
 

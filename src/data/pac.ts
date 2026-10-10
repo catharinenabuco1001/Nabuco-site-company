@@ -26,7 +26,7 @@ export const pacTestimonial = {
 };
 
 export const pacAuthorBio =
-  'Eu era ruim em matemática. Não era um talento natural, nem "a nerd da sala" — eu travava em conta como qualquer pessoa. Foi treinando a base, do zero, que passei a gostar da matéria e a entender de verdade. Hoje sou aprovada nas provas de física da FUVEST e da UNICAMP, tirei 800+ pontos em matemática no ENEM, estudo Neurociência na UFABC e dou aula de física e matemática há mais de um ano e meio.';
+  'Eu era ruim em matemática. Não era um talento natural, nem "a nerd da sala". Eu travava em conta como qualquer pessoa. Foi treinando a base, do zero, que passei a gostar da matéria e a entender de verdade. Hoje sou aprovada nas provas de física da FUVEST e da UNICAMP, tirei 800+ pontos em matemática no ENEM, estudo Neurociência na UFABC e dou aula de física e matemática há mais de um ano e meio.';
 
 export const pacAuthorStats = [
   { value: "+60 mil", label: "nas redes sociais" },
@@ -81,7 +81,7 @@ export const pacModules = [
   {
     n: "2",
     title: "Decimais, frações e porcentagem",
-    desc: "Incluindo fator de aumento e redução — o atalho que mais aparece no ENEM.",
+    desc: "Incluindo fator de aumento e redução, o atalho que mais aparece no ENEM.",
   },
   {
     n: "3",
@@ -105,7 +105,7 @@ export const pacIncludes = [
   "Listas de exercícios por módulo, com questões de vestibular",
   "Comunidade no WhatsApp com outros alunos",
   "IA de dúvidas pra destravar exercício a qualquer hora",
-  "3 meses de acesso — dá pra concluir em ~15 dias",
+  "3 meses de acesso (dá pra concluir em ~15 dias)",
 ];
 
 export const pacGuarantee =
@@ -114,7 +114,7 @@ export const pacGuarantee =
 export const pacFaq = [
   {
     q: "Pra quem é o PAC?",
-    a: "Pra quem está no ensino médio, no cursinho ou se preparando pro ENEM e vestibulares — e também pra universitário que ainda sente buraco na base (costuma aparecer em trigonometria e geometria analítica).",
+    a: "Pra quem está no ensino médio, no cursinho ou se preparando pro ENEM e vestibulares. E também pra universitário que ainda sente buraco na base (costuma aparecer em trigonometria e geometria analítica).",
   },
   {
     q: "Preciso saber alguma coisa antes?",
@@ -122,7 +122,7 @@ export const pacFaq = [
   },
   {
     q: "Serve pra física também?",
-    a: "Serve — e foi por isso que o PAC nasceu. A maioria dos erros em física não é de física: é conta. Fração, potência e notação que travam no meio da resolução.",
+    a: "Serve! E foi por isso que o PAC nasceu. A maioria dos erros em física não é de física: é conta. Fração, potência e notação que travam no meio da resolução.",
   },
   {
     q: "Quanto tempo leva pra terminar?",
@@ -130,7 +130,7 @@ export const pacFaq = [
   },
   {
     q: "Como eu tiro dúvidas?",
-    a: "Pela comunidade no WhatsApp e pela IA de dúvidas, que responde na hora — inclusive de madrugada, na véspera da prova.",
+    a: "Pela comunidade no WhatsApp e pela IA de dúvidas, que responde na hora, inclusive de madrugada, na véspera da prova.",
   },
   {
     q: "Como recebo o acesso?",

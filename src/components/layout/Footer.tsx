@@ -55,7 +55,7 @@ export function Footer() {
                       {social.label}
                     </a>
                   ) : (
-                    <span className="text-sm text-cream/40">{social.label} — em breve</span>
+                    <span className="text-sm text-cream/40">{social.label} (em breve)</span>
                   )}
                 </li>
               ))}

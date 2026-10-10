@@ -118,7 +118,7 @@ export const tiktoks: Video[] = [
   },
   {
     id: "forca-eletrica-lei-de-coulomb",
-    title: "Força Elétrica — Lei de Coulomb",
+    title: "Força Elétrica: Lei de Coulomb",
     category: "estudos",
     platform: "tiktok",
     url: "https://www.tiktok.com/@cathynabuuco/video/7623218032831188231",

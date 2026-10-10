@@ -6,7 +6,7 @@ import { news } from "@/data/news";
 
 export const metadata: Metadata = {
   title: "Catharine Agora",
-  description: "Novidades, projetos, palestras e conquistas — em ordem cronológica.",
+  description: "Novidades, projetos, palestras e conquistas, em ordem cronológica.",
 };
 
 export default function NoticiasPage() {

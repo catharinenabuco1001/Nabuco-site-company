@@ -18,7 +18,7 @@ export const talks: Talk[] = [
   {
     id: "educacao-futuro",
     title: "Educação e futuro",
-    description: "Para onde caminha a forma como aprendemos — e como se preparar para isso.",
+    description: "Para onde caminha a forma como aprendemos e como se preparar para isso.",
   },
   {
     id: "ia-nos-estudos",
