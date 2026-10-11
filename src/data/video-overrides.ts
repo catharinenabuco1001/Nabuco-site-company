@@ -57,9 +57,10 @@ export const DEFAULT_YOUTUBE_CATEGORY: ContentCategory = "estudos";
 // em "Todas as aulas", só na aba geral de vídeos.
 export const videoOverrides: Record<string, VideoOverride> = {
   // YouTube
+  f9sgN4jLMDc: { subject: "matematica", featured: true }, // 5 técnicas pra interpretação matemática
   SznR1CbPzCI: { subject: "performance-e-prova" }, // Como controlar o nervosismo antes da prova
   pfSNPJyOEZs: { subject: "matematica" }, // Voltar na base ou focar no que mais cai
-  M2JMZYi7jg4: { subject: "matematica", featured: true }, // 2 coisas pra melhorar em matemática de verdade
+  M2JMZYi7jg4: { subject: "matematica" }, // 2 coisas pra melhorar em matemática de verdade
   PUO9rmIqbaE: { subject: "metodo-de-estudo" }, // Decorar musiquinha de fórmula
   Fj4jacVdXQY: { subject: "metodo-de-estudo" }, // Não esqueça o que você leu/estudou
   jWM9_h8xhco: { subject: "metodo-de-estudo" }, // Como montei o caderno/habit tracker

@@ -1,6 +1,6 @@
 import "server-only";
 import type { Video } from "@/types";
-import { videos as staticVideos } from "@/data/videos";
+import { videos as staticVideos, manualYoutubeVideos } from "@/data/videos";
 import { siteConfig } from "@/data/site";
 import { videoOverrides, DEFAULT_YOUTUBE_CATEGORY } from "@/data/video-overrides";
 
@@ -76,7 +76,21 @@ function parseYouTubeFeed(xml: string): Video[] {
     .filter((video): video is Video => video !== null);
 }
 
+// Junta as aulas cadastradas à mão (manualYoutubeVideos) que não vieram no
+// feed, na frente da lista, com o destaque de video-overrides.ts.
+function withManualVideos(feedVideos: Video[]): Video[] {
+  const ids = new Set(feedVideos.map((v) => v.id));
+  const missing = manualYoutubeVideos
+    .filter((v) => !ids.has(v.id))
+    .map((v) => ({ ...v, featured: videoOverrides[v.id]?.featured ?? false }));
+  return [...missing, ...feedVideos];
+}
+
 export async function getVideos(): Promise<Video[]> {
+  return withManualVideos(await getFeedVideos());
+}
+
+async function getFeedVideos(): Promise<Video[]> {
   try {
     const res = await fetch(FEED_URL, {
       // Revalida em segundo plano a cada hora — não busca no YouTube a

@@ -89,6 +89,19 @@ export const videos: Video[] = [
   },
 ];
 
+// Aulas do YouTube garantidas no site mesmo se não vierem no RSS (o feed só
+// traz os ~15 mais recentes e às vezes fica fora do ar). Matéria e destaque
+// continuam em src/data/video-overrides.ts, pelo ID do vídeo.
+export const manualYoutubeVideos: Video[] = [
+  {
+    id: "f9sgN4jLMDc",
+    title: "5 técnicas infalíveis para melhorar em interpretação matemática",
+    category: "estudos",
+    platform: "youtube",
+    url: "https://www.youtube.com/watch?v=f9sgN4jLMDc",
+  },
+];
+
 // TikToks reais (@cathynabuuco). Só precisa de "id" + "title" + "url" — a
 // capa é buscada automaticamente do próprio TikTok (ver
 // src/lib/tiktok.ts). Dá pra forçar uma capa manual em
