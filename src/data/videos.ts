@@ -100,6 +100,55 @@ export const manualYoutubeVideos: Video[] = [
     platform: "youtube",
     url: "https://www.youtube.com/watch?v=f9sgN4jLMDc",
   },
+  {
+    id: "SznR1CbPzCI",
+    title: "Como controlar o nervosismo antes da prova de Matemática. (Para ver enquanto faz outra coisa)",
+    category: "estudos",
+    platform: "youtube",
+    url: "https://www.youtube.com/watch?v=SznR1CbPzCI",
+  },
+  {
+    id: "pfSNPJyOEZs",
+    title: "Volto no matemática básica ou foco nos assuntos que mais caem na minha prova?",
+    category: "estudos",
+    platform: "youtube",
+    url: "https://www.youtube.com/watch?v=pfSNPJyOEZs",
+  },
+  {
+    id: "M2JMZYi7jg4",
+    title: "2 coisas que vão fazer você melhorar em matemática de verdade",
+    category: "estudos",
+    platform: "youtube",
+    url: "https://www.youtube.com/watch?v=M2JMZYi7jg4",
+  },
+  {
+    id: "PUO9rmIqbaE",
+    title: "Por que decorar musiquinha de fórmula está te deixando mais burro?",
+    category: "estudos",
+    platform: "youtube",
+    url: "https://www.youtube.com/watch?v=PUO9rmIqbaE",
+  },
+  {
+    id: "Fj4jacVdXQY",
+    title: "Não esqueça mais o que você leu/estudou.",
+    category: "estudos",
+    platform: "youtube",
+    url: "https://www.youtube.com/watch?v=Fj4jacVdXQY",
+  },
+  {
+    id: "jWM9_h8xhco",
+    title: "Como montei o caderno que mudaria minha vida.",
+    category: "estudos",
+    platform: "youtube",
+    url: "https://www.youtube.com/watch?v=jWM9_h8xhco",
+  },
+  {
+    id: "zfe_frjvL5Q",
+    title: "Como melhorar em matemática? - DM - Destrave sua matemática, lançamento em março! #matematica",
+    category: "estudos",
+    platform: "youtube",
+    url: "https://www.youtube.com/watch?v=zfe_frjvL5Q",
+  },
 ];
 
 // TikToks reais (@cathynabuuco). Só precisa de "id" + "title" + "url" — a

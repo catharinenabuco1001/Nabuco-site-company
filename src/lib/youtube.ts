@@ -76,21 +76,22 @@ function parseYouTubeFeed(xml: string): Video[] {
     .filter((video): video is Video => video !== null);
 }
 
-// Junta as aulas cadastradas à mão (manualYoutubeVideos) que não vieram no
-// feed, na frente da lista, com o destaque de video-overrides.ts.
-function withManualVideos(feedVideos: Video[]): Video[] {
-  const ids = new Set(feedVideos.map((v) => v.id));
-  const missing = manualYoutubeVideos
-    .filter((v) => !ids.has(v.id))
-    .map((v) => ({ ...v, featured: videoOverrides[v.id]?.featured ?? false }));
-  return [...missing, ...feedVideos];
-}
-
+// Aulas cadastradas à mão (manualYoutubeVideos), com o destaque de
+// video-overrides.ts. Com o feed no ar, entram no fim só as que faltaram
+// nele; com o feed fora, elas viram a lista inteira (na ordem cadastrada).
 export async function getVideos(): Promise<Video[]> {
-  return withManualVideos(await getFeedVideos());
+  const manual = manualYoutubeVideos.map((v) => ({
+    ...v,
+    featured: videoOverrides[v.id]?.featured ?? false,
+  }));
+  const feedVideos = await getFeedVideos();
+  if (!feedVideos) return [...manual, ...staticVideos];
+
+  const ids = new Set(feedVideos.map((v) => v.id));
+  return [...feedVideos, ...manual.filter((v) => !ids.has(v.id))];
 }
 
-async function getFeedVideos(): Promise<Video[]> {
+async function getFeedVideos(): Promise<Video[] | null> {
   try {
     const res = await fetch(FEED_URL, {
       // Revalida em segundo plano a cada hora — não busca no YouTube a
@@ -112,6 +113,6 @@ async function getFeedVideos(): Promise<Video[]> {
     return videos;
   } catch (error) {
     console.error("[youtube] Falha ao buscar o feed real, usando vídeos de exemplo:", error);
-    return staticVideos;
+    return null;
   }
 }
