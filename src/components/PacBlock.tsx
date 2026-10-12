@@ -1,6 +1,7 @@
 import { Container } from "@/components/ui/Container";
 import { CTA } from "@/components/ui/CTA";
-import { siteConfig } from "@/data/site";
+import { PacPhaseNotice } from "@/components/PacLaunch";
+import { getPacPhase } from "@/lib/pac-launch";
 
 export const pacSteps = [
   {
@@ -69,9 +70,7 @@ export function PacBlock({ compact = false }: { compact?: boolean }) {
                 >
                   Entrar no PAC
                 </CTA>
-                <span className="text-sm text-cream/60">
-                  {siteConfig.pacCohort ?? "Valor e turmas em breve."}
-                </span>
+                <PacPhaseNotice buildPhase={getPacPhase()} className="text-sm text-cream/60" />
               </div>
             ) : (
               <div className="min-w-0 flex flex-col gap-px bg-cream/15">

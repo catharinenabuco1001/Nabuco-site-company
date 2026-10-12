@@ -81,7 +81,7 @@ export const pacModules = [
   {
     n: "2",
     title: "Decimais, frações e porcentagem",
-    desc: "Incluindo fator de aumento e redução, o atalho que mais aparece no ENEM.",
+    desc: "Incluindo razão e proporção, média e fator de aumento e redução, o atalho que mais aparece no ENEM.",
   },
   {
     n: "3",
@@ -92,6 +92,20 @@ export const pacModules = [
     n: "4",
     title: "Fatoração e produtos notáveis",
     desc: "Enxergar o padrão antes de sair expandindo tudo na mão.",
+  },
+  {
+    n: "5",
+    title: "Geometria plana",
+    desc: "Áreas e conceitos.",
+  },
+  {
+    n: "6",
+    title: "Trigonometria básica",
+  },
+  {
+    n: "7",
+    title: "Logaritmo",
+    desc: "Aula 1.",
   },
   {
     n: "+",

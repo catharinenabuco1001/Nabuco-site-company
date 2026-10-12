@@ -59,11 +59,8 @@ export const siteConfig = {
   links: {
     amazonCartas: "https://www.amazon.com.br/dp/6598829801/?tag=nabuco01-20",
     pacCheckout: "https://pay.kiwify.com.br/eUCaiLK",
-    // Ainda não usado em nenhum botão do site — ver observação na resposta.
-    pacWhatsappGroup: "https://chat.whatsapp.com/DXENAsQbSBh7ux8ubr6HHB",
+    // Comunidade PAC: destino dos botões de compra fora do período de
+    // matrículas (ver src/lib/pac-launch.ts).
+    pacCommunity: "https://chat.whatsapp.com/DXENAsQbSBh7ux8ubr6HHB",
   },
-
-  // Texto curto sobre a turma aberta no momento. Atualize (ou volte para
-  // null) quando a turma mudar — aparece no /pac.
-  pacCohort: "Turma de outubro com inscrições abertas.",
 } as const;

@@ -19,7 +19,9 @@ import {
   pacGuarantee,
   pacFaq,
 } from "@/data/pac";
+import { PacBuyButton, PacPhaseNotice } from "@/components/PacLaunch";
 import { publicImageExists } from "@/lib/media";
+import { getPacPhase } from "@/lib/pac-launch";
 import { formatPrice } from "@/lib/utils";
 
 export const metadata: Metadata = {
@@ -32,8 +34,6 @@ export const metadata: Metadata = {
       "Você entende a matéria, mas trava na conta? Recupere a base de matemática em mini-aulas de 10 minutos.",
   },
 };
-
-const checkout = siteConfig.links.pacCheckout;
 
 function Eyebrow({ children, className = "" }: { children: React.ReactNode; className?: string }) {
   return (
@@ -172,6 +172,7 @@ export default function PacPage() {
   const authorSrc = publicImageExists("images/sobre.jpg") ? "/images/sobre.jpg" : heroSrc;
   const prints = pacPrints.filter((p) => publicImageExists(`images/pac/prints/${p.file}`));
   const discount = Math.round((1 - pacPricing.price / pacPricing.originalPrice) * 100);
+  const buildPhase = getPacPhase();
 
   return (
     <>
@@ -185,12 +186,10 @@ export default function PacPage() {
         <Container>
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-10 items-center">
             <div className="lg:col-span-7 animate-fadeIn">
-              {siteConfig.pacCohort && (
-                <p className="inline-flex items-center gap-2 rounded-full border border-gold-500/40 bg-gold-500/10 px-4 py-1.5 text-[11px] sm:text-xs font-semibold uppercase tracking-wide text-gold-300">
-                  <span className="h-1.5 w-1.5 rounded-full bg-gold-500 animate-pulse" />
-                  {siteConfig.pacCohort}
-                </p>
-              )}
+              <p className="inline-flex items-center gap-2 rounded-full border border-gold-500/40 bg-gold-500/10 px-4 py-1.5 text-[11px] sm:text-xs font-semibold uppercase tracking-wide text-gold-300">
+                <span className="h-1.5 w-1.5 rounded-full bg-gold-500 animate-pulse" />
+                <PacPhaseNotice buildPhase={buildPhase} />
+              </p>
               <h1 className="mt-6 font-serif text-[2.6rem] sm:text-6xl lg:text-[4.2rem] text-ink-900 leading-[1.02] text-balance">
                 Você entende a matéria.{" "}
                 <span className="italic text-plum-500">Trava na conta.</span>
@@ -202,9 +201,14 @@ export default function PacPage() {
               </p>
 
               <div className="mt-8 flex flex-wrap items-center gap-4">
-                <CTA href={checkout} variant="primary" external className="px-8 py-4">
+                <PacBuyButton buildPhase={buildPhase} className="px-8 py-4">
                   Quero destravar minha base
-                </CTA>
+                </PacBuyButton>
+                <PacPhaseNotice
+                  buildPhase={buildPhase}
+                  onlyWhenClosed
+                  className="basis-full text-sm font-semibold text-plum-500"
+                />
                 <CTA href="#por-dentro" variant="secondary" className="px-7 py-4">
                   Ver o que tem no curso
                 </CTA>
@@ -400,7 +404,9 @@ export default function PacPage() {
                     </span>
                     <div>
                       <p className="text-base sm:text-lg font-semibold text-ink-900">{m.title}</p>
-                      <p className="mt-1 text-sm text-ink-900/60 leading-relaxed">{m.desc}</p>
+                      {m.desc && (
+                        <p className="mt-1 text-sm text-ink-900/60 leading-relaxed">{m.desc}</p>
+                      )}
                     </div>
                   </li>
                 ))}
@@ -617,22 +623,23 @@ export default function PacPage() {
               <p className="text-sm text-cream/50">
                 de <span className="line-through">{formatPrice(pacPricing.originalPrice)}</span> por
               </p>
-              <p className="mt-1 font-serif text-5xl sm:text-6xl text-cream">
-                {formatPrice(pacPricing.price)}
+              <p className="mt-1 flex flex-wrap items-baseline justify-center gap-x-3 gap-y-1">
+                <span className="font-serif text-5xl sm:text-6xl text-cream">
+                  {formatPrice(pacPricing.price)}
+                </span>
+                <span className="text-sm text-cream/70">ou em até 12x no cartão</span>
               </p>
               <p className="mt-2 text-xs text-cream/55">Pix ou cartão · acesso liberado na hora</p>
 
-              <CTA
-                href={checkout}
-                variant="primary"
-                external
+              <PacBuyButton
+                buildPhase={buildPhase}
                 className="mt-8 w-full py-4 bg-cream text-ink-900 hover:bg-gold-500 hover:text-cream-900"
               >
                 Garantir minha vaga
-              </CTA>
-              {siteConfig.pacCohort && (
-                <p className="mt-4 text-xs text-cream/55">{siteConfig.pacCohort}</p>
-              )}
+              </PacBuyButton>
+              <p className="mt-4 text-xs text-cream/55">
+                <PacPhaseNotice buildPhase={buildPhase} />
+              </p>
             </div>
           </div>
 
@@ -721,10 +728,15 @@ export default function PacPage() {
                 <span className="italic text-plum-500">não precisa ser na conta.</span>
               </h2>
               <div className="mt-9">
-                <CTA href={checkout} variant="primary" external className="px-10 py-4">
+                <PacBuyButton buildPhase={buildPhase} className="px-10 py-4">
                   Entrar no PAC agora
-                </CTA>
+                </PacBuyButton>
               </div>
+              <PacPhaseNotice
+                buildPhase={buildPhase}
+                onlyWhenClosed
+                className="mt-4 block text-sm font-semibold text-plum-500"
+              />
               <p className="mt-4 text-xs text-ink-900/50">Garantia de 7 dias · acesso imediato</p>
             </div>
           </div>
@@ -738,11 +750,19 @@ export default function PacPage() {
             <p className="text-[11px] text-ink-900/50 line-through">
               {formatPrice(pacPricing.originalPrice)}
             </p>
-            <p className="font-serif text-xl text-ink-900">{formatPrice(pacPricing.price)}</p>
+            <p className="font-serif text-xl text-ink-900">
+              {formatPrice(pacPricing.price)}{" "}
+              <span className="font-sans text-[11px] text-ink-900/55">ou até 12x</span>
+            </p>
+            <PacPhaseNotice
+              buildPhase={buildPhase}
+              onlyWhenClosed
+              className="block text-[11px] font-semibold text-plum-500"
+            />
           </div>
-          <CTA href={checkout} variant="primary" external className="px-6 py-3 text-xs">
+          <PacBuyButton buildPhase={buildPhase} className="px-6 py-3 text-xs">
             Garantir vaga
-          </CTA>
+          </PacBuyButton>
         </div>
       </div>
     </>
