@@ -7,6 +7,7 @@ export const pacPricing = {
   price: 297.9,
   coupon: "LANÇAMENTO",
   installments: { count: 12, value: 30.19 },
+  perDay: "cerca de R$1 por dia, com garantia de 7 dias",
 };
 
 // Prazo da 3ª turma (as datas que mudam os botões estão em src/lib/pac-launch.ts).
@@ -21,11 +22,12 @@ export const pacBonuses = [
     desc: "Os 5 primeiros a comprar ganham um kit de estudo. O kit é enviado depois dos 7 dias de garantia.",
   },
   {
-    title: "2 encontros ao vivo para tirar dúvidas",
-    desc: "Sábado, 17/10, e sábado, 24/10, às 18h.",
+    title: "Plano de estudos de 15 dias",
+    desc: "30 minutos por dia, para você fixar o que aprende.",
   },
   {
-    title: "Plano de estudos de 15 dias",
+    title: "2 encontros ao vivo para tirar dúvidas",
+    desc: "Sábado, 17/10, e sábado, 24/10, às 18h.",
   },
   {
     title: "E-book “Como usar IA para estudar”",
@@ -33,6 +35,22 @@ export const pacBonuses = [
   },
   {
     title: "Assistente de IA de dúvidas do Método PAC",
+  },
+];
+
+// Bloco "Seu filho quer fazer o PAC?" (só com informações que já estão na página).
+export const pacParents = [
+  {
+    title: "O que ele vai fazer",
+    desc: "Mini-aulas de ~10 minutos que reconstroem a base de matemática do zero, com listas de exercícios por módulo.",
+  },
+  {
+    title: "7 dias de garantia, sem perguntas",
+    desc: "Se não for pra ele, é só pedir o reembolso dentro do prazo e você recebe 100% de volta.",
+  },
+  {
+    title: "12x de R$30,19",
+    desc: "R$297,90 com o cupom LANÇAMENTO, cerca de R$1 por dia.",
   },
 ];
 
@@ -48,6 +66,9 @@ export const pacFit = {
     "Você entende a matéria de exatas, mas trava na hora de fazer a conta.",
     "Decora fórmula, mas esquece na prova ou não sabe quando aplicar cada uma.",
     "Sente que tem buracos lá do fundamental que nunca foram resolvidos.",
+    "Estuda, mas não fixa.",
+    "Tem lacunas do fundamental.",
+    "Tem medo ou bloqueio com matemática.",
   ],
   isNotFor: [
     "Já domina fração, potência, radiciação e produtos notáveis de olhos fechados.",
@@ -130,17 +151,9 @@ export const pacModules = [
   },
   {
     n: "5",
-    title: "Geometria plana",
-    desc: "Áreas e conceitos.",
-  },
-  {
-    n: "6",
-    title: "Trigonometria básica",
-  },
-  {
-    n: "7",
-    title: "Logaritmo",
-    desc: "Aula 1.",
+    title: "Introdução à matemática avançada",
+    desc: "Uma prévia do que vem depois da base: você já vê como a matemática avançada funciona, sem medo.",
+    lessons: ["Seno e cosseno", "Introdução a logaritmo (aula 1)", "Conceito de área"],
   },
   {
     n: "+",

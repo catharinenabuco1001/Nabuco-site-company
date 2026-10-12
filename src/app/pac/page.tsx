@@ -21,6 +21,7 @@ import {
   pacDeadline,
   pacBonuses,
   pacLiveClasses,
+  pacParents,
 } from "@/data/pac";
 import { PacBuyButton, PacPhaseNotice } from "@/components/PacLaunch";
 import { publicImageExists } from "@/lib/media";
@@ -28,13 +29,13 @@ import { getPacPhase } from "@/lib/pac-launch";
 import { formatPrice } from "@/lib/utils";
 
 export const metadata: Metadata = {
-  title: "Método PAC: Pense Antes de Calcular",
+  title: "Método PAC, 3ª turma, inscrições até 15/10",
   description:
-    "Você entende a matéria, mas trava na conta? O Método PAC reconstrói a matemática básica em mini-aulas de 10 minutos, pra você calcular com segurança no ENEM e no vestibular.",
+    "Método PAC, 3ª turma, inscrições até 15/10. Você entende a matéria, mas trava na conta? O PAC reconstrói a matemática básica em mini-aulas de 10 minutos, pra você calcular com segurança no ENEM e no vestibular.",
   openGraph: {
-    title: "Método PAC: Pense Antes de Calcular",
+    title: "Método PAC, 3ª turma, inscrições até 15/10",
     description:
-      "Você entende a matéria, mas trava na conta? Recupere a base de matemática em mini-aulas de 10 minutos.",
+      "Método PAC, 3ª turma, inscrições até 15/10. Você entende a matéria, mas trava na conta? Recupere a base de matemática em mini-aulas de 10 minutos.",
   },
 };
 
@@ -197,6 +198,9 @@ export default function PacPage() {
                 Você entende a matéria.{" "}
                 <span className="italic text-plum-500">Trava na conta.</span>
               </h1>
+              <p className="mt-4 font-serif text-xl sm:text-2xl text-ink-900/80">
+                Trava no enunciado? É aqui que o PAC começa.
+              </p>
               <p className="mt-6 max-w-xl text-base sm:text-lg text-ink-700/80 leading-relaxed">
                 O <strong className="text-ink-900 font-semibold">Método PAC</strong> reconstrói a
                 matemática básica que ficou pra trás (fração, potência, radiciação, fatoração) em
@@ -409,6 +413,18 @@ export default function PacPage() {
                       <p className="text-base sm:text-lg font-semibold text-ink-900">{m.title}</p>
                       {m.desc && (
                         <p className="mt-1 text-sm text-ink-900/60 leading-relaxed">{m.desc}</p>
+                      )}
+                      {m.lessons && (
+                        <ul className="mt-3 flex flex-wrap gap-2">
+                          {m.lessons.map((lesson) => (
+                            <li
+                              key={lesson}
+                              className="rounded-full border border-gold-500/40 px-3 py-1 text-xs text-ink-900/75"
+                            >
+                              {lesson}
+                            </li>
+                          ))}
+                        </ul>
                       )}
                     </div>
                   </li>
@@ -703,6 +719,7 @@ export default function PacPage() {
                   ou {pacPricing.installments.count}x de {formatPrice(pacPricing.installments.value)}
                 </span>
               </p>
+              <p className="mt-1 text-xs text-cream/60">{pacPricing.perDay}</p>
               <p className="mt-4 inline-flex items-center gap-2 rounded-full border border-cream/25 px-4 py-1.5 text-xs text-cream/80">
                 Cupom
                 <span className="font-semibold tracking-wide text-cream">{pacPricing.coupon}</span>
@@ -744,6 +761,31 @@ export default function PacPage() {
               />
             </svg>
             <p className="text-sm text-ink-900/75 leading-relaxed">{pacGuarantee}</p>
+          </div>
+        </Container>
+      </section>
+
+      {/* ------------------------------------------------------------ PAIS */}
+      <section id="pais" className="scroll-mt-24 py-20 sm:py-28 border-t border-ink-900/10">
+        <Container>
+          <div className="text-center max-w-2xl mx-auto">
+            <Eyebrow>Para pais e responsáveis</Eyebrow>
+            <h2 className="font-serif text-3xl sm:text-5xl text-ink-900 leading-tight text-balance">
+              Seu filho quer fazer o PAC?
+            </h2>
+          </div>
+          <ul className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-4 max-w-5xl mx-auto">
+            {pacParents.map((item) => (
+              <li key={item.title} className="rounded-2xl border border-ink-900/10 bg-cream-50/60 p-6 sm:p-7">
+                <p className="font-serif text-xl text-ink-900 leading-snug">{item.title}</p>
+                <p className="mt-2 text-sm text-ink-900/65 leading-relaxed">{item.desc}</p>
+              </li>
+            ))}
+          </ul>
+          <div className="mt-10 text-center">
+            <PacBuyButton buildPhase={buildPhase} className="px-10 py-4">
+              Garantir a vaga
+            </PacBuyButton>
           </div>
         </Container>
       </section>

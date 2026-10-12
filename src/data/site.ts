@@ -13,6 +13,7 @@ export const siteConfig = {
     { label: "Início", href: "/" },
     { label: "Aulas", href: "/aulas" },
     { label: "PAC", href: "/pac" },
+    { label: "Ao vivo", href: "/pac#ao-vivo" },
     { label: "Produtos", href: "/produtos" },
     { label: "Palestras & Mídia", href: "/palestras" },
     { label: "Blog", href: "/blog" },
@@ -59,10 +60,10 @@ export const siteConfig = {
   links: {
     amazonCartas: "https://www.amazon.com.br/dp/6598829801/?tag=nabuco01-20",
     pacCheckout: "https://pay.kiwify.com.br/eUCaiLK",
-    // Comunidade PAC: destino dos botões de compra fora do período de
-    // matrículas (ver src/lib/pac-launch.ts).
     // Pra onde vai quem cai numa página que não existe (404).
     notFoundRedirect: "https://tally.so/r/RG788K",
+    // Comunidade PAC: destino dos botões de compra fora do período de
+    // matrículas (ver src/lib/pac-launch.ts).
     pacCommunity: "https://chat.whatsapp.com/DXENAsQbSBh7ux8ubr6HHB",
   },
 } as const;
