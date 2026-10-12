@@ -5,7 +5,42 @@
 export const pacPricing = {
   originalPrice: 349.9,
   price: 297.9,
+  coupon: "LANÇAMENTO",
+  installments: { count: 12, value: 30.19 },
 };
+
+// Prazo da 3ª turma (as datas que mudam os botões estão em src/lib/pac-launch.ts).
+export const pacDeadline = {
+  title: "Matrículas até quinta, 15/10, às 23h59.",
+  after: "Depois disso, a turma fecha e só volta no fim de outubro, por R$349,90.",
+};
+
+export const pacBonuses = [
+  {
+    title: "Kit de estudo (caderno e caneta)",
+    desc: "Os 5 primeiros a comprar ganham um kit de estudo. O kit é enviado depois dos 7 dias de garantia.",
+  },
+  {
+    title: "2 encontros ao vivo para tirar dúvidas",
+    desc: "Sábado, 17/10, e sábado, 24/10, às 18h.",
+  },
+  {
+    title: "Plano de estudos de 15 dias",
+  },
+  {
+    title: "E-book “Como usar IA para estudar”",
+    desc: "Liberado até 14/10.",
+  },
+  {
+    title: "Assistente de IA de dúvidas do Método PAC",
+  },
+];
+
+export const pacLiveClasses = [
+  { day: "Segunda, 12/10", time: "18h", title: "3 questões do ENEM que você não pode errar" },
+  { day: "Terça, 13/10", time: "18h", title: "Geometria espacial sem decorar fórmula" },
+  { day: "Quinta, 15/10", time: "18h", title: "O teste da sua matemática" },
+];
 
 export const pacFit = {
   title: "Vamos ser honestos sobre isso.",
@@ -81,7 +116,7 @@ export const pacModules = [
   {
     n: "2",
     title: "Decimais, frações e porcentagem",
-    desc: "Incluindo razão e proporção, média e fator de aumento e redução, o atalho que mais aparece no ENEM.",
+    desc: "Incluindo fator de aumento e redução, o atalho que mais aparece no ENEM.",
   },
   {
     n: "3",

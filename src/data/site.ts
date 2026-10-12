@@ -61,6 +61,8 @@ export const siteConfig = {
     pacCheckout: "https://pay.kiwify.com.br/eUCaiLK",
     // Comunidade PAC: destino dos botões de compra fora do período de
     // matrículas (ver src/lib/pac-launch.ts).
+    // Pra onde vai quem cai numa página que não existe (404).
+    notFoundRedirect: "https://tally.so/r/RG788K",
     pacCommunity: "https://chat.whatsapp.com/DXENAsQbSBh7ux8ubr6HHB",
   },
 } as const;
