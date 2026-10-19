@@ -801,13 +801,12 @@ export default function PacPage() {
               </h2>
               <p className="mt-4 text-sm text-ink-900/60">
                 Ficou alguma?{" "}
+                Escreve pra{" "}
                 <a
-                  href={siteConfig.social.instagram.replace("/reels/", "")}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-plum-500 underline underline-offset-4 hover:text-gold-300"
+                  href={`mailto:${siteConfig.contact.email}`}
+                  className="text-plum-500 underline underline-offset-4 hover:text-gold-300 break-all"
                 >
-                  Me chama no Instagram
+                  {siteConfig.contact.email}
                 </a>
                 .
               </p>

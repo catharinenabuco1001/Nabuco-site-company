@@ -49,6 +49,8 @@ export const siteConfig = {
   },
 
   contact: {
+    // E-mail de contato e ajuda (rodapé e dúvidas do /pac).
+    email: "contato@catharinenabuco.com",
     // Usado pelo CTA de aula particular em /produtos.
     whatsapp:
       "https://wa.me/5571996025791?text=Oi%2C%20Catharine!%20Vi%20seu%20site%20e%20quero%20saber%20mais%20sobre%20aula%20particular",

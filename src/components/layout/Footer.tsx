@@ -18,6 +18,15 @@ export function Footer() {
             <p className="mt-2 text-sm text-cream/60 uppercase tracking-widest2">
               {siteConfig.tagline}
             </p>
+            <p className="mt-6 text-xs font-sans font-semibold uppercase tracking-widest2 text-cream/50">
+              Contato e ajuda
+            </p>
+            <a
+              href={`mailto:${siteConfig.contact.email}`}
+              className="mt-2 inline-block text-sm text-cream/80 hover:text-gold-700 transition-colors underline-grow"
+            >
+              {siteConfig.contact.email}
+            </a>
           </div>
 
           <div>
