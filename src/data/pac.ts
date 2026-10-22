@@ -3,10 +3,10 @@
 // são inventados aqui, só centralizados para não ficar solto no JSX.
 
 export const pacPricing = {
-  originalPrice: 349.9,
-  price: 297.9,
-  coupon: "LANÇAMENTO",
-  installments: { count: 12, value: 30.19 },
+  price: 349.9,
+  // Sem valor de parcela: o R$30,19 era do preço com cupom. Com o preço cheio
+  // a parcela depende dos juros da Kiwify, então só dizemos "até 12x".
+  installmentsText: "ou em até 12x no cartão",
   perDay: "cerca de R$1 por dia, com garantia de 7 dias",
 };
 
@@ -49,8 +49,8 @@ export const pacParents = [
     desc: "Se não for pra ele, é só pedir o reembolso dentro do prazo e você recebe 100% de volta.",
   },
   {
-    title: "12x de R$30,19",
-    desc: "R$297,90 com o cupom LANÇAMENTO, cerca de R$1 por dia.",
+    title: "Em até 12x no cartão",
+    desc: "R$349,90, cerca de R$1 por dia.",
   },
 ];
 

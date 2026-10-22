@@ -175,7 +175,6 @@ export default function PacPage() {
     : "/images/hero-retrato.jpeg";
   const authorSrc = publicImageExists("images/sobre.jpg") ? "/images/sobre.jpg" : heroSrc;
   const prints = pacPrints.filter((p) => publicImageExists(`images/pac/prints/${p.file}`));
-  const discount = Math.round((1 - pacPricing.price / pacPricing.originalPrice) * 100);
   const buildPhase = getPacPhase();
 
   return (
@@ -682,11 +681,6 @@ export default function PacPage() {
           <div className="mt-12 mx-auto max-w-xl rounded-[2rem] bg-ink-900 text-cream p-8 sm:p-12 shadow-2xl shadow-black/40">
             <div className="flex items-center justify-between gap-4">
               <p className="font-serif text-2xl">Método PAC</p>
-              {discount > 0 && (
-                <span className="rounded-full bg-cream px-3 py-1 text-[11px] font-semibold uppercase tracking-wide text-gold-300">
-                  {discount}% off
-                </span>
-              )}
             </div>
 
             <ul className="mt-8 space-y-3.5">
@@ -708,22 +702,13 @@ export default function PacPage() {
             </ul>
 
             <div className="mt-10 border-t border-cream/15 pt-8 text-center">
-              <p className="text-sm text-cream/50">
-                de <span className="line-through">{formatPrice(pacPricing.originalPrice)}</span> por
-              </p>
-              <p className="mt-1 flex flex-wrap items-baseline justify-center gap-x-3 gap-y-1">
+              <p className="flex flex-wrap items-baseline justify-center gap-x-3 gap-y-1">
                 <span className="font-serif text-5xl sm:text-6xl text-cream">
                   {formatPrice(pacPricing.price)}
                 </span>
-                <span className="text-sm text-cream/70">
-                  ou {pacPricing.installments.count}x de {formatPrice(pacPricing.installments.value)}
-                </span>
+                <span className="text-sm text-cream/70">{pacPricing.installmentsText}</span>
               </p>
               <p className="mt-1 text-xs text-cream/60">{pacPricing.perDay}</p>
-              <p className="mt-4 inline-flex items-center gap-2 rounded-full border border-cream/25 px-4 py-1.5 text-xs text-cream/80">
-                Cupom
-                <span className="font-semibold tracking-wide text-cream">{pacPricing.coupon}</span>
-              </p>
               <p className="mt-3 text-xs text-cream/55">Pix ou cartão · acesso liberado na hora</p>
 
               <PacBuyButton
@@ -870,14 +855,9 @@ export default function PacPage() {
       <div className="fixed inset-x-0 bottom-0 z-40 border-t border-ink-900/10 bg-cream/95 backdrop-blur-md lg:hidden">
         <div className="flex items-center justify-between gap-4 px-5 py-3">
           <div className="leading-tight">
-            <p className="text-[11px] text-ink-900/50 line-through">
-              {formatPrice(pacPricing.originalPrice)}
-            </p>
             <p className="font-serif text-xl text-ink-900">
               {formatPrice(pacPricing.price)}{" "}
-              <span className="font-sans text-[11px] text-ink-900/55">
-                ou {pacPricing.installments.count}x de {formatPrice(pacPricing.installments.value)}
-              </span>
+              <span className="font-sans text-[11px] text-ink-900/55">ou até 12x</span>
             </p>
             <PacPhaseNotice
               buildPhase={buildPhase}
