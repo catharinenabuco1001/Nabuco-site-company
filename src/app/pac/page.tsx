@@ -303,22 +303,30 @@ export default function PacPage() {
             </p>
           </div>
 
-          <div className="mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          {/* Erro × correto lado a lado (empilha no mobile). Vermelho #F2A5A5 e
+              verde #86DBA0 passam de 6:1 de contraste sobre o card (#173B2C). */}
+          <div className="mt-12 grid grid-cols-1 lg:grid-cols-2 gap-4">
             {pacMistakes.map((m) => (
-              <div
-                key={m.wrong}
-                className="group rounded-2xl border border-ink-900/10 bg-cream-50/60 p-6 transition-colors hover:border-gold-500/50"
-              >
-                <p className="text-[10px] uppercase tracking-widest2 font-semibold text-ink-900/40">
+              <div key={m.wrong} className="rounded-2xl border border-ink-900/10 bg-cream-50 p-6">
+                <p className="text-[10px] uppercase tracking-widest2 font-semibold text-ink-900/60">
                   {m.module}
                 </p>
-                <p className="mt-4 font-serif text-xl sm:text-2xl text-ink-900/45 line-through decoration-red-400/70 decoration-2">
-                  {m.wrong}
-                </p>
-                <p className="mt-3 flex items-center gap-2 font-serif text-xl sm:text-2xl text-gold-300">
-                  <span className="text-sm font-sans text-gold-500">✓</span>
-                  {m.right}
-                </p>
+                <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  <div className="rounded-xl border border-[#F2A5A5]/30 bg-[#F2A5A5]/[0.06] p-4">
+                    <p className="flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-wide text-[#F2A5A5]">
+                      <span aria-hidden>✕</span> Erro comum
+                    </p>
+                    <p className="mt-2 font-serif text-xl sm:text-2xl text-[#F2A5A5] line-through decoration-2">
+                      {m.wrong}
+                    </p>
+                  </div>
+                  <div className="rounded-xl border border-[#86DBA0]/30 bg-[#86DBA0]/[0.06] p-4">
+                    <p className="flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-wide text-[#86DBA0]">
+                      <span aria-hidden>✓</span> Correto
+                    </p>
+                    <p className="mt-2 font-serif text-xl sm:text-2xl text-[#86DBA0]">{m.right}</p>
+                  </div>
+                </div>
               </div>
             ))}
           </div>

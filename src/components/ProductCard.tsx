@@ -22,6 +22,13 @@ export function ProductCard({ product }: { product: Product }) {
           />
         </div>
       )}
+      {/* Capa cadastrada mas o arquivo ainda não está em public/: placeholder
+          no mesmo formato, até a imagem real ser adicionada. */}
+      {!hasCover && product.coverImage && (
+        <div className="relative aspect-[3/4] w-full rounded-xl overflow-hidden mb-6 flex items-center justify-center bg-[#0F2E22] border border-[#C9A24C]/30">
+          <span className="font-serif text-3xl text-[#C9A24C]">{product.name}</span>
+        </div>
+      )}
       {product.badge && (
         <Badge tone="outline" className="self-start mb-6">
           {product.badge}

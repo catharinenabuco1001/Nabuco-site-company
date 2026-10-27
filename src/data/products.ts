@@ -13,6 +13,9 @@ export const products: Product[] = [
     ctaUrl: "/pac",
     href: "/pac",
     badge: "Método",
+    // Ainda não existe: enquanto o arquivo não estiver em public/, o card
+    // mostra um placeholder "Método PAC".
+    coverImage: "images/pac-capa.jpg",
   },
   {
     id: "cartas-vestibulando",
