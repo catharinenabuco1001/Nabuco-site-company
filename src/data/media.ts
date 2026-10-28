@@ -55,7 +55,15 @@ export const pastTalks: PastTalk[] = [
     photos: ["/images/palestras/sao-jorge-1.jpg", "/images/palestras/sao-jorge-2.jpg"],
     instagramUrl: "https://www.instagram.com/reel/DYSe05_ONyn/",
   },
+  // TODO(Cathy): faltam 2 palestras pra lista bater com as 4 realizadas.
+  // Preencha e descomente (só "id" e "place" são obrigatórios):
+  // { id: "palestra-3", place: "NOME DA ESCOLA/EVENTO", city: "", date: "2026-MM" },
+  // { id: "palestra-4", place: "NOME DA ESCOLA/EVENTO", city: "", date: "2026-MM" },
 ];
+
+// Total de palestras realizadas mostrado no contador de /palestras. Hoje a
+// lista acima tem 2; quando ela tiver 4 ou mais, o contador usa a lista.
+export const pastTalksDone = Math.max(4, pastTalks.length);
 
 // Ordem = ordem na página. Datas opcionais (formato "2026-05").
 export const podcasts: Podcast[] = [

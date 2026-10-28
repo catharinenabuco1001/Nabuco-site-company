@@ -3,7 +3,7 @@ import Image from "next/image";
 import { Container } from "@/components/ui/Container";
 import { CTA } from "@/components/ui/CTA";
 import { talks } from "@/data/talks";
-import { pastTalks, podcasts, press, type PastTalk } from "@/data/media";
+import { pastTalks, pastTalksDone, podcasts, press, type PastTalk } from "@/data/media";
 import { siteConfig } from "@/data/site";
 import { publicImageExists } from "@/lib/media";
 
@@ -52,6 +52,7 @@ function TalkTile({ talk }: { talk: PastTalk }) {
             alt={`Catharine Nabuco em palestra no ${talk.place}${talk.city ? `, ${talk.city}` : ""}`}
             fill
             sizes="(min-width: 1024px) 30vw, (min-width: 640px) 45vw, 90vw"
+            quality={90}
             className="object-cover transition-transform duration-700 group-hover:scale-[1.03]"
           />
         ) : (
@@ -84,6 +85,7 @@ function TalkTile({ talk }: { talk: PastTalk }) {
                 alt={`Mais uma foto da palestra no ${talk.place}`}
                 fill
                 sizes="96px"
+                quality={90}
                 className="object-cover"
               />
             </a>
@@ -137,8 +139,8 @@ export default function PalestrasPage() {
     : undefined;
   const counters = [
     {
-      v: pastTalks.length,
-      l: pastTalks.length === 1 ? "palestra realizada" : "palestras realizadas",
+      v: pastTalksDone,
+      l: pastTalksDone === 1 ? "palestra realizada" : "palestras realizadas",
     },
     { v: podcasts.length, l: podcasts.length === 1 ? "podcast" : "podcasts" },
     {
@@ -215,6 +217,7 @@ export default function PalestrasPage() {
                     fill
                     priority
                     sizes="(min-width: 1024px) 38vw, 90vw"
+                    quality={90}
                     className="object-cover"
                     style={{ objectPosition: "60% 30%" }}
                   />

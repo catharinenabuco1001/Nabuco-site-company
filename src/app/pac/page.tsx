@@ -316,7 +316,7 @@ export default function PacPage() {
                     <p className="flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-wide text-[#F2A5A5]">
                       <span aria-hidden>✕</span> Erro comum
                     </p>
-                    <p className="mt-2 font-serif text-xl sm:text-2xl text-[#F2A5A5] line-through decoration-2">
+                    <p className="mt-2 font-serif text-xl sm:text-2xl text-[#F2A5A5]">
                       {m.wrong}
                     </p>
                   </div>

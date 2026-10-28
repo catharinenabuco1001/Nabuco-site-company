@@ -78,6 +78,7 @@ export function HomeAuthority() {
                     alt={`Catharine Nabuco em palestra no ${talk.place}`}
                     fill
                     sizes="(min-width: 1024px) 40vw, 90vw"
+                    quality={90}
                     className="object-cover transition-transform duration-700 group-hover:scale-[1.03]"
                   />
                   <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/70 to-transparent p-5 sm:p-6">

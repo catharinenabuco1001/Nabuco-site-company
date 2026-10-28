@@ -27,6 +27,7 @@ export default function SobrePage() {
                   alt="Catharine Nabuco"
                   fill
                   sizes="(min-width: 1024px) 40vw, 90vw"
+                  quality={90}
                   className="object-cover"
                 />
               ) : (
