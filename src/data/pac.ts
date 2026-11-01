@@ -3,12 +3,19 @@
 // são inventados aqui, só centralizados para não ficar solto no JSX.
 
 export const pacPricing = {
+  // Preço do PAC: MUDE SÓ AQUI. Vale pra /pac (oferta, barra do celular,
+  // bloco dos pais) e pro card em /produtos.
   price: 349.9,
-  // Sem valor de parcela: o R$30,19 era do preço com cupom. Com o preço cheio
-  // a parcela depende dos juros da Kiwify, então só dizemos "até 12x".
-  installmentsText: "ou em até 12x no cartão",
+  installments: 12,
+  installmentValue: 36.19,
   perDay: "cerca de R$1 por dia, com garantia de 7 dias",
 };
+
+const brl = (v: number) => v.toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
+
+// "12x de R$ 36,19" (destaque) e "ou R$ 349,90 à vista" (pequeno, embaixo).
+export const pacPriceInstallments = `${pacPricing.installments}x de ${brl(pacPricing.installmentValue)}`;
+export const pacPriceCash = `ou ${brl(pacPricing.price)} à vista`;
 
 export const pacBonuses = [
   {
@@ -41,8 +48,8 @@ export const pacParents = [
     desc: "Se não for pra ele, é só pedir o reembolso dentro do prazo e você recebe 100% de volta.",
   },
   {
-    title: "Em até 12x no cartão",
-    desc: "R$349,90, cerca de R$1 por dia.",
+    title: pacPriceInstallments,
+    desc: `${pacPriceCash}, cerca de R$1 por dia.`,
   },
 ];
 

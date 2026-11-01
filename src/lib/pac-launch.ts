@@ -8,7 +8,7 @@ export const PAC_NEXT_COHORT = {
   // Dia de abertura (horário de Brasília). Sem horário definido: o aviso some
   // sozinho quando esse dia termina, pra não ficar data vencida no site.
   date: "2026-11-16",
-  notice: "Nova turma do PAC abre dia 16 de novembro",
+  notice: "Nova turma abre dia 16 de novembro",
 };
 
 // Janela de matrículas COM horário. Enquanto for null, os botões de compra

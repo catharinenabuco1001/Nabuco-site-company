@@ -6,6 +6,7 @@ import { formatPrice } from "@/lib/utils";
 import { publicImageExists } from "@/lib/media";
 import { PacPhaseNotice } from "@/components/PacLaunch";
 import { getPacPhase } from "@/lib/pac-launch";
+import { pacPriceInstallments, pacPriceCash } from "@/data/pac";
 
 export function ProductCard({ product }: { product: Product }) {
   const isExternal = product.ctaUrl.startsWith("http");
@@ -44,9 +45,12 @@ export function ProductCard({ product }: { product: Product }) {
 
       <div className="mt-6 flex items-center justify-between">
         <span className="text-sm font-sans font-semibold text-ink-900">
-          {formatPrice(product.price)}
+          {product.id === "pac" ? pacPriceInstallments : formatPrice(product.price)}
         </span>
       </div>
+      {product.id === "pac" && (
+        <p className="mt-1 text-xs text-ink-900/60">{pacPriceCash}</p>
+      )}
       {product.id === "pac" && (
         <PacPhaseNotice buildPhase={getPacPhase()} className="mt-2 block text-xs text-plum-500" />
       )}

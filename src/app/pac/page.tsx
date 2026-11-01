@@ -5,6 +5,8 @@ import { CTA } from "@/components/ui/CTA";
 import { pacSteps } from "@/components/PacBlock";
 import { siteConfig } from "@/data/site";
 import {
+  pacPriceInstallments,
+  pacPriceCash,
   pacPricing,
   pacFit,
   pacChats,
@@ -24,7 +26,6 @@ import {
 import { PacBuyButton, PacPhaseNotice } from "@/components/PacLaunch";
 import { publicImageExists } from "@/lib/media";
 import { getPacPhase, PAC_NEXT_COHORT } from "@/lib/pac-launch";
-import { formatPrice } from "@/lib/utils";
 
 export const metadata: Metadata = {
   title: `Método PAC: ${PAC_NEXT_COHORT.notice}`,
@@ -668,12 +669,8 @@ export default function PacPage() {
             </ul>
 
             <div className="mt-10 border-t border-cream/15 pt-8 text-center">
-              <p className="flex flex-wrap items-baseline justify-center gap-x-3 gap-y-1">
-                <span className="font-serif text-5xl sm:text-6xl text-cream">
-                  {formatPrice(pacPricing.price)}
-                </span>
-                <span className="text-sm text-cream/70">{pacPricing.installmentsText}</span>
-              </p>
+              <p className="font-serif text-5xl sm:text-6xl text-cream">{pacPriceInstallments}</p>
+              <p className="mt-2 text-sm text-cream/70">{pacPriceCash}</p>
               <p className="mt-1 text-xs text-cream/60">{pacPricing.perDay}</p>
               <p className="mt-3 text-xs text-cream/55">Pix ou cartão · acesso liberado na hora</p>
 
@@ -820,9 +817,9 @@ export default function PacPage() {
         <div className="flex items-center justify-between gap-4 px-5 py-3">
           <div className="leading-tight">
             <p className="font-serif text-xl text-ink-900">
-              {formatPrice(pacPricing.price)}{" "}
-              <span className="font-sans text-[11px] text-ink-900/55">ou até 12x</span>
+              {pacPriceInstallments}
             </p>
+            <p className="font-sans text-[11px] text-ink-900/55">{pacPriceCash}</p>
             <PacPhaseNotice
               buildPhase={buildPhase}
               onlyWhenClosed
