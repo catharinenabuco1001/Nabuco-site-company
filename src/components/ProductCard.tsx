@@ -4,6 +4,8 @@ import { Badge } from "@/components/ui/Badge";
 import { CTA } from "@/components/ui/CTA";
 import { formatPrice } from "@/lib/utils";
 import { publicImageExists } from "@/lib/media";
+import { PacPhaseNotice } from "@/components/PacLaunch";
+import { getPacPhase } from "@/lib/pac-launch";
 
 export function ProductCard({ product }: { product: Product }) {
   const isExternal = product.ctaUrl.startsWith("http");
@@ -45,6 +47,9 @@ export function ProductCard({ product }: { product: Product }) {
           {formatPrice(product.price)}
         </span>
       </div>
+      {product.id === "pac" && (
+        <PacPhaseNotice buildPhase={getPacPhase()} className="mt-2 block text-xs text-plum-500" />
+      )}
 
       <CTA
         href={product.ctaUrl || "#"}

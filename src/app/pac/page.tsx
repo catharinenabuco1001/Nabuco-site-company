@@ -18,24 +18,20 @@ import {
   pacIncludes,
   pacGuarantee,
   pacFaq,
-  pacDeadline,
   pacBonuses,
-  pacLiveClasses,
   pacParents,
 } from "@/data/pac";
 import { PacBuyButton, PacPhaseNotice } from "@/components/PacLaunch";
 import { publicImageExists } from "@/lib/media";
-import { getPacPhase } from "@/lib/pac-launch";
+import { getPacPhase, PAC_NEXT_COHORT } from "@/lib/pac-launch";
 import { formatPrice } from "@/lib/utils";
 
 export const metadata: Metadata = {
-  title: "Método PAC, 3ª turma, inscrições até 15/10",
-  description:
-    "Método PAC, 3ª turma, inscrições até 15/10. Você entende a matéria, mas trava na conta? O PAC reconstrói a matemática básica em mini-aulas de 10 minutos, pra você calcular com segurança no ENEM e no vestibular.",
+  title: `Método PAC: ${PAC_NEXT_COHORT.notice}`,
+  description: `${PAC_NEXT_COHORT.notice}. Você entende a matéria, mas trava na conta? O PAC reconstrói a matemática básica em mini-aulas de 10 minutos, pra você calcular com segurança no ENEM e no vestibular.`,
   openGraph: {
-    title: "Método PAC, 3ª turma, inscrições até 15/10",
-    description:
-      "Método PAC, 3ª turma, inscrições até 15/10. Você entende a matéria, mas trava na conta? Recupere a base de matemática em mini-aulas de 10 minutos.",
+    title: `Método PAC: ${PAC_NEXT_COHORT.notice}`,
+    description: `${PAC_NEXT_COHORT.notice}. Você entende a matéria, mas trava na conta? Recupere a base de matemática em mini-aulas de 10 minutos.`,
   },
 };
 
@@ -189,11 +185,12 @@ export default function PacPage() {
         <Container>
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-10 items-center">
             <div className="lg:col-span-7 animate-fadeIn">
-              <p className="inline-flex items-center gap-2 rounded-full border border-gold-500/40 bg-gold-500/10 px-4 py-1.5 text-[11px] sm:text-xs font-semibold uppercase tracking-wide text-gold-300">
-                <span className="h-1.5 w-1.5 rounded-full bg-gold-500 animate-pulse" />
-                <PacPhaseNotice buildPhase={buildPhase} />
-              </p>
-              <h1 className="mt-6 font-serif text-[2.6rem] sm:text-6xl lg:text-[4.2rem] text-ink-900 leading-[1.02] text-balance">
+              <PacPhaseNotice
+                buildPhase={buildPhase}
+                badge
+                className="mb-6 inline-flex items-center gap-2 rounded-full border border-gold-500/40 bg-gold-500/10 px-4 py-1.5 text-[11px] sm:text-xs font-semibold uppercase tracking-wide text-gold-300"
+              />
+              <h1 className=" font-serif text-[2.6rem] sm:text-6xl lg:text-[4.2rem] text-ink-900 leading-[1.02] text-balance">
                 Você entende a matéria.{" "}
                 <span className="italic text-plum-500">Trava na conta.</span>
               </h1>
@@ -637,45 +634,6 @@ export default function PacPage() {
         </Container>
       </section>
 
-      {/* ------------------------------------------------------------ AULAS AO VIVO */}
-      <section id="ao-vivo" className="scroll-mt-24 py-20 sm:py-28 border-t border-ink-900/10 bg-cream-100/50">
-        <Container>
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-start">
-            <div className="lg:col-span-5">
-              <Eyebrow>Aulas ao vivo</Eyebrow>
-              <h2 className="font-serif text-3xl sm:text-4xl text-ink-900 leading-tight text-balance">
-                Três encontros essa semana, <span className="italic text-plum-500">às 18h.</span>
-              </h2>
-              <p className="mt-4 text-ink-900/65 leading-relaxed">
-                Os links saem na Comunidade PAC.
-              </p>
-              <CTA
-                href={siteConfig.links.pacCommunity}
-                variant="secondary"
-                external
-                className="mt-6 px-7 py-4"
-              >
-                Entrar na Comunidade PAC
-              </CTA>
-            </div>
-            <ol className="lg:col-span-7 flex flex-col">
-              {pacLiveClasses.map((c) => (
-                <li
-                  key={c.day}
-                  className="flex gap-5 sm:gap-7 py-5 border-b border-ink-900/10 first:border-t"
-                >
-                  <div className="w-24 sm:w-32 shrink-0">
-                    <p className="text-sm font-semibold text-ink-900">{c.day}</p>
-                    <p className="text-sm text-gold-300">{c.time}</p>
-                  </div>
-                  <p className="font-serif text-lg sm:text-xl text-ink-900 leading-snug">{c.title}</p>
-                </li>
-              ))}
-            </ol>
-          </div>
-        </Container>
-      </section>
-
       {/* ------------------------------------------------------------ OFERTA */}
       <section id="oferta" className="scroll-mt-24 py-20 sm:py-28 border-t border-ink-900/10 bg-cream-100/50">
         <Container>
@@ -725,13 +683,11 @@ export default function PacPage() {
               >
                 Garantir minha vaga
               </PacBuyButton>
-              <div className="mt-6 rounded-2xl border border-cream/15 px-5 py-4">
-                <p className="text-sm font-semibold text-cream">{pacDeadline.title}</p>
-                <p className="mt-1 text-xs leading-relaxed text-cream/60">{pacDeadline.after}</p>
-              </div>
-              <p className="mt-4 text-xs text-cream/55">
-                <PacPhaseNotice buildPhase={buildPhase} onlyWhenClosed />
-              </p>
+              <PacPhaseNotice
+                buildPhase={buildPhase}
+                onlyWhenClosed
+                className="mt-6 block rounded-2xl border border-cream/15 px-5 py-4 text-sm font-semibold text-cream"
+              />
             </div>
           </div>
 

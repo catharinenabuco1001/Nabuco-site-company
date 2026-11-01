@@ -57,6 +57,7 @@ export function PacBlock({ compact = false }: { compact?: boolean }) {
                   >
                     Entrar no PAC
                   </CTA>
+                  <PacPhaseNotice buildPhase={getPacPhase()} className="text-sm text-cream/60" />
                 </div>
               )}
             </div>

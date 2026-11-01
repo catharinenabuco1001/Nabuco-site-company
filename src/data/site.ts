@@ -13,7 +13,6 @@ export const siteConfig = {
     { label: "Início", href: "/" },
     { label: "Aulas", href: "/aulas" },
     { label: "PAC", href: "/pac" },
-    { label: "Ao vivo", href: "/pac#ao-vivo" },
     { label: "Produtos", href: "/produtos" },
     { label: "Palestras & Mídia", href: "/palestras" },
     { label: "Blog", href: "/blog" },

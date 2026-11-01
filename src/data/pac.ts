@@ -10,12 +10,6 @@ export const pacPricing = {
   perDay: "cerca de R$1 por dia, com garantia de 7 dias",
 };
 
-// Prazo da 3ª turma (as datas que mudam os botões estão em src/lib/pac-launch.ts).
-export const pacDeadline = {
-  title: "Matrículas até quinta, 15/10, às 23h59.",
-  after: "Depois disso, a turma fecha e só volta no fim de outubro, por R$349,90.",
-};
-
 export const pacBonuses = [
   {
     title: "Kit de estudo (caderno e caneta)",
@@ -27,11 +21,9 @@ export const pacBonuses = [
   },
   {
     title: "2 encontros ao vivo para tirar dúvidas",
-    desc: "Sábado, 17/10, e sábado, 24/10, às 18h.",
   },
   {
     title: "E-book “Como usar IA para estudar”",
-    desc: "Liberado até 14/10.",
   },
   {
     title: "Assistente de IA de dúvidas do Método PAC",
@@ -52,12 +44,6 @@ export const pacParents = [
     title: "Em até 12x no cartão",
     desc: "R$349,90, cerca de R$1 por dia.",
   },
-];
-
-export const pacLiveClasses = [
-  { day: "Segunda, 12/10", time: "18h", title: "3 questões do ENEM que você não pode errar" },
-  { day: "Terça, 13/10", time: "18h", title: "Geometria espacial sem decorar fórmula" },
-  { day: "Quinta, 15/10", time: "18h", title: "O teste da sua matemática" },
 ];
 
 export const pacFit = {
