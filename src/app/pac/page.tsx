@@ -338,7 +338,7 @@ export default function PacPage() {
             <div className="lg:col-span-5">
               <Eyebrow>Por que você trava</Eyebrow>
               <h2 className="font-serif text-3xl sm:text-4xl text-ink-900 leading-tight text-balance">
-                O problema não é física. <span className="italic text-plum-500">É a conta.</span>
+                O problema não é matemática. <span className="italic text-plum-500">É a conta.</span>
               </h2>
             </div>
             <div className="lg:col-span-7 space-y-5 text-base sm:text-lg text-ink-900/75 leading-relaxed">
