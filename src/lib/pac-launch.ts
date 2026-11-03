@@ -15,6 +15,10 @@ export const PAC_NEXT_COHORT = {
 // levam pra Comunidade PAC no WhatsApp. Quando tiver horário, preencha, ex.:
 // { opensAt: "2026-11-16T19:00:00-03:00", closesAt: "2026-11-19T23:59:59-03:00" }
 // e os botões passam a levar ao checkout só dentro da janela.
+// Botão "Quero entrar no PAC" da seção de abas: antes deste momento vai pra
+// Comunidade PAC; a partir dele, pro checkout. Decidido no navegador.
+export const PAC_CHECKOUT_FROM = "2026-11-16T00:00:00-03:00";
+
 export const PAC_ENROLLMENT: { opensAt: string; closesAt: string } | null = null;
 
 export type PacPhase = "antes" | "abertas" | "encerradas";

@@ -5,10 +5,13 @@
 export const pacPricing = {
   // Preço do PAC: MUDE SÓ AQUI. Vale pra /pac (oferta, barra do celular,
   // bloco dos pais) e pro card em /produtos.
+  cohort: "4ª turma",
   price: 349.9,
+  // Preço à vista com o cupom ativo na abertura da turma.
+  couponPrice: 297.9,
   installments: 12,
   installmentValue: 36.19,
-  perDay: "cerca de R$1 por dia, com garantia de 7 dias",
+  accessMonths: 6,
 };
 
 const brl = (v: number) => v.toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
@@ -17,25 +20,15 @@ const brl = (v: number) => v.toLocaleString("pt-BR", { style: "currency", curren
 export const pacPriceInstallments = `${pacPricing.installments}x de ${brl(pacPricing.installmentValue)}`;
 export const pacPriceCash = `ou ${brl(pacPricing.price)} à vista`;
 
-export const pacBonuses = [
-  {
-    title: "Kit de estudo (caderno e caneta)",
-    desc: "Os 5 primeiros a comprar ganham um kit de estudo. O kit é enviado depois dos 7 dias de garantia.",
-  },
-  {
-    title: "Plano de estudos de 15 dias",
-    desc: "30 minutos por dia, para você fixar o que aprende.",
-  },
-  {
-    title: "2 encontros ao vivo para tirar dúvidas",
-  },
-  {
-    title: "E-book “Como usar IA para estudar”",
-  },
-  {
-    title: "Assistente de IA de dúvidas do Método PAC",
-  },
-];
+// Bloco de preço do card da oferta em /pac.
+export const pacOfferPrice = {
+  title: `Método PAC, ${pacPricing.cohort}`,
+  from: `De ${brl(pacPricing.price)} por`,
+  coupon: brl(pacPricing.couponPrice),
+  couponNote: "no à vista (cupom ativo na abertura da turma)",
+  installments: `Ou parcelado no cartão pelo valor cheio (${pacPriceInstallments})`,
+  access: `${pacPricing.accessMonths} meses de acesso a todas as aulas, listas e materiais`,
+};
 
 // Bloco "Seu filho quer fazer o PAC?" (só com informações que já estão na página).
 export const pacParents = [
@@ -89,7 +82,7 @@ export const pacCurriculum = [
     desc: "Do zero até fatoração e produtos notáveis, em aulas de ~10 min.",
   },
   {
-    title: "3 meses de acesso",
+    title: `${pacPricing.accessMonths} meses de acesso`,
     desc: "Dá pra concluir em ~15 dias com dedicação, no seu tempo.",
   },
   {
@@ -155,12 +148,14 @@ export const pacModules = [
   },
 ];
 
+// Lista "O que você leva" do card da oferta. Desligue a linha do gabarito aqui.
+export const SHOW_GABARITO = true;
+
 export const pacIncludes = [
-  "+40 mini-aulas de ~10 minutos",
-  "Listas de exercícios por módulo, com questões de vestibular",
-  "Comunidade no WhatsApp com outros alunos",
-  "IA de dúvidas pra destravar exercício a qualquer hora",
-  "3 meses de acesso (dá pra concluir em ~15 dias)",
+  `${pacPricing.accessMonths} meses de acesso ao Método PAC`,
+  "Aulas curtas de matemática básica, no seu ritmo",
+  ...(SHOW_GABARITO ? ["Listas de exercícios com gabarito"] : []),
+  "Garantia de 7 dias",
 ];
 
 export const pacGuarantee =
@@ -181,7 +176,11 @@ export const pacFaq = [
   },
   {
     q: "Quanto tempo leva pra terminar?",
-    a: "As aulas têm cerca de 10 minutos. Com dedicação, dá pra concluir em uns 15 dias. Você tem 3 meses de acesso pra ir no seu ritmo e revisar.",
+    a: `As aulas têm cerca de 10 minutos. Com dedicação, dá pra concluir em uns 15 dias. Você tem ${pacPricing.accessMonths} meses de acesso pra ir no seu ritmo e revisar.`,
+  },
+  {
+    q: "Por quanto tempo eu tenho acesso?",
+    a: "Você tem 6 meses de acesso, contados a partir da compra. Dá tempo de refazer as aulas quantas vezes precisar e estudar no seu ritmo.",
   },
   {
     q: "Como eu tiro dúvidas?",
@@ -193,7 +192,7 @@ export const pacFaq = [
   },
   {
     q: "E se eu não gostar?",
-    a: "Você tem 7 dias de garantia. Pediu dentro do prazo, recebe o valor de volta.",
+    a: "Você tem 7 dias de garantia. Se não fizer sentido para você, é só pedir o reembolso nesse prazo.",
   },
 ];
 
@@ -306,3 +305,45 @@ export const pacPrints = [
 export const pacVideos: { youtubeId: string; name: string; caption: string; vertical?: boolean }[] = [
   // { youtubeId: "XXXXXXXXXXX", name: "Clara", caption: "Como o PAC mudou minha relação com a conta", vertical: true },
 ];
+
+// Seção "Será que o PAC é para mim?" (abas). As frases ficam em
+// pacForWhomQuotes, separadas, pra poder tirar sem mexer nos textos.
+export const pacForWhomTabs = [
+  {
+    id: "vestibular",
+    label: "Vestibular, Enem e concurso",
+    title: "SIM, se você ainda trava nos cálculos.",
+    text: "Se você entende a matéria, mas perde a questão na última linha da conta, o Método PAC é para você. Ele reconstrói a base que ficou para trás (fração, potência, radiciação, fatoração) em mini-aulas de 10 minutos, para você parar de travar nos cálculos.",
+    extra: "Serve para concurso? Sim. A base de matemática é a mesma que cai em provas de concurso.",
+  },
+  {
+    id: "faculdade",
+    label: "Faculdade e quem está voltando a estudar",
+    title:
+      "SIM, porque se você não souber produtos notáveis, como vai lidar com as matérias mais difíceis?",
+    text: "Se você sente que tem buracos lá do fundamental que nunca foram resolvidos, o PAC reconstrói a base sem pular etapa, para você não travar nas matérias da faculdade.",
+  },
+  {
+    id: "escola",
+    label: "Escola",
+    title: "SIM, para ajudar você a garantir sua nota no final e não errar besteira.",
+    text: "Se você trava em equação do 1º grau e se pergunta “por que eu tenho tanta dificuldade, mesmo me dedicando tanto?”, o PAC começa do zero, no Módulo 0, e vai subindo sem pular etapa. Ele ensina o raciocínio passo a passo, sem depender de “dom”.",
+    extra: "Para menores de idade: a compra é com a autorização dos pais.",
+  },
+];
+
+export const pacForWhomQuotes: Record<string, string[]> = {
+  vestibular: [
+    "Muitas vezes não consigo nem interpretar o enunciado.",
+    "Não sei nem o básico e quero prestar concurso.",
+  ],
+  faculdade: [
+    "Não é que eu não saiba, só preciso relembrar.",
+    "Aprendo rápido, mas esqueço na mesma proporção.",
+    "Preciso começar do absoluto zero.",
+  ],
+  escola: [
+    "Quando tem equação do 1º grau ou geometria, é um pouco mais difícil.",
+    "Chorei vendo vídeo sem entender divisão.",
+  ],
+};

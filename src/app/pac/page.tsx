@@ -7,7 +7,7 @@ import { siteConfig } from "@/data/site";
 import {
   pacPriceInstallments,
   pacPriceCash,
-  pacPricing,
+  pacOfferPrice,
   pacFit,
   pacChats,
   pacPrints,
@@ -20,10 +20,10 @@ import {
   pacIncludes,
   pacGuarantee,
   pacFaq,
-  pacBonuses,
   pacParents,
 } from "@/data/pac";
 import { PacBuyButton, PacPhaseNotice } from "@/components/PacLaunch";
+import { PacForWhom } from "@/components/PacForWhom";
 import { publicImageExists } from "@/lib/media";
 import { getPacPhase, PAC_NEXT_COHORT } from "@/lib/pac-launch";
 
@@ -479,6 +479,19 @@ export default function PacPage() {
         </Container>
       </section>
 
+      {/* ------------------------------------------------------------ SERÁ QUE É PRA MIM */}
+      <section id="pra-mim" className="scroll-mt-24 py-20 sm:py-28 border-t border-ink-900/10 bg-cream-100/50">
+        <Container>
+          <div className="text-center max-w-2xl mx-auto">
+            <h2 className="font-serif text-3xl sm:text-5xl text-ink-900 leading-tight text-balance">
+              Será que o PAC é para mim?
+            </h2>
+            <p className="mt-4 text-base text-ink-900/65">Clique no seu caso e veja se é para você.</p>
+          </div>
+          <PacForWhom />
+        </Container>
+      </section>
+
       {/* ------------------------------------------------------------ AUTORA */}
       <section className="py-20 sm:py-28 bg-cream-200">
         <Container>
@@ -605,36 +618,6 @@ export default function PacPage() {
         </Container>
       </section>
 
-      {/* ------------------------------------------------------------ BÔNUS */}
-      <section id="bonus" className="scroll-mt-24 py-20 sm:py-28 border-t border-ink-900/10">
-        <Container>
-          <div className="text-center max-w-2xl mx-auto">
-            <Eyebrow>Bônus da turma</Eyebrow>
-            <h2 className="font-serif text-3xl sm:text-5xl text-ink-900 leading-tight text-balance">
-              Entrando agora, você <span className="italic text-plum-500">também leva:</span>
-            </h2>
-          </div>
-          <ul className="mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-            {pacBonuses.map((b, i) => (
-              <li
-                key={b.title}
-                className={`rounded-2xl border p-6 sm:p-7 ${
-                  i === 0 ? "border-gold-500/50 bg-gold-500/[0.07]" : "border-ink-900/10 bg-cream-50/60"
-                }`}
-              >
-                <p className="text-[10px] uppercase tracking-widest2 font-semibold text-plum-500">
-                  Bônus {i + 1}
-                </p>
-                <p className="mt-3 font-serif text-xl text-ink-900 leading-snug">{b.title}</p>
-                {b.desc && (
-                  <p className="mt-2 text-sm text-ink-900/65 leading-relaxed">{b.desc}</p>
-                )}
-              </li>
-            ))}
-          </ul>
-        </Container>
-      </section>
-
       {/* ------------------------------------------------------------ OFERTA */}
       <section id="oferta" className="scroll-mt-24 py-20 sm:py-28 border-t border-ink-900/10 bg-cream-100/50">
         <Container>
@@ -647,7 +630,7 @@ export default function PacPage() {
 
           <div className="mt-12 mx-auto max-w-xl rounded-[2rem] bg-ink-900 text-cream p-8 sm:p-12 shadow-2xl shadow-black/40">
             <div className="flex items-center justify-between gap-4">
-              <p className="font-serif text-2xl">Método PAC</p>
+              <p className="font-serif text-2xl">{pacOfferPrice.title}</p>
             </div>
 
             <ul className="mt-8 space-y-3.5">
@@ -669,10 +652,11 @@ export default function PacPage() {
             </ul>
 
             <div className="mt-10 border-t border-cream/15 pt-8 text-center">
-              <p className="font-serif text-5xl sm:text-6xl text-cream">{pacPriceInstallments}</p>
-              <p className="mt-2 text-sm text-cream/70">{pacPriceCash}</p>
-              <p className="mt-1 text-xs text-cream/60">{pacPricing.perDay}</p>
-              <p className="mt-3 text-xs text-cream/55">Pix ou cartão · acesso liberado na hora</p>
+              <p className="text-sm text-cream/70">{pacOfferPrice.from}</p>
+              <p className="mt-1 font-serif text-5xl sm:text-6xl text-cream">{pacOfferPrice.coupon}</p>
+              <p className="mt-2 text-sm text-cream/80">{pacOfferPrice.couponNote}</p>
+              <p className="mt-4 text-sm text-cream/70">{pacOfferPrice.installments}</p>
+              <p className="mt-3 text-xs text-cream/60">{pacOfferPrice.access}</p>
 
               <PacBuyButton
                 buildPhase={buildPhase}
