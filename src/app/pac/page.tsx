@@ -331,6 +331,19 @@ export default function PacPage() {
         </Container>
       </section>
 
+      {/* ------------------------------------------------------------ SERÁ QUE É PRA MIM */}
+      <section id="pra-mim" className="scroll-mt-24 py-20 sm:py-28 border-t border-ink-900/10">
+        <Container>
+          <div className="text-center max-w-2xl mx-auto">
+            <h2 className="font-serif text-3xl sm:text-5xl text-ink-900 leading-tight text-balance">
+              Será que o PAC é para mim?
+            </h2>
+            <p className="mt-4 text-base text-ink-900/65">Clique no seu caso e veja se é para você.</p>
+          </div>
+          <PacForWhom />
+        </Container>
+      </section>
+
       {/* ------------------------------------------------------------ POR QUE */}
       <section className="py-20 sm:py-28 border-t border-ink-900/10 bg-cream-100/50">
         <Container>
@@ -476,19 +489,6 @@ export default function PacPage() {
               </ul>
             </div>
           </div>
-        </Container>
-      </section>
-
-      {/* ------------------------------------------------------------ SERÁ QUE É PRA MIM */}
-      <section id="pra-mim" className="scroll-mt-24 py-20 sm:py-28 border-t border-ink-900/10 bg-cream-100/50">
-        <Container>
-          <div className="text-center max-w-2xl mx-auto">
-            <h2 className="font-serif text-3xl sm:text-5xl text-ink-900 leading-tight text-balance">
-              Será que o PAC é para mim?
-            </h2>
-            <p className="mt-4 text-base text-ink-900/65">Clique no seu caso e veja se é para você.</p>
-          </div>
-          <PacForWhom />
         </Container>
       </section>
 
