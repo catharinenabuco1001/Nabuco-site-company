@@ -139,7 +139,7 @@ export const pacModules = [
     n: "5",
     title: "Introdução à matemática avançada",
     desc: "Uma prévia do que vem depois da base: você já vê como a matemática avançada funciona, sem medo.",
-    lessons: ["Seno e cosseno", "Introdução a logaritmo (aula 1)", "Conceito de área"],
+    lessons: ["Seno e cosseno", "Conceito de área"],
   },
   {
     n: "+",
