@@ -6,7 +6,6 @@ import { pacSteps } from "@/components/PacBlock";
 import { siteConfig } from "@/data/site";
 import {
   pacPriceInstallments,
-  pacPriceCash,
   pacOfferPrice,
   pacFit,
   pacChats,
@@ -205,15 +204,15 @@ export default function PacPage() {
               </p>
 
               <div className="mt-8 flex flex-wrap items-center gap-4">
-                <PacBuyButton buildPhase={buildPhase} className="px-8 py-4">
+                <CTA href="#sera-que-o-pac-e-para-mim" variant="primary" className="px-8 py-4">
                   Quero destravar minha base
-                </PacBuyButton>
+                </CTA>
                 <PacPhaseNotice
                   buildPhase={buildPhase}
                   onlyWhenClosed
                   className="basis-full text-sm font-semibold text-plum-500"
                 />
-                <CTA href="#por-dentro" variant="secondary" className="px-7 py-4">
+                <CTA href="#por-dentro-do-pac" variant="secondary" className="px-7 py-4">
                   Ver o que tem no curso
                 </CTA>
               </div>
@@ -332,7 +331,7 @@ export default function PacPage() {
       </section>
 
       {/* ------------------------------------------------------------ SERÁ QUE É PRA MIM */}
-      <section id="pra-mim" className="scroll-mt-24 py-20 sm:py-28 border-t border-ink-900/10">
+      <section id="sera-que-o-pac-e-para-mim" className="scroll-mt-24 py-20 sm:py-28 border-t border-ink-900/10">
         <Container>
           <div className="text-center max-w-2xl mx-auto">
             <h2 className="font-serif text-3xl sm:text-5xl text-ink-900 leading-tight text-balance">
@@ -408,7 +407,7 @@ export default function PacPage() {
 
       {/* ------------------------------------------------------------ POR DENTRO */}
       <section
-        id="por-dentro"
+        id="por-dentro-do-pac"
         className="scroll-mt-24 py-20 sm:py-28 border-t border-ink-900/10 bg-cream-100/50"
       >
         <Container>
@@ -624,7 +623,7 @@ export default function PacPage() {
           <div className="text-center max-w-2xl mx-auto">
             <Eyebrow>Sua vaga</Eyebrow>
             <h2 className="font-serif text-3xl sm:text-5xl text-ink-900 leading-tight text-balance">
-              Recupere sua base e ganhe segurança pra prova.
+              Recupere sua base e ganhe segurança para a prova.
             </h2>
           </div>
 
@@ -652,10 +651,8 @@ export default function PacPage() {
             </ul>
 
             <div className="mt-10 border-t border-cream/15 pt-8 text-center">
-              <p className="text-sm text-cream/70">{pacOfferPrice.from}</p>
-              <p className="mt-1 font-serif text-5xl sm:text-6xl text-cream">{pacOfferPrice.coupon}</p>
-              <p className="mt-2 text-sm text-cream/80">{pacOfferPrice.couponNote}</p>
-              <p className="mt-4 text-sm text-cream/70">{pacOfferPrice.installments}</p>
+              <p className="font-serif text-5xl sm:text-6xl text-cream">{pacOfferPrice.installments}</p>
+              <p className="mt-3 text-sm text-cream/80">{pacOfferPrice.cash}</p>
               <p className="mt-3 text-xs text-cream/60">{pacOfferPrice.access}</p>
 
               <PacBuyButton
@@ -803,7 +800,6 @@ export default function PacPage() {
             <p className="font-serif text-xl text-ink-900">
               {pacPriceInstallments}
             </p>
-            <p className="font-sans text-[11px] text-ink-900/55">{pacPriceCash}</p>
             <PacPhaseNotice
               buildPhase={buildPhase}
               onlyWhenClosed

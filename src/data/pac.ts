@@ -2,31 +2,35 @@
 // estatísticas vieram de um mockup de design aprovado pela Catharine — não
 // são inventados aqui, só centralizados para não ficar solto no JSX.
 
+// Preço do PAC: MUDE SÓ AQUI. Vale pra /pac (oferta, barra do celular,
+// bloco dos pais) e pro card em /produtos.
+export const PRECO_PARCELA = 36.19; // valor de cada parcela (12x)
+export const PRECO_AVISTA = 297.9; // à vista com o cupom ativo na abertura da turma
+export const PRECO_CHEIO = 349.9;
+
 export const pacPricing = {
-  // Preço do PAC: MUDE SÓ AQUI. Vale pra /pac (oferta, barra do celular,
-  // bloco dos pais) e pro card em /produtos.
   cohort: "4ª turma",
-  price: 349.9,
-  // Preço à vista com o cupom ativo na abertura da turma.
-  couponPrice: 297.9,
+  price: PRECO_CHEIO,
+  couponPrice: PRECO_AVISTA,
   installments: 12,
-  installmentValue: 36.19,
+  installmentValue: PRECO_PARCELA,
   accessMonths: 6,
 };
 
 const brl = (v: number) => v.toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
 
-// "12x de R$ 36,19" (destaque) e "ou R$ 349,90 à vista" (pequeno, embaixo).
+// "12x de R$ 36,19" (destaque).
 export const pacPriceInstallments = `${pacPricing.installments}x de ${brl(pacPricing.installmentValue)}`;
+// "À vista: de R$ 349,90 por R$ 297,90 (cupom ativo na abertura da turma)".
+export const pacPriceCashCoupon = `À vista: de ${brl(pacPricing.price)} por ${brl(pacPricing.couponPrice)} (cupom ativo na abertura da turma)`;
+// Usado só no card de /produtos.
 export const pacPriceCash = `ou ${brl(pacPricing.price)} à vista`;
 
 // Bloco de preço do card da oferta em /pac.
 export const pacOfferPrice = {
   title: `Método PAC, ${pacPricing.cohort}`,
-  from: `De ${brl(pacPricing.price)} por`,
-  coupon: brl(pacPricing.couponPrice),
-  couponNote: "no à vista (cupom ativo na abertura da turma)",
-  installments: `Ou parcelado no cartão pelo valor cheio (${pacPriceInstallments})`,
+  installments: pacPriceInstallments,
+  cash: pacPriceCashCoupon,
   access: `${pacPricing.accessMonths} meses de acesso a todas as aulas, listas e materiais`,
 };
 
@@ -42,7 +46,7 @@ export const pacParents = [
   },
   {
     title: pacPriceInstallments,
-    desc: `${pacPriceCash}, cerca de R$1 por dia.`,
+    desc: pacPriceCashCoupon,
   },
 ];
 
@@ -142,13 +146,15 @@ export const pacModules: { n: string; title: string; desc: string; lessons?: str
   },
 ];
 
-// Lista "O que você leva" do card da oferta. Desligue a linha do gabarito aqui.
+// Lista "O que você leva" do card da oferta. Desligue as linhas aqui.
 export const SHOW_GABARITO = true;
+export const SHOW_TESTE_SEMANAL = true;
 
 export const pacIncludes = [
   `${pacPricing.accessMonths} meses de acesso ao Método PAC`,
   "Aulas curtas de matemática básica, no seu ritmo",
   ...(SHOW_GABARITO ? ["Listas de exercícios com gabarito"] : []),
+  ...(SHOW_TESTE_SEMANAL ? ["Teste semanal para garantir que você está conseguindo avançar"] : []),
   "Garantia de 7 dias",
 ];
 
