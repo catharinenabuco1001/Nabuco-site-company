@@ -109,7 +109,7 @@ export const pacMistakes = [
   { wrong: "+20% e −20% = 0%", right: "−4%", module: "Porcentagem" },
 ];
 
-export const pacModules = [
+export const pacModules: { n: string; title: string; desc: string; lessons?: string[] }[] = [
   {
     n: "0",
     title: "Aprenda a aprender",
@@ -134,12 +134,6 @@ export const pacModules = [
     n: "4",
     title: "Fatoração e produtos notáveis",
     desc: "Enxergar o padrão antes de sair expandindo tudo na mão.",
-  },
-  {
-    n: "5",
-    title: "Introdução à matemática avançada",
-    desc: "Uma prévia do que vem depois da base: você já vê como a matemática avançada funciona, sem medo.",
-    lessons: ["Seno e cosseno", "Conceito de área"],
   },
   {
     n: "+",
