@@ -1,6 +1,11 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
+  // Teste "Raio X da Sua Base": página pronta em public/raio-x.html,
+  // servida em /raio-x.
+  async rewrites() {
+    return [{ source: "/raio-x", destination: "/raio-x.html" }];
+  },
   images: {
     remotePatterns: [
       {
