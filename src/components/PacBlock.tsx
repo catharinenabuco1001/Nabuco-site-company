@@ -1,7 +1,6 @@
 import { Container } from "@/components/ui/Container";
 import { CTA } from "@/components/ui/CTA";
-import { PacPhaseNotice } from "@/components/PacLaunch";
-import { getPacPhase } from "@/lib/pac-launch";
+import { PacNotice } from "@/components/PacLaunch";
 
 export const pacSteps = [
   {
@@ -57,7 +56,7 @@ export function PacBlock({ compact = false }: { compact?: boolean }) {
                   >
                     Entrar no PAC
                   </CTA>
-                  <PacPhaseNotice buildPhase={getPacPhase()} className="text-sm text-cream/60" />
+                  <PacNotice className="text-sm text-cream/60" />
                 </div>
               )}
             </div>
@@ -71,7 +70,7 @@ export function PacBlock({ compact = false }: { compact?: boolean }) {
                 >
                   Entrar no PAC
                 </CTA>
-                <PacPhaseNotice buildPhase={getPacPhase()} className="text-sm text-cream/60" />
+                <PacNotice className="text-sm text-cream/60" />
               </div>
             ) : (
               <div className="min-w-0 flex flex-col gap-px bg-cream/15">

@@ -1,33 +1,15 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { CTA } from "@/components/ui/CTA";
-import { siteConfig } from "@/data/site";
 import { pacForWhomQuotes, pacForWhomTabs } from "@/data/pac";
-import { PAC_CHECKOUT_FROM } from "@/lib/pac-launch";
-
-const checkoutFrom = Date.parse(PAC_CHECKOUT_FROM);
-
-// Decide no navegador (não no build): antes de PAC_CHECKOUT_FROM vai pra
-// Comunidade PAC, depois pro checkout. Recalcula a cada 30s pra virar sozinho.
-function useEntryHref() {
-  const [now, setNow] = useState<number>();
-  useEffect(() => {
-    const update = () => setNow(Date.now());
-    update();
-    const id = setInterval(update, 30_000);
-    return () => clearInterval(id);
-  }, []);
-  return now !== undefined && now >= checkoutFrom
-    ? siteConfig.links.pacCheckout
-    : siteConfig.links.pacCommunity;
-}
+import { useCtaUrl } from "@/components/PacLaunch";
 
 // Seção "Será que o PAC é para mim?": 3 abas acessíveis (setas, Home/End).
 export function PacForWhom() {
   const [active, setActive] = useState(0);
   const tabRefs = useRef<(HTMLButtonElement | null)[]>([]);
-  const href = useEntryHref();
+  const href = useCtaUrl();
 
   const focusTab = (i: number) => {
     const n = pacForWhomTabs.length;

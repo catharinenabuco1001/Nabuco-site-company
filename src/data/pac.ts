@@ -52,12 +52,13 @@ export const pacParents = [
 
 export const pacFit = {
   title: "Vamos ser honestos sobre isso.",
+  // Palavra do título destacada em dourado.
+  highlight: "honestos",
   isFor: [
     "Você entende a matéria de exatas, mas trava na hora de fazer a conta.",
     "Decora fórmula, mas esquece na prova ou não sabe quando aplicar cada uma.",
     "Sente que tem buracos lá do fundamental que nunca foram resolvidos.",
     "Estuda, mas não fixa.",
-    "Tem lacunas do fundamental.",
     "Tem medo ou bloqueio com matemática.",
   ],
   isNotFor: [

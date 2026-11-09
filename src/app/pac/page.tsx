@@ -21,19 +21,32 @@ import {
   pacFaq,
   pacParents,
 } from "@/data/pac";
-import { PacBuyButton, PacPhaseNotice } from "@/components/PacLaunch";
+import { PacBuyButton, PacNotice } from "@/components/PacLaunch";
 import { PacForWhom } from "@/components/PacForWhom";
 import { publicImageExists } from "@/lib/media";
-import { getPacPhase, PAC_NEXT_COHORT } from "@/lib/pac-launch";
+import { PAC_AVISO_ANTES } from "@/lib/pac-launch";
+
+const ogTitle = `Método PAC: ${PAC_AVISO_ANTES}`;
+const ogDescription = `${PAC_AVISO_ANTES}. Você entende a matéria, mas trava na conta? Recupere a base de matemática em mini-aulas de 10 minutos.`;
 
 export const metadata: Metadata = {
-  title: `Método PAC: ${PAC_NEXT_COHORT.notice}`,
-  description: `${PAC_NEXT_COHORT.notice}. Você entende a matéria, mas trava na conta? O PAC reconstrói a matemática básica em mini-aulas de 10 minutos, pra você calcular com segurança no ENEM e no vestibular.`,
+  title: ogTitle,
+  description: `${PAC_AVISO_ANTES}. Você entende a matéria, mas trava na conta? O PAC reconstrói a matemática básica em mini-aulas de 10 minutos, pra você calcular com segurança no ENEM e no vestibular.`,
   openGraph: {
-    title: `Método PAC: ${PAC_NEXT_COHORT.notice}`,
-    description: `${PAC_NEXT_COHORT.notice}. Você entende a matéria, mas trava na conta? Recupere a base de matemática em mini-aulas de 10 minutos.`,
+    title: ogTitle,
+    description: ogDescription,
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: ogTitle,
+    description: ogDescription,
   },
 };
+
+// Palavra-chave em dourado nos títulos de seção (sem mudar o texto).
+function Destaque({ children }: { children: React.ReactNode }) {
+  return <span className="italic text-[#C9A24C]">{children}</span>;
+}
 
 function Eyebrow({ children, className = "" }: { children: React.ReactNode; className?: string }) {
   return (
@@ -171,8 +184,6 @@ export default function PacPage() {
     : "/images/hero-retrato.jpeg";
   const authorSrc = publicImageExists("images/sobre.jpg") ? "/images/sobre.jpg" : heroSrc;
   const prints = pacPrints.filter((p) => publicImageExists(`images/pac/prints/${p.file}`));
-  const buildPhase = getPacPhase();
-
   return (
     <>
       {/* ------------------------------------------------------------ HERO */}
@@ -185,19 +196,18 @@ export default function PacPage() {
         <Container>
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-10 items-center">
             <div className="lg:col-span-7 animate-fadeIn">
-              <PacPhaseNotice
-                buildPhase={buildPhase}
+              <PacNotice
                 badge
                 className="mb-6 inline-flex items-center gap-2 rounded-full border border-gold-500/40 bg-gold-500/10 px-4 py-1.5 text-[11px] sm:text-xs font-semibold uppercase tracking-wide text-gold-300"
               />
               <h1 className=" font-serif text-[2.6rem] sm:text-6xl lg:text-[4.2rem] text-ink-900 leading-[1.02] text-balance">
                 Você entende a matéria.{" "}
-                <span className="italic text-plum-500">Trava na conta.</span>
+                <Destaque>Trava na conta.</Destaque>
               </h1>
               <p className="mt-4 font-serif text-xl sm:text-2xl text-ink-900/80">
                 Trava no enunciado? É aqui que o PAC começa.
               </p>
-              <p className="mt-6 max-w-xl text-base sm:text-lg text-ink-700/80 leading-relaxed">
+              <p className="mt-6 pac-text text-ink-700/80">
                 O <strong className="text-ink-900 font-semibold">Método PAC</strong> reconstrói a
                 matemática básica que ficou pra trás (fração, potência, radiciação, fatoração) em
                 mini-aulas de 10 minutos. Pra você parar de perder questão na última linha da conta.
@@ -207,11 +217,6 @@ export default function PacPage() {
                 <CTA href="#sera-que-o-pac-e-para-mim" variant="primary" className="px-8 py-4">
                   Quero destravar minha base
                 </CTA>
-                <PacPhaseNotice
-                  buildPhase={buildPhase}
-                  onlyWhenClosed
-                  className="basis-full text-sm font-semibold text-plum-500"
-                />
                 <CTA href="#por-dentro-do-pac" variant="secondary" className="px-7 py-4">
                   Ver o que tem no curso
                 </CTA>
@@ -292,9 +297,9 @@ export default function PacPage() {
           <div className="max-w-2xl">
             <Eyebrow>Seja honesto</Eyebrow>
             <h2 className="font-serif text-3xl sm:text-5xl text-ink-900 leading-tight text-balance">
-              Qual desses você já fez numa prova?
+              Qual desses você já fez <Destaque>numa prova?</Destaque>
             </h2>
-            <p className="mt-4 text-ink-900/65 leading-relaxed">
+            <p className="mt-4 pac-text mx-auto text-ink-900/65">
               Quase todo mundo já errou pelo menos um. Não é falta de inteligência, é base que
               ficou com buraco. E cada um desses tem uma aula no PAC.
             </p>
@@ -335,9 +340,9 @@ export default function PacPage() {
         <Container>
           <div className="text-center max-w-2xl mx-auto">
             <h2 className="font-serif text-3xl sm:text-5xl text-ink-900 leading-tight text-balance">
-              Será que o PAC é para mim?
+              Será que o PAC é <Destaque>para mim?</Destaque>
             </h2>
-            <p className="mt-4 text-base text-ink-900/65">Clique no seu caso e veja se é para você.</p>
+            <p className="mt-4 pac-text mx-auto text-ink-900/65">Clique no seu caso e veja se é para você.</p>
           </div>
           <PacForWhom />
         </Container>
@@ -350,10 +355,10 @@ export default function PacPage() {
             <div className="lg:col-span-5">
               <Eyebrow>Por que você trava</Eyebrow>
               <h2 className="font-serif text-3xl sm:text-4xl text-ink-900 leading-tight text-balance">
-                O problema não é matemática. <span className="italic text-plum-500">É a conta.</span>
+                O problema não é matemática. <Destaque>É a conta.</Destaque>
               </h2>
             </div>
-            <div className="lg:col-span-7 space-y-5 text-base sm:text-lg text-ink-900/75 leading-relaxed">
+            <div className="lg:col-span-7 space-y-6 pac-text text-ink-900/75">
               <p>
                 Nossa relação com os números se forma cedo, lá no fundamental. Se ficou um buraco
                 ali (um professor que passou rápido, a pandemia, a vergonha de perguntar), ele
@@ -379,9 +384,9 @@ export default function PacPage() {
           <div className="text-center max-w-2xl mx-auto">
             <Eyebrow>O método</Eyebrow>
             <h2 className="font-serif text-3xl sm:text-5xl text-ink-900 leading-tight">
-              Pense <span className="italic text-plum-500">Antes</span> de Calcular.
+              Pense <Destaque>Antes</Destaque> de Calcular.
             </h2>
-            <p className="mt-4 text-ink-900/65">
+            <p className="mt-4 pac-text mx-auto text-ink-900/65">
               A aula te faz aprender. O PAC garante que o aprendizado se consolide.
             </p>
           </div>
@@ -396,7 +401,7 @@ export default function PacPage() {
                 </span>
                 <span className="font-serif text-4xl text-gold-300">{step.n}</span>
                 <h3 className="mt-4 font-serif text-2xl text-ink-900">{step.title}</h3>
-                <p className="mt-3 text-sm sm:text-base text-ink-900/65 leading-relaxed">
+                <p className="mt-3 pac-text text-ink-900/65">
                   {step.desc}
                 </p>
               </div>
@@ -415,7 +420,7 @@ export default function PacPage() {
             <div className="lg:col-span-7 order-2 lg:order-1">
               <Eyebrow>Por dentro do PAC</Eyebrow>
               <h2 className="font-serif text-3xl sm:text-4xl text-ink-900 leading-tight">
-                Do zero à fatoração, sem pular etapa.
+                Do zero à fatoração, <Destaque>sem pular etapa.</Destaque>
               </h2>
               <ol className="mt-10 flex flex-col">
                 {pacModules.map((m) => (
@@ -427,9 +432,9 @@ export default function PacPage() {
                       {m.n}
                     </span>
                     <div>
-                      <p className="text-base sm:text-lg font-semibold text-ink-900">{m.title}</p>
+                      <p className="text-[17px] sm:text-lg font-semibold text-ink-900">{m.title}</p>
                       {m.desc && (
-                        <p className="mt-1 text-sm text-ink-900/60 leading-relaxed">{m.desc}</p>
+                        <p className="mt-1 pac-text text-ink-900/60">{m.desc}</p>
                       )}
                       {m.lessons && (
                         <ul className="mt-3 flex flex-wrap gap-2">
@@ -460,14 +465,18 @@ export default function PacPage() {
         <Container>
           <div className="text-center max-w-2xl mx-auto">
             <Eyebrow>Pra quem é</Eyebrow>
-            <h2 className="font-serif text-3xl sm:text-4xl text-ink-900">{pacFit.title}</h2>
+            <h2 className="font-serif text-3xl sm:text-4xl text-ink-900">
+              {pacFit.title.split(pacFit.highlight).flatMap((part, i) =>
+                i === 0 ? [part] : [<Destaque key={i}>{pacFit.highlight}</Destaque>, part]
+              )}
+            </h2>
           </div>
           <div className="mt-12 grid grid-cols-1 md:grid-cols-2 gap-4 max-w-5xl mx-auto">
             <div className="rounded-2xl border border-gold-500/40 bg-gold-500/[0.06] p-8">
               <p className="font-serif text-xl text-gold-300">É pra você se…</p>
               <ul className="mt-6 space-y-4">
                 {pacFit.isFor.map((item) => (
-                  <li key={item} className="flex gap-3 text-ink-900/85 leading-relaxed">
+                  <li key={item} className="flex gap-3 text-[17px] sm:text-lg leading-[1.6] text-ink-900/85">
                     <Check />
                     {item}
                   </li>
@@ -478,7 +487,7 @@ export default function PacPage() {
               <p className="font-serif text-xl text-ink-900/50">Não é pra você se…</p>
               <ul className="mt-6 space-y-4">
                 {pacFit.isNotFor.map((item) => (
-                  <li key={item} className="flex gap-3 text-ink-900/50 leading-relaxed">
+                  <li key={item} className="flex gap-3 text-[17px] sm:text-lg leading-[1.6] text-ink-900/50">
                     <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full border border-ink-900/25 text-[10px]">
                       ✕
                     </span>
@@ -511,9 +520,9 @@ export default function PacPage() {
               <Eyebrow>Quem te guia</Eyebrow>
               <h2 className="font-serif text-3xl sm:text-4xl text-ink-900 leading-tight">
                 Oi, eu sou a Cathy.{" "}
-                <span className="italic text-plum-500">E eu também travava na conta.</span>
+                <Destaque>E eu também travava na conta.</Destaque>
               </h2>
-              <p className="mt-6 text-base sm:text-lg leading-relaxed text-ink-900/75">
+              <p className="mt-6 pac-text text-ink-900/75">
                 {pacAuthorBio}
               </p>
               <div className="mt-10 grid grid-cols-1 sm:grid-cols-3 gap-6 border-t border-ink-900/10 pt-8">
@@ -536,7 +545,7 @@ export default function PacPage() {
             <Eyebrow>Quem já está no PAC</Eyebrow>
             <h2 className="font-serif text-3xl sm:text-5xl text-ink-900 leading-tight text-balance">
               Não sou eu que tô dizendo.{" "}
-              <span className="italic text-plum-500">São eles.</span>
+              <Destaque>São eles.</Destaque>
             </h2>
             <p className="mt-4 text-sm text-ink-900/55">
               Mensagens reais que recebi de alunos no WhatsApp.
@@ -623,7 +632,7 @@ export default function PacPage() {
           <div className="text-center max-w-2xl mx-auto">
             <Eyebrow>Sua vaga</Eyebrow>
             <h2 className="font-serif text-3xl sm:text-5xl text-ink-900 leading-tight text-balance">
-              Recupere sua base e ganhe segurança para a prova.
+              Recupere sua base e ganhe <Destaque>segurança</Destaque> para a prova.
             </h2>
           </div>
 
@@ -632,19 +641,12 @@ export default function PacPage() {
               <p className="font-serif text-2xl">{pacOfferPrice.title}</p>
             </div>
 
-            <ul className="mt-8 space-y-3.5">
+            <ul className="mt-8 space-y-5">
               {pacIncludes.map((item) => (
-                <li key={item} className="flex gap-3 text-sm sm:text-base text-cream/85">
-                  <svg viewBox="0 0 20 20" aria-hidden className="h-5 w-5 shrink-0 text-plum-700 mt-0.5">
-                    <path
-                      d="M5 10.4l3.2 3.2L15 6.8"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                  </svg>
+                <li key={item} className="flex gap-3 text-[17px] sm:text-lg leading-[1.6] text-cream/85">
+                  <span aria-hidden className="shrink-0 font-bold text-[#C9A24C]">
+                    ✔
+                  </span>
                   {item}
                 </li>
               ))}
@@ -656,14 +658,11 @@ export default function PacPage() {
               <p className="mt-3 text-xs text-cream/60">{pacOfferPrice.access}</p>
 
               <PacBuyButton
-                buildPhase={buildPhase}
                 className="mt-8 w-full py-4 bg-cream text-ink-900 hover:bg-gold-500 hover:text-cream-900"
               >
                 Garantir minha vaga
               </PacBuyButton>
-              <PacPhaseNotice
-                buildPhase={buildPhase}
-                onlyWhenClosed
+              <PacNotice
                 className="mt-6 block rounded-2xl border border-cream/15 px-5 py-4 text-sm font-semibold text-cream"
               />
             </div>
@@ -687,7 +686,7 @@ export default function PacPage() {
                 strokeLinejoin="round"
               />
             </svg>
-            <p className="text-sm text-ink-900/75 leading-relaxed">{pacGuarantee}</p>
+            <p className="pac-text text-ink-900/75">{pacGuarantee}</p>
           </div>
         </Container>
       </section>
@@ -698,19 +697,19 @@ export default function PacPage() {
           <div className="text-center max-w-2xl mx-auto">
             <Eyebrow>Para pais e responsáveis</Eyebrow>
             <h2 className="font-serif text-3xl sm:text-5xl text-ink-900 leading-tight text-balance">
-              Seu filho quer fazer o PAC?
+              Seu filho quer fazer <Destaque>o PAC?</Destaque>
             </h2>
           </div>
           <ul className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-4 max-w-5xl mx-auto">
             {pacParents.map((item) => (
               <li key={item.title} className="rounded-2xl border border-ink-900/10 bg-cream-50/60 p-6 sm:p-7">
                 <p className="font-serif text-xl text-ink-900 leading-snug">{item.title}</p>
-                <p className="mt-2 text-sm text-ink-900/65 leading-relaxed">{item.desc}</p>
+                <p className="mt-2 pac-text text-ink-900/65">{item.desc}</p>
               </li>
             ))}
           </ul>
           <div className="mt-10 text-center">
-            <PacBuyButton buildPhase={buildPhase} className="px-10 py-4">
+            <PacBuyButton className="px-10 py-4">
               Garantir a vaga
             </PacBuyButton>
           </div>
@@ -724,7 +723,7 @@ export default function PacPage() {
             <div className="lg:col-span-4">
               <Eyebrow>Dúvidas</Eyebrow>
               <h2 className="font-serif text-3xl sm:text-4xl text-ink-900 leading-tight">
-                Perguntas frequentes
+                Perguntas <Destaque>frequentes</Destaque>
               </h2>
               <p className="mt-4 text-sm text-ink-900/60">
                 Ficou alguma?{" "}
@@ -750,7 +749,7 @@ export default function PacPage() {
                       +
                     </span>
                   </summary>
-                  <p className="pb-6 pr-12 text-sm sm:text-base text-ink-900/65 leading-relaxed">
+                  <p className="pb-6 pr-12 pac-text text-ink-900/65">
                     {item.a}
                   </p>
                 </details>
@@ -775,18 +774,13 @@ export default function PacPage() {
             <div className="relative">
               <h2 className="font-serif text-3xl sm:text-5xl text-ink-900 max-w-2xl mx-auto text-balance leading-tight">
                 A próxima questão que você perder{" "}
-                <span className="italic text-plum-500">não precisa ser na conta.</span>
+                <Destaque>não precisa ser na conta.</Destaque>
               </h2>
               <div className="mt-9">
-                <PacBuyButton buildPhase={buildPhase} className="px-10 py-4">
+                <PacBuyButton className="px-10 py-4">
                   Entrar no PAC agora
                 </PacBuyButton>
               </div>
-              <PacPhaseNotice
-                buildPhase={buildPhase}
-                onlyWhenClosed
-                className="mt-4 block text-sm font-semibold text-plum-500"
-              />
               <p className="mt-4 text-xs text-ink-900/50">Garantia de 7 dias · acesso imediato</p>
             </div>
           </div>
@@ -800,13 +794,11 @@ export default function PacPage() {
             <p className="font-serif text-xl text-ink-900">
               {pacPriceInstallments}
             </p>
-            <PacPhaseNotice
-              buildPhase={buildPhase}
-              onlyWhenClosed
+            <PacNotice
               className="block text-[11px] font-semibold text-plum-500"
             />
           </div>
-          <PacBuyButton buildPhase={buildPhase} className="px-6 py-3 text-xs">
+          <PacBuyButton className="px-6 py-3 text-xs">
             Garantir vaga
           </PacBuyButton>
         </div>

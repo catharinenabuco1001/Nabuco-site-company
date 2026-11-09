@@ -1,45 +1,31 @@
 import { siteConfig } from "@/data/site";
 
 // ---------------------------------------------------------------------------
-// Próxima turma do PAC: MUDE SÓ AQUI. O aviso aparece em todas as páginas
-// onde o PAC aparece (/pac, home, /aulas, /produtos, blog).
+// Abertura da turma do PAC: MUDE SÓ AQUI. Esta data controla tudo: a barra de
+// contagem do topo, os avisos com a data e a troca dos botões de compra
+// (Comunidade PAC antes, checkout depois). O fuso vai fixo no próprio ISO.
 // ---------------------------------------------------------------------------
-export const PAC_NEXT_COHORT = {
-  // Dia de abertura (horário de Brasília). Sem horário definido: o aviso some
-  // sozinho quando esse dia termina, pra não ficar data vencida no site.
-  date: "2026-11-16",
-  notice: "Nova turma abre dia 16 de novembro",
-};
+export const DATA_ABERTURA_PAC = "2026-11-16T20:00:00-03:00";
+export const DATA_ABERTURA_TEXTO = "dia 16 de novembro, às 20h";
 
-// Janela de matrículas COM horário. Enquanto for null, os botões de compra
-// levam pra Comunidade PAC no WhatsApp. Quando tiver horário, preencha, ex.:
-// { opensAt: "2026-11-16T19:00:00-03:00", closesAt: "2026-11-19T23:59:59-03:00" }
-// e os botões passam a levar ao checkout só dentro da janela.
-// Botão "Quero entrar no PAC" da seção de abas: antes deste momento vai pra
-// Comunidade PAC; a partir dele, pro checkout. Decidido no navegador.
-export const PAC_CHECKOUT_FROM = "2026-11-16T00:00:00-03:00";
+export const COMUNIDADE_URL = siteConfig.links.pacCommunity;
+export const CHECKOUT_URL = siteConfig.links.pacCheckout;
 
-export const PAC_ENROLLMENT: { opensAt: string; closesAt: string } | null = null;
+export const PAC_AVISO_ANTES = `Nova turma abre ${DATA_ABERTURA_TEXTO}`;
+export const PAC_AVISO_DEPOIS = "Inscrições abertas";
 
-export type PacPhase = "antes" | "abertas" | "encerradas";
+const aberturaMs = Date.parse(DATA_ABERTURA_PAC);
 
-export function getPacPhase(now: number = Date.now()): PacPhase {
-  if (!PAC_ENROLLMENT) return "antes";
-  if (now < Date.parse(PAC_ENROLLMENT.opensAt)) return "antes";
-  if (now <= Date.parse(PAC_ENROLLMENT.closesAt)) return "abertas";
-  return "encerradas";
+export function pacAberto(now: number = Date.now()): boolean {
+  return now >= aberturaMs;
 }
 
-const cohortDayEnd = Date.parse(`${PAC_NEXT_COHORT.date}T23:59:59-03:00`);
-
-// Texto do aviso por estado. `null` = não mostra nada (ex.: a data da próxima
-// turma já passou e ninguém atualizou PAC_NEXT_COHORT).
-export function pacPhaseNotice(phase: PacPhase, now: number = Date.now()): string | null {
-  if (phase === "abertas") return "Matrículas abertas";
-  if (now > cohortDayEnd) return null;
-  return PAC_NEXT_COHORT.notice;
+export function msAteAbertura(now: number = Date.now()): number {
+  return Math.max(0, aberturaMs - now);
 }
 
-export function pacBuyHref(phase: PacPhase): string {
-  return phase === "abertas" ? siteConfig.links.pacCheckout : siteConfig.links.pacCommunity;
+// Destino de todo botão de compra: Comunidade PAC antes da abertura, checkout
+// a partir dela.
+export function getCtaUrl(now: number = Date.now()): string {
+  return pacAberto(now) ? CHECKOUT_URL : COMUNIDADE_URL;
 }

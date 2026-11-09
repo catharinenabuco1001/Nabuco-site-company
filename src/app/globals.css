@@ -5,10 +5,31 @@
 :root {
   --font-fraunces: "Fraunces", Georgia, serif;
   --font-inter: "Inter", system-ui, sans-serif;
+  /* Fundo da barra de contagem do PAC (topo do site). */
+  --pac-bar-bg: #B3261E;
 }
 
 html {
   scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+/* Texto corrido da página do PAC: até ~65 caracteres por linha, 17px no
+   celular e 18px a partir do sm, entrelinha 1.6. */
+.pac-text {
+  max-width: 65ch;
+  font-size: 17px;
+  line-height: 1.6;
+}
+@media (min-width: 640px) {
+  .pac-text {
+    font-size: 18px;
+  }
 }
 
 body {

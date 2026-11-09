@@ -4,8 +4,7 @@ import { Badge } from "@/components/ui/Badge";
 import { CTA } from "@/components/ui/CTA";
 import { formatPrice } from "@/lib/utils";
 import { publicImageExists } from "@/lib/media";
-import { PacPhaseNotice } from "@/components/PacLaunch";
-import { getPacPhase } from "@/lib/pac-launch";
+import { PacNotice } from "@/components/PacLaunch";
 import { pacPriceInstallments, pacPriceCash } from "@/data/pac";
 
 export function ProductCard({ product }: { product: Product }) {
@@ -52,7 +51,7 @@ export function ProductCard({ product }: { product: Product }) {
         <p className="mt-1 text-xs text-ink-900/60">{pacPriceCash}</p>
       )}
       {product.id === "pac" && (
-        <PacPhaseNotice buildPhase={getPacPhase()} className="mt-2 block text-xs text-plum-500" />
+        <PacNotice className="mt-2 block text-xs text-plum-500" />
       )}
 
       <CTA

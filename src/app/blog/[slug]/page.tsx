@@ -8,8 +8,7 @@ import { PostBody } from "@/components/PostBody";
 import { posts, getPost, readingTime } from "@/data/posts";
 import { siteConfig } from "@/data/site";
 import { formatDate } from "@/lib/utils";
-import { PacPhaseNotice } from "@/components/PacLaunch";
-import { getPacPhase } from "@/lib/pac-launch";
+import { PacNotice } from "@/components/PacLaunch";
 
 export function generateStaticParams() {
   return posts.map((p) => ({ slug: p.slug }));
@@ -117,7 +116,7 @@ export default function PostPage({ params }: { params: { slug: string } }) {
             <CTA href="/pac" variant="primary">
               Conhecer o Método PAC
             </CTA>
-            <PacPhaseNotice buildPhase={getPacPhase()} className="text-sm text-ink-900/60" />
+            <PacNotice className="text-sm text-ink-900/60" />
           </div>
         </div>
       </Container>
