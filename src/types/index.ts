@@ -36,6 +36,7 @@ export type Product = {
 
 export type Talk = {
   id: string;
+  ativo?: boolean;
   title: string;
   description: string;
   location?: string;

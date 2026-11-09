@@ -1,39 +1,34 @@
 import type { Talk } from "@/types";
 
-// Temas de palestra são fixos/editáveis aqui. Local, ano, vídeo e evento
-// ficam undefined até existirem dados reais — a UI trata isso com placeholders.
+// Temas de palestra (seção "Temas" de /palestras). Pra esconder um card, troque
+// `ativo` pra false: a numeração (01, 02...) se ajusta sozinha.
 export const talks: Talk[] = [
   {
-    id: "vestibular-alta-performance",
-    title: "Vestibular e alta performance",
+    id: "erros-enem-vestibular",
+    ativo: true,
+    title: "Os erros que eu cometi estudando para o Enem e o vestibular",
     description:
-      "Como transformar rotina de estudo em execução consistente durante o período de vestibular.",
+      "O que eu fiz errado, o que custou e o que eu mudaria. Para quem está no 3º ano ou chegando lá.",
   },
   {
-    id: "disciplina-execucao",
-    title: "Disciplina e execução",
+    id: "matematica-me-travou",
+    ativo: true,
+    title: "Onde a matemática me travou",
     description:
-      "O que separa quem planeja do que quem conquista: disciplina aplicada ao dia a dia.",
+      "Base, enunciado, medo da matéria. Eu errei no básico, e mostro como foi. Para quem acha que \"não leva jeito\".",
   },
   {
-    id: "educacao-futuro",
-    title: "Educação e futuro",
-    description: "Para onde caminha a forma como aprendemos e como se preparar para isso.",
-  },
-  {
-    id: "ia-nos-estudos",
-    title: "Inteligência Artificial nos estudos",
+    id: "eu-e-o-celular",
+    ativo: true,
+    title: "Eu e o celular",
     description:
-      "Ferramentas de IA aplicadas de forma prática à rotina de quem estuda.",
+      "O que a distração fez com os meus estudos, o que eu tentei e o que não funcionou. Sem sermão, só a minha experiência.",
   },
   {
-    id: "estudar-mundo-distraido",
-    title: "Como estudar melhor em um mundo distraído",
-    description: "Atenção, foco e estratégias de estudo em um ambiente de estímulos constantes.",
-  },
-  {
-    id: "rotina-alta-performance",
-    title: "Construção de uma rotina de alta performance",
-    description: "Como estruturar uma rotina que sustente resultado no longo prazo.",
+    id: "cansada-e-estudando",
+    ativo: true,
+    title: "Cansada e estudando: o que eu aprendi sobre rotina",
+    description:
+      "Planejar demais, desistir, recomeçar. Como uma rotina que aguenta uma semana ruim.",
   },
 ];

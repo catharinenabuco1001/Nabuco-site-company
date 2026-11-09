@@ -134,6 +134,7 @@ function TalkTile({ talk }: { talk: PastTalk }) {
 
 export default function PalestrasPage() {
   const liveVideos = pastTalks.filter((t) => t.youtubeId);
+  const activeTalks = talks.filter((t) => t.ativo !== false);
   const heroPhoto = publicImageExists("images/palestras/bernoulli-1.jpg")
     ? "/images/palestras/bernoulli-1.jpg"
     : undefined;
@@ -388,11 +389,21 @@ export default function PalestrasPage() {
         <Container>
           <Eyebrow>Temas</Eyebrow>
           <h2 className="font-serif text-3xl sm:text-4xl text-ink-900 max-w-xl">
-            O que eu posso levar pro seu evento
+            O que eu posso levar pra sua escola
           </h2>
-          <div className="mt-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-px bg-ink-900/10 rounded-3xl overflow-hidden border border-ink-900/10">
-            {talks.map((t, i) => (
-              <div key={t.id} className="bg-cream p-7 sm:p-8">
+          <p className="mt-4 max-w-2xl text-base sm:text-lg text-ink-900/70 leading-relaxed">
+            Não sou uma aprovação com técnica infalível. Sou uma menina que errou muito e conta
+            cada erro, do jeito que foi, para os alunos encontrarem um caminho com menos
+            obstáculos do que o meu.
+          </p>
+          <div className="mt-10 grid grid-cols-1 sm:grid-cols-2 gap-px bg-ink-900/10 rounded-3xl overflow-hidden border border-ink-900/10">
+            {activeTalks.map((t, i) => (
+              <div
+                key={t.id}
+                className={`bg-cream p-7 sm:p-8 ${
+                  activeTalks.length % 2 === 1 && i === activeTalks.length - 1 ? "sm:col-span-2" : ""
+                }`}
+              >
                 <span className="font-serif text-2xl text-gold-500/60">
                   {String(i + 1).padStart(2, "0")}
                 </span>
