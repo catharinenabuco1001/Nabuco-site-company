@@ -5,7 +5,6 @@ import { CTA } from "@/components/ui/CTA";
 import { pacSteps } from "@/components/PacBlock";
 import { siteConfig } from "@/data/site";
 import {
-  pacPriceInstallments,
   pacOfferPrice,
   pacFit,
   pacChats,
@@ -653,9 +652,35 @@ export default function PacPage() {
             </ul>
 
             <div className="mt-10 border-t border-cream/15 pt-8 text-center">
-              <p className="font-serif text-5xl sm:text-6xl text-cream">{pacOfferPrice.installments}</p>
-              <p className="mt-3 text-sm text-cream/80">{pacOfferPrice.cash}</p>
-              <p className="mt-3 text-xs text-cream/60">{pacOfferPrice.access}</p>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-left">
+                {/* À vista (principal): no celular fica em cima. */}
+                <div className="relative rounded-2xl border-2 border-[#C9A24C] p-5 pt-7">
+                  <span className="absolute -top-3 left-5 rounded-full bg-[#C9A24C] px-3 py-1 text-[11px] font-bold uppercase tracking-wide text-[#0F2E22]">
+                    Melhor preço
+                  </span>
+                  <p className="text-xs font-semibold uppercase tracking-wide text-cream/70">À vista</p>
+                  <p className="mt-2 text-sm text-cream/70">
+                    <span className="sr-only">de </span>
+                    <s>{pacOfferPrice.cashFull}</s>
+                    <span className="sr-only"> por</span>
+                  </p>
+                  <p className="font-serif text-4xl sm:text-[2.6rem] leading-none text-cream">
+                    {pacOfferPrice.cash}
+                  </p>
+                  <p className="mt-3 text-sm font-semibold text-cream">{pacOfferPrice.cashSaving}</p>
+                  <p className="mt-1 text-xs text-cream/70">{pacOfferPrice.couponNote}</p>
+                </div>
+                {/* Parcelado (secundário). */}
+                <div className="rounded-2xl border border-cream/20 p-5 pt-7">
+                  <p className="text-xs font-semibold uppercase tracking-wide text-cream/70">Parcelado</p>
+                  <p className="mt-2 font-serif text-2xl sm:text-3xl leading-tight text-cream">
+                    {pacOfferPrice.installments}
+                  </p>
+                  <p className="mt-2 text-xs text-cream/70">{pacOfferPrice.installmentsTotal}</p>
+                </div>
+              </div>
+              <p className="mt-5 text-sm font-semibold text-cream">{pacOfferPrice.savingVsInstallments}</p>
+              <p className="mt-3 text-xs text-cream/70">{pacOfferPrice.access}</p>
 
               <PacBuyButton
                 className="mt-8 w-full py-4 bg-cream text-ink-900 hover:bg-gold-500 hover:text-cream-900"
@@ -791,9 +816,7 @@ export default function PacPage() {
       <div className="fixed inset-x-0 bottom-0 z-40 border-t border-ink-900/10 bg-cream/95 backdrop-blur-md lg:hidden">
         <div className="flex items-center justify-between gap-4 px-5 py-3">
           <div className="leading-tight">
-            <p className="font-serif text-xl text-ink-900">
-              {pacPriceInstallments}
-            </p>
+            <p className="text-sm font-semibold text-ink-900">{pacOfferPrice.mobileBar}</p>
             <PacNotice
               className="block text-[11px] font-semibold text-plum-500"
             />

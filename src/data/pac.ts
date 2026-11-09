@@ -3,35 +3,49 @@
 // são inventados aqui, só centralizados para não ficar solto no JSX.
 
 // Preço do PAC: MUDE SÓ AQUI. Vale pra /pac (oferta, barra do celular,
-// bloco dos pais) e pro card em /produtos.
-export const PRECO_PARCELA = 36.19; // valor de cada parcela (12x)
-export const PRECO_AVISTA = 297.9; // à vista com o cupom ativo na abertura da turma
+// bloco dos pais) e pro card em /produtos. Só os 4 valores abaixo são
+// digitados; o resto é calculado em centavos, pra não dar erro de arredondamento.
 export const PRECO_CHEIO = 349.9;
+export const PRECO_AVISTA = 297.9; // à vista com o cupom ativo na abertura da turma
+export const PARCELAS = 12;
+export const VALOR_PARCELA = 36.19;
+
+const centavos = (v: number) => Math.round(v * 100);
+export const TOTAL_PARCELADO = (PARCELAS * centavos(VALOR_PARCELA)) / 100; // 434,28
+export const DESCONTO_VS_CHEIO = (centavos(PRECO_CHEIO) - centavos(PRECO_AVISTA)) / 100; // 52,00
+export const ECONOMIA_VS_PARCELADO =
+  (PARCELAS * centavos(VALOR_PARCELA) - centavos(PRECO_AVISTA)) / 100; // 136,38
+
+const brlFormat = new Intl.NumberFormat("pt-BR", { style: "currency", currency: "BRL" });
+export const brl = (v: number) => brlFormat.format(v);
 
 export const pacPricing = {
   cohort: "4ª turma",
   price: PRECO_CHEIO,
   couponPrice: PRECO_AVISTA,
-  installments: 12,
-  installmentValue: PRECO_PARCELA,
+  installments: PARCELAS,
+  installmentValue: VALOR_PARCELA,
   accessMonths: 6,
 };
 
-const brl = (v: number) => v.toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
-
-// "12x de R$ 36,19" (destaque).
-export const pacPriceInstallments = `${pacPricing.installments}x de ${brl(pacPricing.installmentValue)}`;
-// "À vista: de R$ 349,90 por R$ 297,90 (cupom ativo na abertura da turma)".
-export const pacPriceCashCoupon = `À vista: de ${brl(pacPricing.price)} por ${brl(pacPricing.couponPrice)} (cupom ativo na abertura da turma)`;
+// "12x de R$ 36,19".
+export const pacPriceInstallments = `${PARCELAS}x de ${brl(VALOR_PARCELA)}`;
 // Usado só no card de /produtos.
-export const pacPriceCash = `ou ${brl(pacPricing.price)} à vista`;
+export const pacPriceCash = `ou ${brl(PRECO_CHEIO)} à vista`;
 
 // Bloco de preço do card da oferta em /pac.
 export const pacOfferPrice = {
   title: `Método PAC, ${pacPricing.cohort}`,
+  cashFull: brl(PRECO_CHEIO),
+  cash: brl(PRECO_AVISTA),
+  cashSaving: `Você economiza ${brl(DESCONTO_VS_CHEIO)}`,
+  couponNote: "cupom ativo na abertura da turma",
   installments: pacPriceInstallments,
-  cash: pacPriceCashCoupon,
+  installmentsTotal: `(${brl(TOTAL_PARCELADO)} no total)`,
+  savingVsInstallments: `Pagando à vista você economiza ${brl(ECONOMIA_VS_PARCELADO)} em relação ao parcelado.`,
   access: `${pacPricing.accessMonths} meses de acesso a todas as aulas, listas e materiais`,
+  // Barra fixa do celular.
+  mobileBar: `${brl(PRECO_AVISTA)} à vista · ou ${pacPriceInstallments}`,
 };
 
 // Bloco "Seu filho quer fazer o PAC?" (só com informações que já estão na página).
@@ -45,8 +59,8 @@ export const pacParents = [
     desc: "Se não for pra ele, é só pedir o reembolso dentro do prazo e você recebe 100% de volta.",
   },
   {
-    title: pacPriceInstallments,
-    desc: pacPriceCashCoupon,
+    title: `De ${brl(PRECO_CHEIO)} por ${brl(PRECO_AVISTA)} à vista`,
+    desc: `ou ${pacPriceInstallments}. Cupom ativo na abertura da turma.`,
   },
 ];
 
