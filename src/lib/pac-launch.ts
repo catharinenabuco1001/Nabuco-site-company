@@ -29,3 +29,33 @@ export function msAteAbertura(now: number = Date.now()): number {
 export function getCtaUrl(now: number = Date.now()): string {
   return pacAberto(now) ? CHECKOUT_URL : COMUNIDADE_URL;
 }
+
+// ---------------------------------------------------------------------------
+// Promoção da live de abertura: de DATA_ABERTURA_PAC até PROMO_FIM (meia-noite
+// de 16 pra 17/11). Não reinicia nem prorroga: depois de PROMO_FIM o estado é
+// sempre "depois".
+// ---------------------------------------------------------------------------
+export const PROMO_FIM = "2026-11-17T00:00:00-03:00";
+// Hora do fim em texto ("Só até meia-noite").
+export const HORA_FIM_TEXTO = (() => {
+  const h = Number(
+    new Intl.DateTimeFormat("pt-BR", {
+      hour: "numeric",
+      hourCycle: "h23",
+      timeZone: "America/Sao_Paulo",
+    }).format(new Date(PROMO_FIM))
+  );
+  const m = new Date(PROMO_FIM).getUTCMinutes();
+  if (h === 0 && m === 0) return "meia-noite";
+  return m ? `${h}h${String(m).padStart(2, "0")}` : `${h}h`;
+})();
+
+export type EstadoOferta = "antes" | "live" | "depois";
+
+const promoFimMs = Date.parse(PROMO_FIM);
+
+export function getEstadoOferta(agora: number = Date.now()): EstadoOferta {
+  if (agora < aberturaMs) return "antes";
+  if (agora < promoFimMs) return "live";
+  return "depois";
+}

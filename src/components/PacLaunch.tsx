@@ -7,22 +7,27 @@ import {
   PAC_AVISO_ANTES,
   PAC_AVISO_DEPOIS,
   getCtaUrl,
-  pacAberto,
+  getEstadoOferta,
+  type EstadoOferta,
 } from "@/lib/pac-launch";
 
 // As páginas são geradas no build, então a decisão "antes/depois da abertura"
 // é feita no navegador, depois de montar. O primeiro render é sempre o de
 // "antes" (Comunidade PAC), igual ao HTML do build: sem erro de hidratação.
-// Recalcula a cada 30s pra virar sozinho na hora da abertura.
-export function usePacAberto(): boolean {
-  const [aberto, setAberto] = useState(false);
+// Recalcula a cada 15s pra virar sozinho, sem recarregar a página.
+export function useEstadoOferta(): EstadoOferta {
+  const [estado, setEstado] = useState<EstadoOferta>("antes");
   useEffect(() => {
-    const update = () => setAberto(pacAberto());
+    const update = () => setEstado(getEstadoOferta());
     update();
-    const id = setInterval(update, 30_000);
+    const id = setInterval(update, 15_000);
     return () => clearInterval(id);
   }, []);
-  return aberto;
+  return estado;
+}
+
+export function usePacAberto(): boolean {
+  return useEstadoOferta() !== "antes";
 }
 
 export function useCtaUrl(): string {

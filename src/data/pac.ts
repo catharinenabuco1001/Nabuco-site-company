@@ -2,54 +2,82 @@
 // estatísticas vieram de um mockup de design aprovado pela Catharine — não
 // são inventados aqui, só centralizados para não ficar solto no JSX.
 
-// Preço do PAC: MUDE SÓ AQUI. Vale pra /pac (oferta, barra do celular,
-// bloco dos pais) e pro card em /produtos. Só os 4 valores abaixo são
-// digitados; o resto é calculado em centavos, pra não dar erro de arredondamento.
-export const PRECO_CHEIO = 349.9;
-export const PRECO_AVISTA = 297.9; // à vista com o cupom ativo na abertura da turma
-export const PARCELAS = 12;
-export const VALOR_PARCELA = 36.19;
+import { HORA_FIM_TEXTO } from "@/lib/pac-launch";
 
-const centavos = (v: number) => Math.round(v * 100);
-export const TOTAL_PARCELADO = (PARCELAS * centavos(VALOR_PARCELA)) / 100; // 434,28
-export const DESCONTO_VS_CHEIO = (centavos(PRECO_CHEIO) - centavos(PRECO_AVISTA)) / 100; // 52,00
-export const ECONOMIA_VS_PARCELADO =
-  (PARCELAS * centavos(VALOR_PARCELA) - centavos(PRECO_AVISTA)) / 100; // 136,38
+// Preço do PAC: MUDE SÓ AQUI. Vale pra /pac (oferta, barra do celular,
+// bloco dos pais, FAQ) e pro card em /produtos. Valores em CENTAVOS (inteiros),
+// pra não dar erro de arredondamento. A data da live (PROMO_FIM) fica em
+// src/lib/pac-launch.ts, junto com DATA_ABERTURA_PAC.
+export const PRECO_AVISTA = 34990; // R$ 349,90
+export const PRECO_LIVE = 29790; // R$ 297,90, só durante a live de abertura
+export const PARCELAS = 12;
+export const VALOR_PARCELA = 3619; // R$ 36,19
+export const TOTAL_PARCELADO = PARCELAS * VALOR_PARCELA; // R$ 434,28
+// Cupom da live: string (ex.: "LIVE16") ou null pra não mostrar.
+export const CUPOM_LIVE: string | null = null;
 
 const brlFormat = new Intl.NumberFormat("pt-BR", { style: "currency", currency: "BRL" });
-export const brl = (v: number) => brlFormat.format(v);
+// Formata centavos em reais: 29790 -> "R$ 297,90".
+export const brl = (centavos: number) => brlFormat.format(centavos / 100);
 
 export const pacPricing = {
   cohort: "4ª turma",
-  price: PRECO_CHEIO,
-  couponPrice: PRECO_AVISTA,
-  installments: PARCELAS,
-  installmentValue: VALOR_PARCELA,
   accessMonths: 6,
 };
 
 // "12x de R$ 36,19".
 export const pacPriceInstallments = `${PARCELAS}x de ${brl(VALOR_PARCELA)}`;
-// Usado só no card de /produtos.
-export const pacPriceCash = `ou ${brl(PRECO_CHEIO)} à vista`;
+// Usado no card de /produtos e no bloco dos pais.
+export const pacPriceCash = `ou ${brl(PRECO_AVISTA)} à vista`;
+
+// Textos da promoção da live de abertura.
+// Antes da live o preço da live NÃO aparece: ele só é mostrado a partir de
+// DATA_ABERTURA_PAC.
+export const pacPromo = {
+  faixaTitulo: "PROMOÇÃO ÚNICA NA LIVE DE ABERTURA.",
+  faixaTextoAntes: "Segunda, 16/11, às 20h. Só durante a live.",
+  faixaTextoLive: `Segunda, 16/11, às 20h: ${brl(PRECO_LIVE)} à vista. Só até ${HORA_FIM_TEXTO}.`,
+  comunidadeCta: "Entrar na comunidade e receber o link da live",
+  selo: "PREÇO DA LIVE",
+  ate: `Só até ${HORA_FIM_TEXTO}`,
+  cupom: (c: string) => `Use o cupom ${c}`,
+};
 
 // Bloco de preço do card da oferta em /pac.
 export const pacOfferPrice = {
   title: `Método PAC, ${pacPricing.cohort}`,
-  cashFull: brl(PRECO_CHEIO),
   cash: brl(PRECO_AVISTA),
-  cashSaving: `Você economiza ${brl(DESCONTO_VS_CHEIO)}`,
-  couponNote: "cupom ativo na abertura da turma",
+  cashLive: brl(PRECO_LIVE),
   installments: pacPriceInstallments,
   installmentsTotal: `(${brl(TOTAL_PARCELADO)} no total)`,
-  savingVsInstallments: `Pagando à vista você economiza ${brl(ECONOMIA_VS_PARCELADO)} em relação ao parcelado.`,
   access: `${pacPricing.accessMonths} meses de acesso a todas as aulas, listas e materiais`,
-  // Barra fixa do celular.
-  mobileBar: `${brl(PRECO_AVISTA)} à vista · ou ${pacPriceInstallments}`,
+};
+
+// Barra fixa do celular, por estado da oferta.
+export const pacMobileBar = {
+  antes: "Live 16/11, 20h: promoção única",
+  live: `Preço da live: ${brl(PRECO_LIVE)} à vista`,
+  depois: `${pacPriceInstallments} ou ${brl(PRECO_AVISTA)} à vista`,
+};
+
+// Barra de contagem do topo.
+export const pacTopBar = {
+  antesLinha2: "Na live de abertura: promoção única, só nela.",
+  live: `AO VIVO: preço da live ${brl(PRECO_LIVE)} à vista até ${HORA_FIM_TEXTO}`,
+  depois: "INSCRIÇÕES ABERTAS",
+};
+
+// FAQ "Tem desconto?": a resposta muda por estado (antes sem o preço da live).
+export const pacFaqDesconto = {
+  q: "Tem desconto?",
+  aAntes: `O PAC custa ${pacPriceInstallments} ou ${brl(PRECO_AVISTA)} à vista. Na live de abertura, dia 16/11 às 20h, tem uma condição única, só durante a live.`,
+  aLive: `O PAC custa ${pacPriceInstallments} ou ${brl(PRECO_AVISTA)} à vista. Na live de abertura, dia 16/11 às 20h, tem uma condição única: ${brl(PRECO_LIVE)} à vista, só até ${HORA_FIM_TEXTO}.`,
+  aDepois: `O PAC custa ${pacPriceInstallments} ou ${brl(PRECO_AVISTA)} à vista.`,
 };
 
 // Bloco "Seu filho quer fazer o PAC?" (só com informações que já estão na página).
-export const pacParents = [
+// `promo: true` = mostra a linha da live embaixo (só antes/durante a live).
+export const pacParents: { title: string; desc: string; promo?: boolean }[] = [
   {
     title: "O que ele vai fazer",
     desc: "Mini-aulas de ~10 minutos que reconstroem a base de matemática do zero, com listas de exercícios por módulo.",
@@ -59,8 +87,9 @@ export const pacParents = [
     desc: "Se não for pra ele, é só pedir o reembolso dentro do prazo e você recebe 100% de volta.",
   },
   {
-    title: `De ${brl(PRECO_CHEIO)} por ${brl(PRECO_AVISTA)} à vista`,
-    desc: `ou ${pacPriceInstallments}. Cupom ativo na abertura da turma.`,
+    title: pacPriceInstallments,
+    desc: pacPriceCash,
+    promo: true,
   },
 ];
 
@@ -180,7 +209,7 @@ export const pacIncludes = [
 export const pacGuarantee =
   "Garantia de 7 dias. Se entrar e sentir que não é pra você, é só pedir o reembolso dentro do prazo e você recebe 100% de volta.";
 
-export const pacFaq = [
+export const pacFaq: { q: string; a: string; desconto?: boolean }[] = [
   {
     q: "Pra quem é o PAC?",
     a: "Pra quem está no ensino médio, no cursinho ou se preparando pro ENEM e vestibulares. E também pra universitário que ainda sente buraco na base (costuma aparecer em trigonometria e geometria analítica).",
@@ -209,6 +238,8 @@ export const pacFaq = [
     q: "Como recebo o acesso?",
     a: "O pagamento é pela Kiwify (Pix ou cartão). Assim que ele é aprovado, o acesso chega no seu e-mail.",
   },
+  // Resposta muda por estado da oferta (ver pacFaqDesconto).
+  { q: pacFaqDesconto.q, a: pacFaqDesconto.aAntes, desconto: true },
   {
     q: "E se eu não gostar?",
     a: "Você tem 7 dias de garantia. Se não fizer sentido para você, é só pedir o reembolso nesse prazo.",

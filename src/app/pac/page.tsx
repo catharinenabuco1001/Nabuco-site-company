@@ -22,6 +22,12 @@ import {
 } from "@/data/pac";
 import { PacBuyButton, PacNotice } from "@/components/PacLaunch";
 import { PacForWhom } from "@/components/PacForWhom";
+import {
+  PacFaqDescontoResposta,
+  PacMobileBarPreco,
+  PacOfertaPreco,
+  PacPromoLinha,
+} from "@/components/PacOferta";
 import { publicImageExists } from "@/lib/media";
 import { PAC_AVISO_ANTES } from "@/lib/pac-launch";
 
@@ -651,46 +657,7 @@ export default function PacPage() {
               ))}
             </ul>
 
-            <div className="mt-10 border-t border-cream/15 pt-8 text-center">
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-left">
-                {/* À vista (principal): no celular fica em cima. */}
-                <div className="relative rounded-2xl border-2 border-[#C9A24C] p-5 pt-7">
-                  <span className="absolute -top-3 left-5 rounded-full bg-[#C9A24C] px-3 py-1 text-[11px] font-bold uppercase tracking-wide text-[#0F2E22]">
-                    Melhor preço
-                  </span>
-                  <p className="text-xs font-semibold uppercase tracking-wide text-cream/70">À vista</p>
-                  <p className="mt-2 text-sm text-cream/70">
-                    <span className="sr-only">de </span>
-                    <s>{pacOfferPrice.cashFull}</s>
-                    <span className="sr-only"> por</span>
-                  </p>
-                  <p className="font-serif text-4xl sm:text-[2.6rem] leading-none text-cream">
-                    {pacOfferPrice.cash}
-                  </p>
-                  <p className="mt-3 text-sm font-semibold text-cream">{pacOfferPrice.cashSaving}</p>
-                  <p className="mt-1 text-xs text-cream/70">{pacOfferPrice.couponNote}</p>
-                </div>
-                {/* Parcelado (secundário). */}
-                <div className="rounded-2xl border border-cream/20 p-5 pt-7">
-                  <p className="text-xs font-semibold uppercase tracking-wide text-cream/70">Parcelado</p>
-                  <p className="mt-2 font-serif text-2xl sm:text-3xl leading-tight text-cream">
-                    {pacOfferPrice.installments}
-                  </p>
-                  <p className="mt-2 text-xs text-cream/70">{pacOfferPrice.installmentsTotal}</p>
-                </div>
-              </div>
-              <p className="mt-5 text-sm font-semibold text-cream">{pacOfferPrice.savingVsInstallments}</p>
-              <p className="mt-3 text-xs text-cream/70">{pacOfferPrice.access}</p>
-
-              <PacBuyButton
-                className="mt-8 w-full py-4 bg-cream text-ink-900 hover:bg-gold-500 hover:text-cream-900"
-              >
-                Garantir minha vaga
-              </PacBuyButton>
-              <PacNotice
-                className="mt-6 block rounded-2xl border border-cream/15 px-5 py-4 text-sm font-semibold text-cream"
-              />
-            </div>
+            <PacOfertaPreco />
           </div>
 
           <div className="mt-8 mx-auto max-w-xl flex items-start gap-4 rounded-2xl border border-gold-500/30 p-6">
@@ -730,6 +697,7 @@ export default function PacPage() {
               <li key={item.title} className="rounded-2xl border border-ink-900/10 bg-cream-50/60 p-6 sm:p-7">
                 <p className="font-serif text-xl text-ink-900 leading-snug">{item.title}</p>
                 <p className="mt-2 pac-text text-ink-900/65">{item.desc}</p>
+                {item.promo && <PacPromoLinha />}
               </li>
             ))}
           </ul>
@@ -774,9 +742,11 @@ export default function PacPage() {
                       +
                     </span>
                   </summary>
-                  <p className="pb-6 pr-12 pac-text text-ink-900/65">
-                    {item.a}
-                  </p>
+                  {item.desconto ? (
+                    <PacFaqDescontoResposta className="pb-6 pr-12 pac-text text-ink-900/65" />
+                  ) : (
+                    <p className="pb-6 pr-12 pac-text text-ink-900/65">{item.a}</p>
+                  )}
                 </details>
               ))}
             </div>
@@ -816,7 +786,7 @@ export default function PacPage() {
       <div className="fixed inset-x-0 bottom-0 z-40 border-t border-ink-900/10 bg-cream/95 backdrop-blur-md lg:hidden">
         <div className="flex items-center justify-between gap-4 px-5 py-3">
           <div className="leading-tight">
-            <p className="text-sm font-semibold text-ink-900">{pacOfferPrice.mobileBar}</p>
+            <PacMobileBarPreco className="text-sm font-semibold text-ink-900" />
             <PacNotice
               className="block text-[11px] font-semibold text-plum-500"
             />
