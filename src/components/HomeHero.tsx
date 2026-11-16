@@ -7,7 +7,12 @@ import { publicImageExists } from "@/lib/media";
 import type { Video } from "@/types";
 
 export function HomeHero({ novidade }: { novidade?: Video }) {
-  const heroSrc = publicImageExists("images/hero-lendo.png")
+  // Capa horizontal (1108x617, rosto e mãos no centro). O container usa a
+  // mesma proporção da foto, então nada é cortado em nenhum tamanho de tela.
+  const capaNova = publicImageExists("images/capa-nova.webp");
+  const heroSrc = capaNova
+    ? "/images/capa-nova.webp"
+    : publicImageExists("images/hero-lendo.png")
     ? "/images/hero-lendo.png"
     : publicImageExists("images/hero-retrato.jpeg")
     ? "/images/hero-retrato.jpeg"
@@ -45,20 +50,37 @@ export function HomeHero({ novidade }: { novidade?: Video }) {
           </div>
 
           <div className="relative min-w-0">
-            <div className="relative aspect-[4/5] w-full overflow-hidden">
+            <div
+              className={`relative w-full overflow-hidden ${
+                capaNova ? "aspect-[1108/617] rounded-2xl" : "aspect-[4/5]"
+              }`}
+            >
               {heroSrc ? (
-                <>
+                capaNova ? (
                   <Image
                     src={heroSrc}
-                    alt="Catharine Nabuco lendo um livro"
+                    alt="Catharine Nabuco sorrindo na frente de um quadro de trigonometria"
                     fill
                     priority
-                    sizes="(min-width: 1024px) 45vw, 90vw"
+                    quality={90}
+                    sizes="(min-width: 1024px) 50vw, 100vw"
                     className="object-cover"
-                    style={{ objectPosition: "50% 25%" }}
+                    style={{ objectPosition: "center" }}
                   />
-                  <div className="absolute inset-0 bg-gradient-to-b from-transparent from-40% to-[rgba(8,25,16,0.75)]" />
-                </>
+                ) : (
+                  <>
+                    <Image
+                      src={heroSrc}
+                      alt="Catharine Nabuco lendo um livro"
+                      fill
+                      priority
+                      sizes="(min-width: 1024px) 45vw, 90vw"
+                      className="object-cover"
+                      style={{ objectPosition: "50% 25%" }}
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-b from-transparent from-40% to-[rgba(8,25,16,0.75)]" />
+                  </>
+                )
               ) : (
                 <ImagePlaceholder label="Foto de Catharine em breve" ratio="aspect-[4/5]" />
               )}
@@ -69,7 +91,11 @@ export function HomeHero({ novidade }: { novidade?: Video }) {
                 href={novidade.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="absolute bottom-5 left-5 right-5 block bg-gold-500 p-5 text-cream-900 transition-colors hover:bg-gold-700"
+                className={
+                  capaNova
+                    ? "mt-4 block bg-gold-500 p-5 text-cream-900 transition-colors hover:bg-gold-700"
+                    : "absolute bottom-5 left-5 right-5 block bg-gold-500 p-5 text-cream-900 transition-colors hover:bg-gold-700"
+                }
               >
                 <p className="text-[11px] font-sans font-semibold uppercase tracking-[0.22em] text-cream-900/70">
                   Novidade da semana
