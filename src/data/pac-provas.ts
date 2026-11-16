@@ -20,11 +20,12 @@ export type Prova = {
 
 export const PROVAS: Prova[] = [
   {
-    // Card que já existia no site ("Tirei 8 em matemática"), sem print.
+    // Card que já existia no site ("Tirei 8 em matemática").
     nome: "",
     contexto: "Depois da prova",
     chip: "De 5 para 8 em matemática",
     frase: "Tirei 8 em matemática… tinha tirado 5 na outra prova antes de vc",
+    arquivo: "tirei-8.png",
     bloco: "A",
     autorizado: true,
   },
