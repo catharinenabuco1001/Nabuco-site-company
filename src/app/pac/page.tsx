@@ -30,7 +30,9 @@ import {
   PacOfertaPreco,
   PacPromoLinha,
 } from "@/components/PacOferta";
-import { publicImageExists } from "@/lib/media";
+import { publicImageExists, publicImageSize } from "@/lib/media";
+import { PROVAS, PROVAS_DIR, PROVAS_RODAPE, altProva, nomeProva } from "@/data/pac-provas";
+import { PacPrintsGrid, PacResultados } from "@/components/PacProvas";
 import { PAC_AVISO_ANTES } from "@/lib/pac-launch";
 
 const ogTitle = `Método PAC: ${PAC_AVISO_ANTES}`;
@@ -145,26 +147,26 @@ function PhoneMockup() {
 function ChatCard({ chat }: { chat: PacChat }) {
   return (
     <figure
-      className={`mb-4 break-inside-avoid rounded-3xl border p-5 sm:p-6 ${
+      className={`mb-4 break-inside-avoid rounded-2xl border p-4 ${
         chat.highlight
           ? "border-gold-500/50 bg-gold-500/[0.07]"
           : "border-ink-900/10 bg-cream-50/60"
       }`}
     >
-      <figcaption className="flex items-center gap-3 pb-4 border-b border-ink-900/10">
+      <figcaption className="flex items-center gap-3 pb-3 border-b border-ink-900/10">
         <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-gold-500/20 font-serif text-gold-300">
           {chat.name.startsWith("Alun") ? "★" : chat.name[0]}
         </span>
         <span className="min-w-0">
           <span className="block text-sm font-semibold text-ink-900">{chat.name}</span>
-          <span className="block text-[11px] text-ink-900/45">{chat.context}</span>
+          <span className="block text-[11px] text-ink-900/60">{chat.context}</span>
         </span>
       </figcaption>
-      <div className="mt-4 flex flex-col gap-2">
+      <div className="mt-3 flex flex-col gap-1.5">
         {chat.messages.map((m, j) => (
           <p
             key={j}
-            className={`max-w-[88%] rounded-2xl px-4 py-2.5 text-sm leading-relaxed ${
+            className={`max-w-[92%] rounded-2xl px-3.5 py-2 text-sm leading-relaxed ${
               m.from === "cathy"
                 ? "self-end rounded-br-md bg-gold-500 text-cream-900"
                 : "self-start rounded-bl-md bg-ink-900/[0.08] text-ink-900"
@@ -197,6 +199,32 @@ export default function PacPage() {
   // "Cenas do PAC": só itens ativos cujo arquivo existe em public/images/pac/.
   const cenas = pacCenas.filter((c) => c.ativo && publicImageExists(`images/pac/${c.file}`));
   const prints = pacPrints.filter((p) => publicImageExists(`images/pac/prints/${p.file}`));
+
+  // Provas sociais (src/data/pac-provas.ts): só autorizadas; item com arquivo
+  // só aparece se o print existir em public/images/pac/provas/.
+  const provas = PROVAS.filter(
+    (p) => p.autorizado && (!p.arquivo || publicImageExists(`${PROVAS_DIR}/${p.arquivo}`))
+  );
+  const provaCards = provas.map((p) => ({
+    nome: nomeProva(p),
+    contexto: p.contexto,
+    chip: p.chip,
+    frase: p.frase,
+    semNome: !p.nome.trim(),
+  }));
+  // Grade "Mensagens reais, sem edição": prints das provas + os prints que já
+  // existiam (public/images/pac/prints/).
+  const printsGrid = [
+    ...provas.flatMap((p) => {
+      if (!p.arquivo) return [];
+      const src = `${PROVAS_DIR}/${p.arquivo}`;
+      const size = publicImageSize(src) ?? { w: 720, h: 1280 };
+      return [{ src: `/${src}`, alt: altProva(p), legenda: p.frase, ...size }];
+    }),
+    ...prints.map((p) => ({ src: `/images/pac/prints/${p.file}`, alt: p.alt, legenda: p.alt, w: p.w, h: p.h })),
+  ];
+  // Depoimentos em texto: o "Tirei 8" virou o primeiro card de resultado.
+  const chatsTexto = pacChats.filter((c) => !c.highlight);
   return (
     <>
       {/* ------------------------------------------------------------ HERO */}
@@ -582,42 +610,31 @@ export default function PacPage() {
             </p>
           </div>
 
-          <div className="mt-14 columns-1 sm:columns-2 lg:columns-3 gap-4 [column-fill:_balance]">
-            {pacChats.map((chat, i) => (
-              <ChatCard key={i} chat={chat} />
-            ))}
-          </div>
+          {/* 1. Resultados */}
+          {provaCards.length > 0 && (
+            <div className="mt-14">
+              <PacResultados cards={provaCards} />
+            </div>
+          )}
 
-          {prints.length > 0 && (
+          {/* 2. Prints */}
+          {printsGrid.length > 0 && (
             <div className="mt-16">
-              <p className="text-center text-xs font-semibold uppercase tracking-widest2 text-ink-900/45">
-                Os prints, pra quem gosta de ver com os próprios olhos
-              </p>
-              <div className="mt-8 flex items-start gap-5 overflow-x-auto no-scrollbar snap-x snap-mandatory pt-4 pb-8 -mx-5 px-5 lg:mx-0 lg:px-0 lg:justify-center">
-                {prints.map((p, i) => (
-                  <a
-                    key={p.file}
-                    href={`/images/pac/prints/${p.file}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label={`Ver print em tamanho real: ${p.alt}`}
-                    className={`shrink-0 snap-center w-[220px] sm:w-[240px] lg:w-[196px] overflow-hidden rounded-[1.4rem] border-[5px] border-[#07170f] bg-[#07170f] shadow-xl shadow-black/40 transition-transform duration-300 hover:rotate-0 hover:scale-[1.03] ${
-                      i % 2 === 0 ? "lg:-rotate-2" : "lg:rotate-2 lg:mt-6"
-                    }`}
-                  >
-                    <Image
-                      src={`/images/pac/prints/${p.file}`}
-                      alt={p.alt}
-                      width={p.w}
-                      height={p.h}
-                      sizes="240px"
-                      className="block h-auto w-full rounded-[1rem]"
-                    />
-                  </a>
-                ))}
+              <h3 className="text-center text-xs font-semibold uppercase tracking-widest2 text-ink-900/65">
+                Mensagens reais, sem edição
+              </h3>
+              <div className="mt-8">
+                <PacPrintsGrid prints={printsGrid} />
               </div>
             </div>
           )}
+
+          {/* 3. Depoimentos em texto */}
+          <div className="mt-16 columns-1 sm:columns-2 lg:columns-3 gap-4 [column-fill:_balance]">
+            {chatsTexto.map((chat, i) => (
+              <ChatCard key={i} chat={chat} />
+            ))}
+          </div>
 
           {pacVideos.length > 0 && (
             <div className="mt-16">
@@ -653,6 +670,8 @@ export default function PacPage() {
               </div>
             </div>
           )}
+
+          <p className="mt-12 text-center text-xs text-ink-900/60">{PROVAS_RODAPE}</p>
         </Container>
       </section>
 
