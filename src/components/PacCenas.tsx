@@ -62,6 +62,10 @@ export function PacCenas({ cenas }: { cenas: PacCena[] }) {
 
   if (!cenas.length) return null;
   const atual = aberta !== null ? cenas[aberta] : null;
+  // Com número ímpar de fotos verticais, a última fica sozinha na linha:
+  // centraliza com meia largura em vez de deixar um buraco ao lado.
+  const retratos = cenas.filter((c) => c.formato === "retrato");
+  const retratoSozinho = retratos.length % 2 === 1 ? retratos[retratos.length - 1].file : null;
 
   return (
     <>
@@ -69,7 +73,13 @@ export function PacCenas({ cenas }: { cenas: PacCena[] }) {
         {cenas.map((c, i) => (
           <figure
             key={c.file}
-            className={`w-[66%] shrink-0 snap-start md:w-auto ${c.formato === "largo" ? "md:col-span-2" : ""}`}
+            className={`w-[66%] shrink-0 snap-start md:w-auto ${
+              c.formato === "largo"
+                ? "md:col-span-2"
+                : c.file === retratoSozinho
+                  ? "md:col-span-2 md:mx-auto md:w-1/2"
+                  : ""
+            }`}
           >
             <button
               ref={(el) => {

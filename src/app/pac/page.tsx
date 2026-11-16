@@ -186,10 +186,14 @@ function ChatCard({ chat }: { chat: PacChat }) {
 }
 
 export default function PacPage() {
-  const heroSrc = publicImageExists("images/pac-hero.jpg")
+  const retratoSrc = publicImageExists("images/pac-hero.jpg")
     ? "/images/pac-hero.jpg"
     : "/images/hero-retrato.jpeg";
-  const authorSrc = publicImageExists("images/sobre.jpg") ? "/images/sobre.jpg" : heroSrc;
+  // Hero: foto horizontal dando aula no quadro (rosto no centro). Sem ela,
+  // volta pro retrato.
+  const heroAula = publicImageExists("images/pac/aula-quadro.webp");
+  const heroSrc = heroAula ? "/images/pac/aula-quadro.webp" : retratoSrc;
+  const authorSrc = publicImageExists("images/sobre.jpg") ? "/images/sobre.jpg" : retratoSrc;
   // "Cenas do PAC": só itens ativos cujo arquivo existe em public/images/pac/.
   const cenas = pacCenas.filter((c) => c.ativo && publicImageExists(`images/pac/${c.file}`));
   const prints = pacPrints.filter((p) => publicImageExists(`images/pac/prints/${p.file}`));
@@ -240,38 +244,49 @@ export default function PacPage() {
 
             {/* Foto + cards flutuantes */}
             <div className="lg:col-span-5 animate-fadeInSlow">
-              <div className="relative mx-auto max-w-[420px] px-6 sm:px-0">
-                <div className="relative aspect-[4/5] w-full overflow-hidden rounded-[2rem] border border-gold-500/25">
+              <div className={`relative mx-auto ${heroAula ? "max-w-[560px]" : "max-w-[420px] px-6 sm:px-0"}`}>
+                <div
+                  className={`relative w-full overflow-hidden rounded-[2rem] border border-gold-500/25 ${
+                    heroAula ? "aspect-[4/3]" : "aspect-[4/5]"
+                  }`}
+                >
                   <Image
                     src={heroSrc}
-                    alt="Catharine Nabuco, criadora do Método PAC"
+                    alt={
+                      heroAula
+                        ? "Catharine Nabuco dando aula de trigonometria em frente ao quadro verde"
+                        : "Catharine Nabuco, criadora do Método PAC"
+                    }
                     fill
                     priority
                     quality={90}
-                    sizes="(min-width: 1024px) 34vw, 90vw"
+                    sizes="(min-width: 1024px) 560px, 100vw"
                     className="object-cover"
-                    style={{ objectPosition: "70% 25%" }}
+                    style={{ objectPosition: heroAula ? "50% 35%" : "70% 25%" }}
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-cream/50 via-transparent to-transparent" />
                 </div>
 
-                <div className="absolute -left-2 sm:-left-10 top-8 rounded-2xl border border-ink-900/10 bg-cream-50/95 backdrop-blur px-4 py-3 shadow-xl shadow-black/30">
-                  <p className="text-[10px] uppercase tracking-widest2 text-plum-500 font-semibold">
-                    Produto notável
-                  </p>
-                  <p className="mt-1 font-serif text-base sm:text-lg text-ink-900 whitespace-nowrap">
-                    (a + b)² = a² + <span className="text-gold-300">2ab</span> + b²
-                  </p>
-                </div>
+                {/* Cartões: no desktop por cima das bordas da foto (longe do
+                    rosto e das mãos), com fundo sólido; no celular, abaixo dela. */}
+                <div className="mt-4 flex flex-wrap gap-3 lg:mt-0 lg:block">
+                  <div className="rounded-2xl border border-[#C9A24C]/70 bg-[#0F2E22]/[0.92] px-4 py-3 shadow-xl shadow-black/30 lg:absolute lg:-left-10 lg:top-6">
+                    <p className="text-[10px] uppercase tracking-widest2 text-[#C9A24C] font-semibold">
+                      Produto notável
+                    </p>
+                    <p className="mt-1 font-serif text-base sm:text-lg text-[#F2F0EB] whitespace-nowrap">
+                      (a + b)² = a² + <span className="text-[#C9A24C]">2ab</span> + b²
+                    </p>
+                  </div>
 
-                <div className="absolute -right-2 sm:-right-8 bottom-10 rounded-2xl bg-ink-900 px-5 py-4 text-cream shadow-xl shadow-black/40">
-                  <p className="text-[10px] uppercase tracking-widest2 font-semibold text-plum-700">
-                    Em 1 mês de PAC
-                  </p>
-                  <p className="mt-1 font-serif text-3xl leading-none">
-                    5 <span className="text-plum-700">→</span> 8
-                  </p>
-                  <p className="mt-1 text-[11px] text-cream/60">nota de uma aluna</p>
+                  <div className="rounded-2xl border border-[#C9A24C]/70 bg-[#0F2E22]/[0.92] px-5 py-4 text-[#F2F0EB] shadow-xl shadow-black/40 lg:absolute lg:-right-8 lg:-bottom-6">
+                    <p className="text-[10px] uppercase tracking-widest2 font-semibold text-[#C9A24C]">
+                      Em 1 mês de PAC
+                    </p>
+                    <p className="mt-1 font-serif text-3xl leading-none">
+                      5 <span className="text-[#C9A24C]">→</span> 8
+                    </p>
+                    <p className="mt-1 text-[11px] text-[#F2F0EB]/70">nota de uma aluna</p>
+                  </div>
                 </div>
               </div>
             </div>
@@ -781,7 +796,21 @@ export default function PacPage() {
                 A próxima questão que você perder{" "}
                 <Destaque>não precisa ser na conta.</Destaque>
               </h2>
-              <div className="mt-9">
+              <div className="mt-9 flex flex-col items-center justify-center gap-6 sm:flex-row sm:gap-8">
+                {/* Retrato aproximado no rosto (a foto original é de meio corpo). */}
+                <div className="h-40 w-40 shrink-0 overflow-hidden rounded-full border border-[#C9A24C]/60">
+                  <Image
+                    src={retratoSrc}
+                    alt="Catharine Nabuco"
+                    width={320}
+                    height={320}
+                    quality={90}
+                    loading="lazy"
+                    sizes="320px"
+                    className="h-full w-full scale-[1.9] object-cover"
+                    style={{ objectPosition: "70% 22%", transformOrigin: "94% 44%" }}
+                  />
+                </div>
                 <PacBuyButton className="px-10 py-4">
                   Entrar no PAC agora
                 </PacBuyButton>

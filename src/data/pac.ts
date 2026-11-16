@@ -422,7 +422,7 @@ export const pacCenas: PacCena[] = [
     h: 617,
     formato: "retrato",
     objectPosition: "50% 40%",
-    ativo: true,
+    ativo: false, // está no hero do /pac, pra não repetir
   },
   {
     file: "bastidores.png",
