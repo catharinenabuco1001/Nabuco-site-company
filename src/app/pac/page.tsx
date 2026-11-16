@@ -77,7 +77,7 @@ export const metadata: Metadata = {
 
 // Palavra-chave em dourado nos títulos de seção (sem mudar o texto).
 function Destaque({ children }: { children: React.ReactNode }) {
-  return <span className="italic text-[#C9A24C]">{children}</span>;
+  return <span className="italic text-[var(--pac-dourado-texto)]">{children}</span>;
 }
 
 function Eyebrow({ children, className = "" }: { children: React.ReactNode; className?: string }) {
@@ -198,7 +198,7 @@ function ChatCard({ chat }: { chat: PacChat }) {
             {m.text}
             <span
               className={`ml-2 align-bottom text-[10px] ${
-                m.from === "cathy" ? "text-cream-900/60" : "text-ink-900/40"
+                m.from === "cathy" ? "text-cream-900/80" : "text-ink-900/40"
               }`}
             >
               {m.time}
@@ -380,7 +380,7 @@ export default function PacPage() {
       </section>
 
       {/* ------------------------------------------------------------ STATS */}
-      <section className="border-y border-ink-900/10 bg-cream-100/60">
+      <section className="border-y border-ink-900/10 tema-creme">
         <Container>
           <div className="grid grid-cols-2 lg:grid-cols-4 divide-x divide-ink-900/10">
             {[
@@ -403,7 +403,7 @@ export default function PacPage() {
 
       {/* ------------------------------------------------------------ PROVAS (BLOCO A) */}
       {provaCards.length > 0 && (
-        <section className="py-16 sm:py-20">
+        <section className="py-16 sm:py-20 tema-claro">
           <Container>
             <h2 className="text-center font-serif text-3xl sm:text-5xl text-ink-900 leading-tight text-balance">
               Não sou eu que tô dizendo. <Destaque>São eles.</Destaque>
@@ -416,7 +416,7 @@ export default function PacPage() {
       )}
 
       {/* ------------------------------------------------------------ ERROS */}
-      <section className="py-20 sm:py-28 border-t border-ink-900/10 bg-cream-100/50">
+      <section className="py-20 sm:py-28 border-t border-ink-900/10 tema-creme">
         <Container>
           <div className="max-w-2xl">
             <Eyebrow>Seja honesto</Eyebrow>
@@ -429,8 +429,8 @@ export default function PacPage() {
             </p>
           </div>
 
-          {/* Erro × correto lado a lado (empilha no mobile). Vermelho #F2A5A5 e
-              verde #86DBA0 passam de 6:1 de contraste sobre o card (#173B2C). */}
+          {/* Erro × correto lado a lado (empilha no mobile). Cores em --pac-erro e
+              --pac-acerto (globals.css), AA nos temas claro e escuro. */}
           <div className="mt-12 grid grid-cols-1 lg:grid-cols-2 gap-4">
             {pacMistakes.map((m) => (
               <div key={m.wrong} className="rounded-2xl border border-ink-900/10 bg-cream-50 p-6">
@@ -438,19 +438,19 @@ export default function PacPage() {
                   {m.module}
                 </p>
                 <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-3">
-                  <div className="rounded-xl border border-[#F2A5A5]/30 bg-[#F2A5A5]/[0.06] p-4">
-                    <p className="flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-wide text-[#F2A5A5]">
+                  <div className="rounded-xl border border-[var(--pac-erro-borda)] bg-[var(--pac-erro-fundo)] p-4">
+                    <p className="flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-wide text-[var(--pac-erro)]">
                       <span aria-hidden>✕</span> Erro comum
                     </p>
-                    <p className="mt-2 font-serif text-xl sm:text-2xl text-[#F2A5A5]">
+                    <p className="mt-2 font-serif text-xl sm:text-2xl text-[var(--pac-erro)]">
                       {m.wrong}
                     </p>
                   </div>
-                  <div className="rounded-xl border border-[#86DBA0]/30 bg-[#86DBA0]/[0.06] p-4">
-                    <p className="flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-wide text-[#86DBA0]">
+                  <div className="rounded-xl border border-[var(--pac-acerto-borda)] bg-[var(--pac-acerto-fundo)] p-4">
+                    <p className="flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-wide text-[var(--pac-acerto)]">
                       <span aria-hidden>✓</span> Correto
                     </p>
-                    <p className="mt-2 font-serif text-xl sm:text-2xl text-[#86DBA0]">{m.right}</p>
+                    <p className="mt-2 font-serif text-xl sm:text-2xl text-[var(--pac-acerto)]">{m.right}</p>
                   </div>
                 </div>
               </div>
@@ -460,7 +460,7 @@ export default function PacPage() {
       </section>
 
       {/* ------------------------------------------------------------ SERÁ QUE É PRA MIM */}
-      <section id="sera-que-o-pac-e-para-mim" className="scroll-mt-24 py-20 sm:py-28 border-t border-ink-900/10">
+      <section id="sera-que-o-pac-e-para-mim" className="scroll-mt-24 py-20 sm:py-28 border-t border-ink-900/10 tema-claro">
         <Container>
           <div className="text-center max-w-2xl mx-auto">
             <h2 className="font-serif text-3xl sm:text-5xl text-ink-900 leading-tight text-balance">
@@ -473,7 +473,7 @@ export default function PacPage() {
       </section>
 
       {/* ------------------------------------------------------------ POR QUE */}
-      <section className="py-20 sm:py-28 border-t border-ink-900/10 bg-cream-100/50">
+      <section className="py-20 sm:py-28 border-t border-ink-900/10 tema-creme">
         <Container>
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-start">
             <div className="lg:col-span-5">
@@ -501,7 +501,7 @@ export default function PacPage() {
           </div>
           {fotoContaExiste && (
             <figure className="mx-auto mt-14 max-w-[720px]">
-              <div className="aspect-video overflow-hidden rounded-2xl border border-[#C9A24C]/60 bg-[#0F2E22]">
+              <div className="aspect-video overflow-hidden rounded-2xl border border-[var(--pac-foto-borda)] bg-[#0F2E22] shadow-[var(--pac-foto-sombra)]">
                 <Image
                   src={FOTO_SECAO_CONTA.src}
                   alt={FOTO_SECAO_CONTA.alt}
@@ -513,7 +513,7 @@ export default function PacPage() {
                   className="h-full w-full object-contain"
                 />
               </div>
-              <figcaption className="mt-2 text-center text-sm text-[#F2F0EB]/70">
+              <figcaption className="mt-2 text-center text-sm text-[var(--pac-legenda)]">
                 {FOTO_SECAO_CONTA.legenda}
               </figcaption>
             </figure>
@@ -524,7 +524,7 @@ export default function PacPage() {
       {/* ------------------------------------------------------------ POR DENTRO */}
       <section
         id="por-dentro-do-pac"
-        className="scroll-mt-24 py-20 sm:py-28 border-t border-ink-900/10"
+        className="scroll-mt-24 py-20 sm:py-28 border-t border-ink-900/10 tema-claro"
       >
         <Container>
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-14 lg:gap-16 items-center">
@@ -565,14 +565,16 @@ export default function PacPage() {
               </ol>
             </div>
             <div className="lg:col-span-5 order-1 lg:order-2">
-              <PhoneMockup />
+              <div className="tema-escuro">
+                <PhoneMockup />
+              </div>
             </div>
           </div>
         </Container>
       </section>
 
       {/* ------------------------------------------------------------ PRA QUEM É */}
-      <section className="py-20 sm:py-28 border-t border-ink-900/10 bg-cream-100/50">
+      <section className="py-20 sm:py-28 border-t border-ink-900/10 tema-creme">
         <Container>
           <div className="text-center max-w-2xl mx-auto">
             <Eyebrow>Pra quem é</Eyebrow>
@@ -612,7 +614,7 @@ export default function PacPage() {
       </section>
 
       {/* ------------------------------------------------------------ AUTORA */}
-      <section className="py-20 sm:py-28 bg-cream-200">
+      <section className="py-20 sm:py-28 border-t border-ink-900/10 tema-claro">
         <Container>
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
             <div className="lg:col-span-5">
@@ -650,7 +652,7 @@ export default function PacPage() {
       </section>
 
       {/* ------------------------------------------------------------ DEPOIMENTOS (BLOCO B) */}
-      <section id="depoimentos" className="py-20 sm:py-28 border-t border-ink-900/10">
+      <section id="depoimentos" className="py-20 sm:py-28 border-t border-ink-900/10 tema-creme">
         <Container>
           <div className="text-center max-w-2xl mx-auto">
             <Eyebrow>Quem já está no PAC</Eyebrow>
@@ -765,7 +767,7 @@ export default function PacPage() {
       </section>
 
       {/* ------------------------------------------------------------ PAIS */}
-      <section id="pais" className="scroll-mt-24 py-20 sm:py-28 border-t border-ink-900/10">
+      <section id="pais" className="scroll-mt-24 py-20 sm:py-28 border-t border-ink-900/10 tema-claro">
         <Container>
           <div className="text-center max-w-2xl mx-auto">
             <Eyebrow>Para pais e responsáveis</Eyebrow>
@@ -791,7 +793,7 @@ export default function PacPage() {
       </section>
 
       {/* ------------------------------------------------------------ FAQ */}
-      <section className="py-20 sm:py-28 border-t border-ink-900/10 bg-cream-100/50">
+      <section className="py-20 sm:py-28 border-t border-ink-900/10 tema-creme">
         <Container>
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10">
             <div className="lg:col-span-4">

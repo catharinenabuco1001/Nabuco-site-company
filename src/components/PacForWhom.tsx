@@ -60,8 +60,8 @@ export function PacForWhom({ foto }: { foto?: Foto | null }) {
               onKeyDown={(e) => onKeyDown(e, i)}
               className={`pac-tab-pulse flex min-h-[56px] w-full items-center justify-between gap-4 rounded-2xl border px-5 py-3 text-left text-lg sm:text-xl font-bold transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#C9A24C] ${
                 active === i
-                  ? "border-[#C9A24C] bg-[#C9A24C] text-[#0F2E22]"
-                  : "border-[#C9A24C]/60 bg-[#173B2C] text-[#F2F0EB] hover:border-[#C9A24C]"
+                  ? "border-[#C9A24C] bg-[var(--pac-aba-ativa-bg)] text-[var(--pac-aba-ativa-texto)]"
+                  : "border-[#C9A24C] bg-[var(--pac-aba-bg)] text-[var(--pac-aba-texto)]"
               }`}
             >
               <span>{tab.label}</span>
@@ -124,9 +124,9 @@ export function PacForWhom({ foto }: { foto?: Foto | null }) {
             quality={90}
             loading="lazy"
             sizes="(min-width: 1024px) 420px, 100vw"
-            className="h-auto w-full rounded-2xl border border-[#C9A24C]/60"
+            className="h-auto w-full rounded-2xl border border-[var(--pac-foto-borda)] shadow-[var(--pac-foto-sombra)]"
           />
-          <figcaption className="mt-2 text-sm text-[#F2F0EB]/70">{foto.legenda}</figcaption>
+          <figcaption className="mt-2 text-sm text-[var(--pac-legenda)]">{foto.legenda}</figcaption>
         </figure>
       )}
     </div>
