@@ -1,5 +1,5 @@
 import "server-only";
-import { existsSync, readFileSync } from "fs";
+import { existsSync, readdirSync, readFileSync } from "fs";
 import path from "path";
 
 // Verifica se um arquivo já foi colocado em /public antes de tentar
@@ -40,5 +40,16 @@ export function publicImageSize(relativePath: string): { w: number; h: number } 
     return null;
   } catch {
     return null;
+  }
+}
+
+// Arquivos de imagem de uma pasta em /public (ex.: "images/pac/provas").
+export function publicImageFiles(relativeDir: string): string[] {
+  try {
+    return readdirSync(path.join(process.cwd(), "public", relativeDir)).filter((f) =>
+      /\.(png|jpe?g|webp)$/i.test(f)
+    );
+  } catch {
+    return [];
   }
 }

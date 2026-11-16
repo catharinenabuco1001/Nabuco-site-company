@@ -7,6 +7,7 @@ import {
   pacOfferPrice,
   pacFit,
   pacChats,
+  pacPrints,
   pacVideos,
   type PacChat,
   pacAuthorBio,
@@ -26,8 +27,16 @@ import {
   PacOfertaPreco,
   PacPromoLinha,
 } from "@/components/PacOferta";
-import { publicImageExists, publicImageSize } from "@/lib/media";
-import { PROVAS, PROVAS_DIR, PROVAS_RODAPE, altProva, nomeProva } from "@/data/pac-provas";
+import { publicImageExists, publicImageFiles, publicImageSize } from "@/lib/media";
+import {
+  ALT_PRINT_NOVO,
+  GALERIA_ORDEM,
+  PROVAS,
+  PROVAS_DIR,
+  PROVAS_RODAPE,
+  altProva,
+  nomeProva,
+} from "@/data/pac-provas";
 import { PacPrintsGrid, PacResultados } from "@/components/PacProvas";
 import { PAC_AVISO_ANTES } from "@/lib/pac-launch";
 
@@ -223,7 +232,7 @@ export default function PacPage() {
     const size = publicImageSize(src) ?? { w: 720, h: 1280 };
     return { src: `/${src}`, alt: altProva(p), legenda: p.frase, ...size };
   };
-  // Bloco A (logo abaixo do topo): cards com "Ver mensagem".
+  // Bloco A (logo abaixo do topo): cards com o print inteiro dentro.
   const provaCards = provas
     .filter((p) => p.bloco === "A")
     .map((p) => ({
@@ -234,13 +243,43 @@ export default function PacPage() {
       semNome: !p.nome.trim(),
       print: printDe(p),
     }));
-  // Bloco B (antes do preço): galeria com os prints do bloco B.
-  const printsGrid = provas
-    .filter((p) => p.bloco === "B")
-    .flatMap((p) => {
-      const print = printDe(p);
-      return print ? [print] : [];
-    });
+  // Bloco B (antes do preço): galeria com todos os prints que não estão no
+  // bloco A: os do bloco B em PROVAS, os de public/images/pac/prints/ e
+  // qualquer imagem nova em provas/ fora do array. Ordem em GALERIA_ORDEM.
+  type PrintGaleria = { nome: string; src: string; alt: string; legenda: string; w: number; h: number };
+  const conhecidos = new Set(PROVAS.flatMap((p) => (p.arquivo ? [p.arquivo] : [])));
+  const galeria: PrintGaleria[] = [
+    ...provas.flatMap((p) => {
+      const print = p.bloco === "B" ? printDe(p) : undefined;
+      return print && p.arquivo ? [{ nome: p.arquivo, ...print }] : [];
+    }),
+    ...pacPrints
+      .filter((p) => publicImageExists(`images/pac/prints/${p.file}`))
+      .map((p) => ({
+        nome: p.file,
+        src: `/images/pac/prints/${p.file}`,
+        alt: p.alt,
+        legenda: p.alt,
+        w: p.w,
+        h: p.h,
+      })),
+    ...publicImageFiles(PROVAS_DIR)
+      .filter((f) => !conhecidos.has(f))
+      .map((f) => ({
+        nome: f,
+        src: `/${PROVAS_DIR}/${f}`,
+        alt: ALT_PRINT_NOVO,
+        legenda: "",
+        ...(publicImageSize(`${PROVAS_DIR}/${f}`) ?? { w: 720, h: 1280 }),
+      })),
+  ];
+  const posicao = (nome: string) => {
+    const i = GALERIA_ORDEM.indexOf(nome);
+    return i === -1 ? GALERIA_ORDEM.length : i;
+  };
+  const printsGrid = galeria
+    .sort((a, b) => posicao(a.nome) - posicao(b.nome))
+    .map((g) => ({ src: g.src, alt: g.alt, legenda: g.legenda, w: g.w, h: g.h }));
   // Depoimentos em texto: o "Tirei 8" virou o primeiro card de resultado.
   const chatsTexto = pacChats.filter((c) => !c.highlight);
   return (

@@ -110,3 +110,22 @@ export const nomeProva = (p: Prova) => p.nome.trim() || "Aluno(a) do PAC";
 export const altProva = (p: Prova) => `Mensagem de WhatsApp de aluno do PAC: ${p.frase}`;
 
 export const PROVAS_RODAPE = "Resultados individuais. Cada aluno avança no seu ritmo.";
+
+// Ordem da galeria antes do preço (bloco B): resultado/transformação
+// primeiro, elogio por último. Arquivos de provas/ e prints/ pelo nome.
+// Arquivo de imagem novo em provas/ que não esteja em PROVAS entra sozinho no
+// fim da galeria (sem legenda).
+export const GALERIA_ORDEM = [
+  "prova-07.png",
+  "diagnostica.jpg",
+  "caderno.jpg",
+  "prova-04.png",
+  "prova-05.png",
+  "prova-06.png",
+  "prova-08.png",
+  "matheus-modulo-0.jpg",
+  "clara.jpg",
+  "bianca.jpg",
+];
+
+export const ALT_PRINT_NOVO = "Mensagem de WhatsApp de aluno do PAC";
