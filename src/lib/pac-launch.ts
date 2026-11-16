@@ -10,6 +10,8 @@ export const DATA_ABERTURA_TEXTO = "dia 16 de novembro, às 20h";
 
 export const COMUNIDADE_URL = siteConfig.links.pacCommunity;
 export const CHECKOUT_URL = siteConfig.links.pacCheckout;
+// Checkout com o cupom da live (só entre DATA_ABERTURA_PAC e PROMO_FIM).
+export const CHECKOUT_LIVE_URL = siteConfig.links.pacCheckoutLive;
 
 export const PAC_AVISO_ANTES = `Nova turma abre ${DATA_ABERTURA_TEXTO}`;
 export const PAC_AVISO_DEPOIS = "Inscrições abertas";
@@ -25,9 +27,11 @@ export function msAteAbertura(now: number = Date.now()): number {
 }
 
 // Destino de todo botão de compra: Comunidade PAC antes da abertura, checkout
-// a partir dela.
+// com o cupom da live durante a live e checkout normal depois dela.
 export function getCtaUrl(now: number = Date.now()): string {
-  return pacAberto(now) ? CHECKOUT_URL : COMUNIDADE_URL;
+  const estado = getEstadoOferta(now);
+  if (estado === "antes") return COMUNIDADE_URL;
+  return estado === "live" ? CHECKOUT_LIVE_URL : CHECKOUT_URL;
 }
 
 // ---------------------------------------------------------------------------

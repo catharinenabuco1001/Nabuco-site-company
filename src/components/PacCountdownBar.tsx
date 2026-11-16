@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { pacTopBar } from "@/data/pac";
-import { CHECKOUT_URL, getEstadoOferta, msAteAbertura, type EstadoOferta } from "@/lib/pac-launch";
+import { CHECKOUT_LIVE_URL, CHECKOUT_URL, getEstadoOferta, msAteAbertura, type EstadoOferta } from "@/lib/pac-launch";
 
 // Barra do topo (todas as páginas). Antes da abertura: contagem até
 // DATA_ABERTURA_PAC; durante a live: preço da live até PROMO_FIM; depois:
@@ -42,7 +42,7 @@ export function PacCountdownBar() {
             {agora.estado === "live" ? pacTopBar.live : `✅ ${pacTopBar.depois}`}
           </p>
           <a
-            href={CHECKOUT_URL}
+            href={agora.estado === "live" ? CHECKOUT_LIVE_URL : CHECKOUT_URL}
             target="_blank"
             rel="noopener noreferrer"
             className="rounded-full bg-[#F2F0EB] px-4 py-1.5 text-[11px] sm:text-xs font-semibold uppercase tracking-wide text-[var(--pac-bar-bg)] transition-opacity hover:opacity-90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#F2F0EB]"

@@ -61,6 +61,9 @@ export const siteConfig = {
   links: {
     amazonCartas: "https://www.amazon.com.br/dp/6598829801/?tag=nabuco01-20",
     pacCheckout: "https://pay.kiwify.com.br/eUCaiLK",
+    // Checkout com o cupom da live de abertura (src/lib/pac-launch.ts decide
+    // quando usar).
+    pacCheckoutLive: "https://pay.kiwify.com.br/eUCaiLK?coupon=LANCAMENTO",
     // Pra onde vai quem cai numa página que não existe (404).
     notFoundRedirect: "https://tally.so/r/RG788K",
     // Comunidade PAC: destino dos botões de compra fora do período de

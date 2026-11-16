@@ -10,7 +10,7 @@ import {
   pacOfferPrice,
   pacPromo,
 } from "@/data/pac";
-import { CHECKOUT_URL, COMUNIDADE_URL } from "@/lib/pac-launch";
+import { CHECKOUT_LIVE_URL, COMUNIDADE_URL } from "@/lib/pac-launch";
 
 // Tudo que muda com o estado da oferta ("antes" / "live" / "depois", ver
 // getEstadoOferta em src/lib/pac-launch.ts). O primeiro render é sempre
@@ -104,7 +104,7 @@ export function PacOfertaPreco() {
       <p className="mt-5 text-xs text-cream/70">{pacOfferPrice.access}</p>
 
       <CTA
-        href={live ? CHECKOUT_URL : href}
+        href={live ? CHECKOUT_LIVE_URL : href}
         variant="primary"
         external
         className="mt-8 w-full py-4 bg-cream text-ink-900 hover:bg-gold-500 hover:text-cream-900"
