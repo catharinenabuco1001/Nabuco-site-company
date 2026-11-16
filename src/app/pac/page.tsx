@@ -18,9 +18,12 @@ import {
   pacGuarantee,
   pacFaq,
   pacParents,
+  ITENS_RECEBE,
+  IMAGENS_RECEBE,
 } from "@/data/pac";
 import { PacBuyButton, PacNotice } from "@/components/PacLaunch";
 import { PacForWhom } from "@/components/PacForWhom";
+import { PacRecebeImagens } from "@/components/PacRecebeImagens";
 import {
   PacFaqDescontoResposta,
   PacMobileBarPreco,
@@ -219,6 +222,15 @@ export default function PacPage() {
   const heroAula = publicImageExists("images/pac/aula-quadro.webp");
   const heroSrc = heroAula ? "/images/pac/aula-quadro.webp" : retratoSrc;
   const authorSrc = publicImageExists("images/sobre.jpg") ? "/images/sobre.jpg" : retratoSrc;
+  // "O que você recebe": capturas que existirem em public/images/pac/.
+  const imagensRecebe = IMAGENS_RECEBE.filter((img) =>
+    publicImageExists(`images/pac/${img.file}`)
+  ).map((img) => ({
+    src: `/images/pac/${img.file}`,
+    alt: img.alt,
+    legenda: img.alt,
+    ...(publicImageSize(`images/pac/${img.file}`) ?? { w: 1280, h: 720 }),
+  }));
   const fotoContaExiste = publicImageExists(FOTO_SECAO_CONTA.src.slice(1));
   const fotoBastidores = publicImageExists(FOTO_BASTIDORES.src.slice(1)) ? FOTO_BASTIDORES : null;
   // Provas sociais (src/data/pac-provas.ts): só autorizadas; item com arquivo
@@ -566,6 +578,42 @@ export default function PacPage() {
             </div>
             <div className="lg:col-span-5 order-1 lg:order-2">
               <PhoneMockup />
+            </div>
+          </div>
+        </Container>
+      </section>
+
+      {/* ------------------------------------------------------------ O QUE VOCÊ RECEBE */}
+      <section id="o-que-voce-recebe" className="scroll-mt-24 py-16 sm:py-20">
+        <Container>
+          <div className="rounded-[24px] border border-[#C9A24C]/40 bg-gradient-to-br from-[#0F2E22] via-[#123627] to-[#1A4433] p-8 sm:p-12 lg:p-14">
+            <div
+              className={`grid grid-cols-1 gap-12 ${
+                imagensRecebe.length > 0 ? "lg:grid-cols-[minmax(0,11fr)_minmax(0,9fr)] lg:items-center" : ""
+              }`}
+            >
+              <div className="min-w-0">
+                <span className="inline-block rounded-full bg-[#8FE0B0] px-4 py-1.5 text-xs font-bold uppercase tracking-wide text-[#0F2E22]">
+                  Método PAC · Pense Antes de Calcular
+                </span>
+                <h2 className="mt-6 font-serif text-4xl sm:text-5xl leading-tight text-[#F2F0EB] text-balance">
+                  Aula curta e exercício na hora
+                </h2>
+                <ul className="mt-10 space-y-5">
+                  {ITENS_RECEBE.filter((item) => item.ativo).map((item) => (
+                    <li key={item.texto} className="flex items-start gap-4 text-lg sm:text-xl leading-snug text-[#F2F0EB]">
+                      <span aria-hidden className="mt-1.5 h-3.5 w-3.5 shrink-0 rounded-full bg-[#8FE0B0]" />
+                      {item.texto}
+                    </li>
+                  ))}
+                </ul>
+                <div className="mt-10">
+                  <PacBuyButton className="px-8 py-4 bg-[#F2F0EB] text-[#0F2E22] hover:bg-gold-500 hover:text-cream-900">
+                    Garantir minha vaga
+                  </PacBuyButton>
+                </div>
+              </div>
+              {imagensRecebe.length > 0 && <PacRecebeImagens imagens={imagensRecebe} />}
             </div>
           </div>
         </Container>

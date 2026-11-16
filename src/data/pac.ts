@@ -398,3 +398,24 @@ export const pacForWhomQuotes: Record<string, string[]> = {
   ],
 };
 
+
+// Seção "O que você recebe" (/pac, depois de "Por dentro do PAC"). Pra
+// esconder um item, `ativo: false`; pra renomear, troque só o texto.
+export const MINI_AULAS = "+40";
+
+export const ITENS_RECEBE: { texto: string; ativo: boolean }[] = [
+  { texto: "Módulos 0 a 5 + atalhos de cálculo", ativo: true },
+  { texto: `${MINI_AULAS} mini-aulas de ~10 minutos`, ativo: true },
+  { texto: "Exercícios por matéria após cada aula", ativo: true },
+  { texto: "Cronograma com metas", ativo: true },
+  { texto: "Simulado semanal incluso", ativo: true },
+  { texto: "IA de dúvidas e grupo no WhatsApp", ativo: true },
+  { texto: `${pacPricing.accessMonths} meses de acesso`, ativo: true },
+];
+
+// Capturas da aula ao lado da lista (public/images/pac/). Arquivo que não
+// existir não aparece; sem nenhuma, a lista ocupa a largura toda.
+export const IMAGENS_RECEBE = [
+  { file: "aula-1.jpg", alt: "Aula do Método PAC na área de membros: tela de uma mini-aula" },
+  { file: "aula-2.jpg", alt: "Aula do Método PAC na área de membros: tela de outra mini-aula" },
+];
