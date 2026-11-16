@@ -243,6 +243,7 @@ export default function PacPage() {
                     alt="Catharine Nabuco, criadora do Método PAC"
                     fill
                     priority
+                    quality={90}
                     sizes="(min-width: 1024px) 34vw, 90vw"
                     className="object-cover"
                     style={{ objectPosition: "70% 25%" }}
