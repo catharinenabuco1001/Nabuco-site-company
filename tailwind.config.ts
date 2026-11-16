@@ -9,6 +9,8 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
+        // As cores marcadas com var(--c-...) têm o valor padrão em
+        // src/app/globals.css (:root) e são trocadas pela classe .tema-claro.
         // Paleta PAC — trocar os valores aqui já atualiza o site inteiro,
         // sem tocar nos componentes. Os nomes ("cream", "ink"...) são só
         // identificadores herdados; o que importa é o papel de cada um:
@@ -16,32 +18,32 @@ const config: Config = {
         //   plum  = destaque secundário (dourado envelhecido, para links e textos)
         //   gold  = destaque principal (dourado metálico vivo, botões/badges)
         cream: {
-          DEFAULT: "#0F2E22", // fundo principal do site
-          50: "#173B2C", // superfícies elevadas (cards, inputs)
-          100: "#112F23", // faixas de seção alternadas
-          200: "#0A2117",
+          DEFAULT: "rgb(var(--c-cream) / <alpha-value>)", // fundo principal do site (#0F2E22)
+          50: "rgb(var(--c-cream-50) / <alpha-value>)", // superfícies elevadas (#173B2C)
+          100: "rgb(var(--c-cream-100) / <alpha-value>)", // faixas alternadas (#112F23)
+          200: "rgb(var(--c-cream-200) / <alpha-value>)", // #0A2117
           900: "#081910", // texto escuro sobre superfícies claras/douradas
         },
         ink: {
-          DEFAULT: "#F2F0EB", // off-white — texto principal e painéis invertidos
-          900: "#F2F0EB",
-          800: "#F2F0EB",
-          700: "#F2F0EB",
+          DEFAULT: "rgb(var(--c-ink) / <alpha-value>)", // off-white (#F2F0EB) — texto principal
+          900: "rgb(var(--c-ink) / <alpha-value>)",
+          800: "rgb(var(--c-ink) / <alpha-value>)",
+          700: "rgb(var(--c-ink) / <alpha-value>)",
         },
         plum: {
           DEFAULT: "#B8903E", // dourado envelhecido — destaque secundário (links, eyebrows)
           50: "#F7F0DE",
           100: "#EAD9AE",
           400: "#D9B66A",
-          500: "#C49A46",
-          600: "#B8903E",
-          700: "#8C6B2A",
+          500: "rgb(var(--c-plum-500) / <alpha-value>)", // #C49A46
+          600: "rgb(var(--c-plum-600) / <alpha-value>)", // #B8903E
+          700: "rgb(var(--c-plum-700) / <alpha-value>)", // #8C6B2A
           900: "#5C4419",
         },
         gold: {
           DEFAULT: "#C9A24C", // dourado metálico — destaque principal (botões, badges)
           100: "#F3E9C9",
-          300: "#DEBD6E",
+          300: "rgb(var(--c-gold-300) / <alpha-value>)", // #DEBD6E
           500: "#C9A24C",
           700: "#96751F",
         },

@@ -12,7 +12,7 @@ function Avatar({ nome, semNome }: { nome: string; semNome: boolean }) {
   return (
     <span
       aria-hidden
-      className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[#C9A24C]/20 font-serif text-lg text-[#C9A24C]"
+      className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[#C9A24C]/20 font-serif text-lg text-[var(--pac-dourado-texto)]"
     >
       {semNome ? (
         <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="1.6">
@@ -56,7 +56,7 @@ function PrintInteiro({
         quality={90}
         loading="lazy"
         sizes={sizes}
-        className="block h-auto w-full rounded-xl border border-[#C9A24C]/50"
+        className="block h-auto w-full rounded-xl border border-[var(--pac-foto-borda)] shadow-[var(--pac-foto-sombra)]"
       />
     </button>
   );
@@ -133,7 +133,7 @@ export function PacPrintsGrid({ prints }: { prints: LightboxItem[] }) {
                 onOpen={() => lb.abrir(i)}
               />
               {p.legenda && (
-                <figcaption className="mt-2 text-xs leading-snug text-[#F2F0EB]/75">{p.legenda}</figcaption>
+                <figcaption className="mt-2 text-xs leading-snug text-[var(--pac-legenda)]">{p.legenda}</figcaption>
               )}
             </figure>
           </li>

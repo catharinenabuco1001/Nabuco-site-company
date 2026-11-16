@@ -126,3 +126,94 @@ input:focus-visible,
     animation: none;
   }
 }
+
+/* ------------------------------------------------------------------------
+   Temas de seção. As cores do Tailwind (cream, ink, plum, gold-300) leem
+   estas variáveis (canais RGB). :root = tema escuro, o padrão do site.
+   .tema-claro / .tema-creme trocam os valores só dentro da seção (usado na
+   página /pac); .tema-escuro volta ao padrão dentro de uma seção clara.
+   ------------------------------------------------------------------------ */
+:root,
+.tema-escuro {
+  --c-cream: 15 46 34; /* #0F2E22 */
+  --c-cream-50: 23 59 44; /* #173B2C */
+  --c-cream-100: 17 47 35; /* #112F23 */
+  --c-cream-200: 10 33 23; /* #0A2117 */
+  --c-ink: 242 240 235; /* #F2F0EB */
+  --c-plum-500: 196 154 70; /* #C49A46 */
+  --c-plum-600: 184 144 62; /* #B8903E */
+  --c-plum-700: 140 107 42; /* #8C6B2A */
+  --c-gold-300: 222 189 110; /* #DEBD6E */
+
+  /* Papéis usados direto nos componentes do /pac. */
+  --pac-dourado-texto: #c9a24c;
+  --pac-legenda: rgba(242, 240, 235, 0.75);
+  --pac-erro: #f2a5a5;
+  --pac-acerto: #86dba0;
+  --pac-foto-borda: rgba(201, 162, 76, 0.6);
+  --pac-foto-sombra: none;
+  --pac-aba-bg: #173b2c;
+  --pac-aba-texto: #f2f0eb;
+  --pac-aba-ativa-bg: #c9a24c;
+  --pac-aba-ativa-texto: #0f2e22;
+}
+.tema-escuro {
+  color: rgb(var(--c-ink));
+}
+
+.tema-claro,
+.tema-creme {
+  --c-cream: 255 255 255; /* texto sobre botões escuros */
+  --c-cream-50: 255 255 255; /* cards */
+  --c-cream-100: 247 244 236; /* #F7F4EC */
+  --c-cream-200: 247 244 236;
+  --c-ink: 15 46 34; /* texto #0F2E22 */
+  --c-plum-500: 138 106 31; /* #8A6A1F: dourado de texto (AA no claro) */
+  --c-plum-600: 138 106 31;
+  --c-plum-700: 138 106 31;
+  --c-gold-300: 138 106 31;
+
+  --pac-dourado-texto: #8a6a1f;
+  --pac-legenda: rgba(15, 46, 34, 0.75);
+  --pac-erro: #b3261e;
+  --pac-acerto: #1b6b3a;
+  --pac-foto-borda: #e5dfd0;
+  --pac-foto-sombra: 0 6px 20px -8px rgba(15, 46, 34, 0.25);
+  --pac-aba-bg: #ffffff;
+  --pac-aba-texto: #0f2e22;
+  --pac-aba-ativa-bg: #0f2e22;
+  --pac-aba-ativa-texto: #f2f0eb;
+  color: #0f2e22;
+}
+.tema-claro {
+  background-color: #ffffff;
+}
+.tema-creme {
+  background-color: #f7f4ec;
+}
+:root,
+.tema-escuro {
+  --pac-erro-borda: rgba(242, 165, 165, 0.3);
+  --pac-erro-fundo: rgba(242, 165, 165, 0.06);
+  --pac-acerto-borda: rgba(134, 219, 160, 0.3);
+  --pac-acerto-fundo: rgba(134, 219, 160, 0.06);
+}
+.tema-claro,
+.tema-creme {
+  --pac-erro-borda: rgba(179, 38, 30, 0.3);
+  --pac-erro-fundo: #ffffff;
+  --pac-acerto-borda: rgba(27, 107, 58, 0.3);
+  --pac-acerto-fundo: #ffffff;
+}
+
+/* Contraste AA no tema claro: texto com pouca opacidade (#0F2E22 abaixo de
+   ~70%) e o dourado vivo (#C9A24C) como texto não passam no fundo claro.
+   Aqui eles sobem pra 75% e pro dourado de texto (#8A6A1F). */
+.tema-claro :is(.text-ink-900\/40, .text-ink-900\/45, .text-ink-900\/50, .text-ink-900\/55, .text-ink-900\/60, .text-ink-900\/65),
+.tema-creme :is(.text-ink-900\/40, .text-ink-900\/45, .text-ink-900\/50, .text-ink-900\/55, .text-ink-900\/60, .text-ink-900\/65) {
+  color: rgb(var(--c-ink) / 0.75);
+}
+.tema-claro :is(.text-gold-500, .text-gold-500\/70),
+.tema-creme :is(.text-gold-500, .text-gold-500\/70) {
+  color: #8a6a1f;
+}
