@@ -126,7 +126,7 @@ export const pacAuthorStats = [
 
 export const pacCurriculum = [
   {
-    title: "7 módulos · +40 aulas",
+    title: "5 módulos · +40 aulas",
     desc: "Do zero até fatoração e produtos notáveis, em aulas de ~10 min.",
   },
   {
