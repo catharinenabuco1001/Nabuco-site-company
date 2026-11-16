@@ -26,32 +26,57 @@ function Avatar({ nome, semNome }: { nome: string; semNome: boolean }) {
   );
 }
 
-// Cards de resultado: 3 por linha no desktop, carrossel no celular.
-export function PacResultados({ cards }: { cards: ProvaCard[] }) {
+// Cards de resultado (bloco A): 4 numa linha no desktop, com a mesma
+// altura; carrossel no celular. "Ver mensagem" abre o print no lightbox (a
+// imagem só carrega quando o lightbox abre).
+export function PacResultados({
+  cards,
+}: {
+  cards: (ProvaCard & { print?: LightboxItem })[];
+}) {
+  const prints = cards.flatMap((c) => (c.print ? [c.print] : []));
+  const lb = useLightbox(prints.length);
   if (!cards.length) return null;
+  let p = -1;
   return (
-    <ul className="-mx-5 flex snap-x snap-mandatory scroll-px-5 gap-4 overflow-x-auto px-5 pb-2 no-scrollbar md:mx-0 md:grid md:grid-cols-3 md:overflow-visible md:px-0 md:pb-0">
-      {cards.map((c, i) => (
-        <li
-          key={i}
-          className="flex w-[80%] shrink-0 snap-start flex-col rounded-2xl border border-[#C9A24C]/40 bg-cream-50/60 p-5 sm:p-6 md:w-auto"
-        >
-          <div className="flex items-center gap-3">
-            <Avatar nome={c.nome} semNome={c.semNome} />
-            <span className="min-w-0">
-              <span className="block text-sm font-semibold text-ink-900">{c.nome}</span>
-              <span className="block text-xs text-ink-900/65">{c.contexto}</span>
-            </span>
-          </div>
-          <span className="mt-4 self-start rounded-full bg-[#C9A24C] px-3 py-1 text-xs font-semibold text-[#0F2E22]">
-            {c.chip}
-          </span>
-          <blockquote className="mt-4 font-serif text-lg leading-snug text-ink-900">
-            “{c.frase}”
-          </blockquote>
-        </li>
-      ))}
-    </ul>
+    <>
+      <ul className="-mx-5 flex snap-x snap-mandatory scroll-px-5 gap-4 overflow-x-auto px-5 pb-2 no-scrollbar md:mx-0 md:grid md:grid-cols-2 md:overflow-visible md:px-0 md:pb-0 lg:grid-cols-4">
+        {cards.map((c, i) => {
+          const idx = c.print ? ++p : -1;
+          return (
+            <li
+              key={i}
+              className="flex w-[82%] shrink-0 snap-start flex-col rounded-2xl border border-[#C9A24C]/40 bg-cream-50/60 p-5 md:w-auto"
+            >
+              <div className="flex items-center gap-3">
+                <Avatar nome={c.nome} semNome={c.semNome} />
+                <span className="min-w-0">
+                  <span className="block text-sm font-semibold text-ink-900">{c.nome}</span>
+                  <span className="block text-xs text-ink-900/70">{c.contexto}</span>
+                </span>
+              </div>
+              <span className="mt-3 self-start rounded-full bg-[#C9A24C] px-3 py-1 text-xs font-semibold text-[#0F2E22]">
+                {c.chip}
+              </span>
+              <blockquote className="mt-3 line-clamp-4 font-serif text-base leading-snug text-ink-900">
+                “{c.frase}”
+              </blockquote>
+              {c.print && (
+                <button
+                  ref={lb.gatilho(idx)}
+                  type="button"
+                  onClick={() => lb.abrir(idx)}
+                  className="mt-auto self-start pt-4 text-sm font-semibold text-[#C9A24C] underline-offset-4 hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#C9A24C]"
+                >
+                  Ver mensagem →
+                </button>
+              )}
+            </li>
+          );
+        })}
+      </ul>
+      <Lightbox lb={lb} items={prints} />
+    </>
   );
 }
 

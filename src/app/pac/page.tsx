@@ -7,7 +7,6 @@ import {
   pacOfferPrice,
   pacFit,
   pacChats,
-  pacPrints,
   pacVideos,
   type PacChat,
   pacAuthorBio,
@@ -213,31 +212,35 @@ export default function PacPage() {
   const authorSrc = publicImageExists("images/sobre.jpg") ? "/images/sobre.jpg" : retratoSrc;
   const fotoContaExiste = publicImageExists(FOTO_SECAO_CONTA.src.slice(1));
   const fotoBastidores = publicImageExists(FOTO_BASTIDORES.src.slice(1)) ? FOTO_BASTIDORES : null;
-  const prints = pacPrints.filter((p) => publicImageExists(`images/pac/prints/${p.file}`));
-
   // Provas sociais (src/data/pac-provas.ts): só autorizadas; item com arquivo
   // só aparece se o print existir em public/images/pac/provas/.
   const provas = PROVAS.filter(
     (p) => p.autorizado && (!p.arquivo || publicImageExists(`${PROVAS_DIR}/${p.arquivo}`))
   );
-  const provaCards = provas.map((p) => ({
-    nome: nomeProva(p),
-    contexto: p.contexto,
-    chip: p.chip,
-    frase: p.frase,
-    semNome: !p.nome.trim(),
-  }));
-  // Grade "Mensagens reais, sem edição": prints das provas + os prints que já
-  // existiam (public/images/pac/prints/).
-  const printsGrid = [
-    ...provas.flatMap((p) => {
-      if (!p.arquivo) return [];
-      const src = `${PROVAS_DIR}/${p.arquivo}`;
-      const size = publicImageSize(src) ?? { w: 720, h: 1280 };
-      return [{ src: `/${src}`, alt: altProva(p), legenda: p.frase, ...size }];
-    }),
-    ...prints.map((p) => ({ src: `/images/pac/prints/${p.file}`, alt: p.alt, legenda: p.alt, w: p.w, h: p.h })),
-  ];
+  const printDe = (p: (typeof provas)[number]) => {
+    if (!p.arquivo) return undefined;
+    const src = `${PROVAS_DIR}/${p.arquivo}`;
+    const size = publicImageSize(src) ?? { w: 720, h: 1280 };
+    return { src: `/${src}`, alt: altProva(p), legenda: p.frase, ...size };
+  };
+  // Bloco A (logo abaixo do topo): cards com "Ver mensagem".
+  const provaCards = provas
+    .filter((p) => p.bloco === "A")
+    .map((p) => ({
+      nome: nomeProva(p),
+      contexto: p.contexto,
+      chip: p.chip,
+      frase: p.frase,
+      semNome: !p.nome.trim(),
+      print: printDe(p),
+    }));
+  // Bloco B (antes do preço): galeria com os prints do bloco B.
+  const printsGrid = provas
+    .filter((p) => p.bloco === "B")
+    .flatMap((p) => {
+      const print = printDe(p);
+      return print ? [print] : [];
+    });
   // Depoimentos em texto: o "Tirei 8" virou o primeiro card de resultado.
   const chatsTexto = pacChats.filter((c) => !c.highlight);
   return (
@@ -359,8 +362,22 @@ export default function PacPage() {
         </Container>
       </section>
 
+      {/* ------------------------------------------------------------ PROVAS (BLOCO A) */}
+      {provaCards.length > 0 && (
+        <section className="py-16 sm:py-20">
+          <Container>
+            <h2 className="text-center font-serif text-3xl sm:text-5xl text-ink-900 leading-tight text-balance">
+              Não sou eu que tô dizendo. <Destaque>São eles.</Destaque>
+            </h2>
+            <div className="mt-10">
+              <PacResultados cards={provaCards} />
+            </div>
+          </Container>
+        </section>
+      )}
+
       {/* ------------------------------------------------------------ ERROS */}
-      <section className="py-20 sm:py-28">
+      <section className="py-20 sm:py-28 border-t border-ink-900/10 bg-cream-100/50">
         <Container>
           <div className="max-w-2xl">
             <Eyebrow>Seja honesto</Eyebrow>
@@ -404,7 +421,7 @@ export default function PacPage() {
       </section>
 
       {/* ------------------------------------------------------------ SERÁ QUE É PRA MIM */}
-      <section id="sera-que-o-pac-e-para-mim" className="scroll-mt-24 py-20 sm:py-28 border-t border-ink-900/10 bg-cream-100/50">
+      <section id="sera-que-o-pac-e-para-mim" className="scroll-mt-24 py-20 sm:py-28 border-t border-ink-900/10">
         <Container>
           <div className="text-center max-w-2xl mx-auto">
             <h2 className="font-serif text-3xl sm:text-5xl text-ink-900 leading-tight text-balance">
@@ -417,7 +434,7 @@ export default function PacPage() {
       </section>
 
       {/* ------------------------------------------------------------ POR QUE */}
-      <section className="py-20 sm:py-28 border-t border-ink-900/10">
+      <section className="py-20 sm:py-28 border-t border-ink-900/10 bg-cream-100/50">
         <Container>
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-start">
             <div className="lg:col-span-5">
@@ -468,7 +485,7 @@ export default function PacPage() {
       {/* ------------------------------------------------------------ POR DENTRO */}
       <section
         id="por-dentro-do-pac"
-        className="scroll-mt-24 py-20 sm:py-28 border-t border-ink-900/10 bg-cream-100/50"
+        className="scroll-mt-24 py-20 sm:py-28 border-t border-ink-900/10"
       >
         <Container>
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-14 lg:gap-16 items-center">
@@ -516,7 +533,7 @@ export default function PacPage() {
       </section>
 
       {/* ------------------------------------------------------------ PRA QUEM É */}
-      <section className="py-20 sm:py-28 border-t border-ink-900/10">
+      <section className="py-20 sm:py-28 border-t border-ink-900/10 bg-cream-100/50">
         <Container>
           <div className="text-center max-w-2xl mx-auto">
             <Eyebrow>Pra quem é</Eyebrow>
@@ -593,35 +610,24 @@ export default function PacPage() {
         </Container>
       </section>
 
-      {/* ------------------------------------------------------------ DEPOIMENTOS */}
+      {/* ------------------------------------------------------------ DEPOIMENTOS (BLOCO B) */}
       <section id="depoimentos" className="py-20 sm:py-28 border-t border-ink-900/10">
         <Container>
           <div className="text-center max-w-2xl mx-auto">
             <Eyebrow>Quem já está no PAC</Eyebrow>
-            <h2 className="font-serif text-3xl sm:text-5xl text-ink-900 leading-tight text-balance">
-              Não sou eu que tô dizendo.{" "}
-              <Destaque>São eles.</Destaque>
-            </h2>
-            <p className="mt-4 text-sm text-ink-900/55">
+            <p className="text-sm text-ink-900/65">
               Mensagens reais que recebi de alunos no WhatsApp.
             </p>
           </div>
 
-          {/* 1. Resultados */}
-          {provaCards.length > 0 && (
-            <div className="mt-14">
-              <PacResultados cards={provaCards} />
-            </div>
-          )}
-
-          {/* 2. Prints */}
+          {/* Prints */}
           {printsGrid.length > 0 && (
-            <div className="mt-16">
+            <div className="mt-10">
               <PacPrintsGrid prints={printsGrid} />
             </div>
           )}
 
-          {/* 3. Depoimentos em texto */}
+          {/* Depoimentos em texto */}
           <div className="mt-16 columns-1 sm:columns-2 lg:columns-3 gap-4 [column-fill:_balance]">
             {chatsTexto.map((chat, i) => (
               <ChatCard key={i} chat={chat} />

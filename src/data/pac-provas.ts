@@ -4,6 +4,8 @@
 // - autorizado: só itens com true aparecem no site.
 // - arquivo: print em public/images/pac/provas/. Se o arquivo não existir, o
 //   item não aparece (nem o card, nem o print). Sem `arquivo`, vira só card.
+// - bloco: "A" = cards logo abaixo do topo da página; "B" = galeria antes do
+//   preço.
 // - As frases estão exatamente como os alunos escreveram (sem corrigir).
 
 export type Prova = {
@@ -12,6 +14,7 @@ export type Prova = {
   chip: string;
   frase: string;
   arquivo?: string;
+  bloco: "A" | "B";
   autorizado: boolean;
 };
 
@@ -22,6 +25,7 @@ export const PROVAS: Prova[] = [
     contexto: "Depois da prova",
     chip: "De 5 para 8 em matemática",
     frase: "Tirei 8 em matemática… tinha tirado 5 na outra prova antes de vc",
+    bloco: "A",
     autorizado: true,
   },
   {
@@ -31,6 +35,7 @@ export const PROVAS: Prova[] = [
     frase:
       "Você já me ajudou muito pq eu não conseguia manipular essas grandezas, agora consigo.",
     arquivo: "prova-01.png",
+    bloco: "A",
     autorizado: true,
   },
   {
@@ -40,6 +45,7 @@ export const PROVAS: Prova[] = [
     frase:
       "Hoje, aprendi a confiar mais em mim, a enxergar a lógica por trás dos exercícios e a entender que sou, sim, capaz de aprender matemática.",
     arquivo: "prova-02.png",
+    bloco: "A",
     autorizado: true,
   },
   {
@@ -48,6 +54,7 @@ export const PROVAS: Prova[] = [
     chip: "Percepção na prova",
     frase: "Antes eu já ia com o pensamento que eu não era boa… Hoje não, foi diferente!",
     arquivo: "prova-03.png",
+    bloco: "A",
     autorizado: true,
   },
   {
@@ -56,6 +63,7 @@ export const PROVAS: Prova[] = [
     chip: "Base antes das matérias difíceis",
     frase: "Faço cursinho mas tem sido primordial eu voltar na base de matemática.",
     arquivo: "prova-04.png",
+    bloco: "B",
     autorizado: true,
   },
   {
@@ -64,6 +72,7 @@ export const PROVAS: Prova[] = [
     chip: "Aprende mais rápido",
     frase: "Mesmo tendo dificuldades eu aprendo muito mais rápido.",
     arquivo: "prova-05.png",
+    bloco: "B",
     autorizado: true,
   },
   {
@@ -72,6 +81,7 @@ export const PROVAS: Prova[] = [
     chip: "Jeito de explicar",
     frase: "Você tem um jeitinho único de explicar.",
     arquivo: "prova-06.png",
+    bloco: "B",
     autorizado: true,
   },
   {
@@ -80,6 +90,7 @@ export const PROVAS: Prova[] = [
     chip: "Diagnóstico",
     frase: "Eu amei! Estou amando o curso…",
     arquivo: "prova-07.png",
+    bloco: "B",
     autorizado: true,
   },
   {
@@ -88,6 +99,7 @@ export const PROVAS: Prova[] = [
     chip: "Explicação fácil de entender",
     frase: "Já senti diferença sim!",
     arquivo: "prova-08.png",
+    bloco: "B",
     autorizado: true,
   },
 ];
