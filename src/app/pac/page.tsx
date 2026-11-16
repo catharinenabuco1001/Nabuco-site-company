@@ -19,9 +19,11 @@ import {
   pacGuarantee,
   pacFaq,
   pacParents,
+  pacCenas,
 } from "@/data/pac";
 import { PacBuyButton, PacNotice } from "@/components/PacLaunch";
 import { PacForWhom } from "@/components/PacForWhom";
+import { PacCenas } from "@/components/PacCenas";
 import {
   PacFaqDescontoResposta,
   PacMobileBarPreco,
@@ -188,6 +190,8 @@ export default function PacPage() {
     ? "/images/pac-hero.jpg"
     : "/images/hero-retrato.jpeg";
   const authorSrc = publicImageExists("images/sobre.jpg") ? "/images/sobre.jpg" : heroSrc;
+  // "Cenas do PAC": só itens ativos cujo arquivo existe em public/images/pac/.
+  const cenas = pacCenas.filter((c) => c.ativo && publicImageExists(`images/pac/${c.file}`));
   const prints = pacPrints.filter((p) => publicImageExists(`images/pac/prints/${p.file}`));
   return (
     <>
@@ -463,6 +467,11 @@ export default function PacPage() {
               <PhoneMockup />
             </div>
           </div>
+          {cenas.length > 0 && (
+            <div className="mt-16 md:mx-auto md:max-w-4xl">
+              <PacCenas cenas={cenas} />
+            </div>
+          )}
         </Container>
       </section>
 
