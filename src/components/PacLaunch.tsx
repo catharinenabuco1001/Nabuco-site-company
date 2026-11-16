@@ -30,9 +30,14 @@ export function usePacAberto(): boolean {
   return useEstadoOferta() !== "antes";
 }
 
+// Destino dos botões de compra (regra em getCtaUrl). Primeiro render =
+// Comunidade PAC, igual ao HTML do build; depois de montar, decide pela hora.
+// `estado` fica aqui só pra recalcular quando ele muda.
 export function useCtaUrl(): string {
-  const aberto = usePacAberto();
-  return aberto ? getCtaUrl() : COMUNIDADE_URL;
+  const estado = useEstadoOferta();
+  const [montado, setMontado] = useState(false);
+  useEffect(() => setMontado(true), []);
+  return montado && estado ? getCtaUrl() : COMUNIDADE_URL;
 }
 
 type BuyProps = {

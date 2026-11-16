@@ -26,12 +26,15 @@ export function msAteAbertura(now: number = Date.now()): number {
   return Math.max(0, aberturaMs - now);
 }
 
-// Destino de todo botão de compra: Comunidade PAC antes da abertura, checkout
-// com o cupom da live durante a live e checkout normal depois dela.
+// Os botões de compra levam ao checkout com o cupom da live a partir de
+// CHECKOUT_DESDE (antecipado, a pedido da Catharine, pra antes da live) até
+// PROMO_FIM; antes disso, pra Comunidade PAC; depois, pro checkout sem cupom.
+export const CHECKOUT_DESDE = "2026-11-16T00:00:00-03:00";
+
 export function getCtaUrl(now: number = Date.now()): string {
-  const estado = getEstadoOferta(now);
-  if (estado === "antes") return COMUNIDADE_URL;
-  return estado === "live" ? CHECKOUT_LIVE_URL : CHECKOUT_URL;
+  if (now < Date.parse(CHECKOUT_DESDE)) return COMUNIDADE_URL;
+  if (now < Date.parse(PROMO_FIM)) return CHECKOUT_LIVE_URL;
+  return CHECKOUT_URL;
 }
 
 // ---------------------------------------------------------------------------
