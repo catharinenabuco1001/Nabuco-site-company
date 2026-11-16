@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import { Container } from "@/components/ui/Container";
 import { CTA } from "@/components/ui/CTA";
-import { pacSteps } from "@/components/PacBlock";
 import { siteConfig } from "@/data/site";
 import {
   pacOfferPrice,
@@ -19,11 +18,9 @@ import {
   pacGuarantee,
   pacFaq,
   pacParents,
-  pacCenas,
 } from "@/data/pac";
 import { PacBuyButton, PacNotice } from "@/components/PacLaunch";
 import { PacForWhom } from "@/components/PacForWhom";
-import { PacCenas } from "@/components/PacCenas";
 import {
   PacFaqDescontoResposta,
   PacMobileBarPreco,
@@ -34,6 +31,24 @@ import { publicImageExists, publicImageSize } from "@/lib/media";
 import { PROVAS, PROVAS_DIR, PROVAS_RODAPE, altProva, nomeProva } from "@/data/pac-provas";
 import { PacPrintsGrid, PacResultados } from "@/components/PacProvas";
 import { PAC_AVISO_ANTES } from "@/lib/pac-launch";
+
+// Foto abaixo de "O problema não é matemática. É a conta." Troque aqui.
+const FOTO_SECAO_CONTA = {
+  src: "/images/pac/dentro-do-pac.webp",
+  w: 1386,
+  h: 766,
+  alt: "Aula do Método PAC com Catharine Nabuco e um exercício de expressões numéricas",
+  legenda: "Uma aula do PAC por dentro.",
+};
+
+// Foto ao lado das abas "Será que o PAC é para mim?". Troque aqui.
+const FOTO_BASTIDORES = {
+  src: "/images/pac/bastidores.png",
+  w: 411,
+  h: 553,
+  alt: "Catharine Nabuco gravando uma aula, com o celular filmando em primeiro plano",
+  legenda: "Bastidores da gravação das aulas.",
+};
 
 const ogTitle = `Método PAC: ${PAC_AVISO_ANTES}`;
 const ogDescription = `${PAC_AVISO_ANTES}. Você entende a matéria, mas trava na conta? Recupere a base de matemática em mini-aulas de 10 minutos.`;
@@ -196,8 +211,8 @@ export default function PacPage() {
   const heroAula = publicImageExists("images/pac/aula-quadro.webp");
   const heroSrc = heroAula ? "/images/pac/aula-quadro.webp" : retratoSrc;
   const authorSrc = publicImageExists("images/sobre.jpg") ? "/images/sobre.jpg" : retratoSrc;
-  // "Cenas do PAC": só itens ativos cujo arquivo existe em public/images/pac/.
-  const cenas = pacCenas.filter((c) => c.ativo && publicImageExists(`images/pac/${c.file}`));
+  const fotoContaExiste = publicImageExists(FOTO_SECAO_CONTA.src.slice(1));
+  const fotoBastidores = publicImageExists(FOTO_BASTIDORES.src.slice(1)) ? FOTO_BASTIDORES : null;
   const prints = pacPrints.filter((p) => publicImageExists(`images/pac/prints/${p.file}`));
 
   // Provas sociais (src/data/pac-provas.ts): só autorizadas; item com arquivo
@@ -389,7 +404,7 @@ export default function PacPage() {
       </section>
 
       {/* ------------------------------------------------------------ SERÁ QUE É PRA MIM */}
-      <section id="sera-que-o-pac-e-para-mim" className="scroll-mt-24 py-20 sm:py-28 border-t border-ink-900/10">
+      <section id="sera-que-o-pac-e-para-mim" className="scroll-mt-24 py-20 sm:py-28 border-t border-ink-900/10 bg-cream-100/50">
         <Container>
           <div className="text-center max-w-2xl mx-auto">
             <h2 className="font-serif text-3xl sm:text-5xl text-ink-900 leading-tight text-balance">
@@ -397,12 +412,12 @@ export default function PacPage() {
             </h2>
             <p className="mt-4 pac-text mx-auto text-ink-900/65">Clique no seu caso e veja se é para você.</p>
           </div>
-          <PacForWhom />
+          <PacForWhom foto={fotoBastidores} />
         </Container>
       </section>
 
       {/* ------------------------------------------------------------ POR QUE */}
-      <section className="py-20 sm:py-28 border-t border-ink-900/10 bg-cream-100/50">
+      <section className="py-20 sm:py-28 border-t border-ink-900/10">
         <Container>
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-start">
             <div className="lg:col-span-5">
@@ -428,38 +443,25 @@ export default function PacPage() {
               </p>
             </div>
           </div>
-        </Container>
-      </section>
-
-      {/* ------------------------------------------------------------ MÉTODO */}
-      <section className="py-20 sm:py-28 border-t border-ink-900/10">
-        <Container>
-          <div className="text-center max-w-2xl mx-auto">
-            <Eyebrow>O método</Eyebrow>
-            <h2 className="font-serif text-3xl sm:text-5xl text-ink-900 leading-tight">
-              Pense <Destaque>Antes</Destaque> de Calcular.
-            </h2>
-            <p className="mt-4 pac-text mx-auto text-ink-900/65">
-              A aula te faz aprender. O PAC garante que o aprendizado se consolide.
-            </p>
-          </div>
-          <div className="mt-14 grid grid-cols-1 sm:grid-cols-3 gap-4">
-            {pacSteps.map((step) => (
-              <div
-                key={step.n}
-                className="relative overflow-hidden rounded-2xl border border-ink-900/10 bg-cream-50/50 p-8 sm:p-10"
-              >
-                <span className="absolute -right-3 -top-8 font-serif text-[9rem] leading-none text-gold-500/10 select-none">
-                  {step.n}
-                </span>
-                <span className="font-serif text-4xl text-gold-300">{step.n}</span>
-                <h3 className="mt-4 font-serif text-2xl text-ink-900">{step.title}</h3>
-                <p className="mt-3 pac-text text-ink-900/65">
-                  {step.desc}
-                </p>
+          {fotoContaExiste && (
+            <figure className="mx-auto mt-14 max-w-[720px]">
+              <div className="aspect-video overflow-hidden rounded-2xl border border-[#C9A24C]/60 bg-[#0F2E22]">
+                <Image
+                  src={FOTO_SECAO_CONTA.src}
+                  alt={FOTO_SECAO_CONTA.alt}
+                  width={FOTO_SECAO_CONTA.w}
+                  height={FOTO_SECAO_CONTA.h}
+                  quality={90}
+                  loading="lazy"
+                  sizes="(min-width: 768px) 720px, 100vw"
+                  className="h-full w-full object-contain"
+                />
               </div>
-            ))}
-          </div>
+              <figcaption className="mt-2 text-center text-sm text-[#F2F0EB]/70">
+                {FOTO_SECAO_CONTA.legenda}
+              </figcaption>
+            </figure>
+          )}
         </Container>
       </section>
 
@@ -510,11 +512,6 @@ export default function PacPage() {
               <PhoneMockup />
             </div>
           </div>
-          {cenas.length > 0 && (
-            <div className="mt-16 md:mx-auto md:max-w-4xl">
-              <PacCenas cenas={cenas} />
-            </div>
-          )}
         </Container>
       </section>
 
@@ -620,12 +617,7 @@ export default function PacPage() {
           {/* 2. Prints */}
           {printsGrid.length > 0 && (
             <div className="mt-16">
-              <h3 className="text-center text-xs font-semibold uppercase tracking-widest2 text-ink-900/65">
-                Mensagens reais, sem edição
-              </h3>
-              <div className="mt-8">
-                <PacPrintsGrid prints={printsGrid} />
-              </div>
+              <PacPrintsGrid prints={printsGrid} />
             </div>
           )}
 
@@ -754,7 +746,7 @@ export default function PacPage() {
       </section>
 
       {/* ------------------------------------------------------------ FAQ */}
-      <section className="py-20 sm:py-28 border-t border-ink-900/10">
+      <section className="py-20 sm:py-28 border-t border-ink-900/10 bg-cream-100/50">
         <Container>
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10">
             <div className="lg:col-span-4">
