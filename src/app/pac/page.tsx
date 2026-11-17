@@ -22,10 +22,8 @@ import {
 import { PacBuyButton, PacNotice } from "@/components/PacLaunch";
 import { PacForWhom } from "@/components/PacForWhom";
 import {
-  PacFaqDescontoResposta,
   PacMobileBarPreco,
   PacOfertaPreco,
-  PacPromoLinha,
 } from "@/components/PacOferta";
 import { publicImageExists, publicImageFiles, publicImageSize } from "@/lib/media";
 import {
@@ -780,7 +778,6 @@ export default function PacPage() {
               <li key={item.title} className="rounded-2xl border border-ink-900/10 bg-cream-50/60 p-6 sm:p-7">
                 <p className="font-serif text-xl text-ink-900 leading-snug">{item.title}</p>
                 <p className="mt-2 pac-text text-ink-900/65">{item.desc}</p>
-                {item.promo && <PacPromoLinha />}
               </li>
             ))}
           </ul>
@@ -825,11 +822,7 @@ export default function PacPage() {
                       +
                     </span>
                   </summary>
-                  {item.desconto ? (
-                    <PacFaqDescontoResposta className="pb-6 pr-12 pac-text text-ink-900/65" />
-                  ) : (
-                    <p className="pb-6 pr-12 pac-text text-ink-900/65">{item.a}</p>
-                  )}
+                  <p className="pb-6 pr-12 pac-text text-ink-900/65">{item.a}</p>
                 </details>
               ))}
             </div>

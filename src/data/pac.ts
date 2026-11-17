@@ -2,19 +2,13 @@
 // estatísticas vieram de um mockup de design aprovado pela Catharine — não
 // são inventados aqui, só centralizados para não ficar solto no JSX.
 
-import { HORA_FIM_TEXTO } from "@/lib/pac-launch";
-
 // Preço do PAC: MUDE SÓ AQUI. Vale pra /pac (oferta, barra do celular,
 // bloco dos pais, FAQ) e pro card em /produtos. Valores em CENTAVOS (inteiros),
-// pra não dar erro de arredondamento. A data da live (PROMO_FIM) fica em
-// src/lib/pac-launch.ts, junto com DATA_ABERTURA_PAC.
-export const PRECO_AVISTA = 34990; // R$ 349,90
-export const PRECO_LIVE = 29790; // R$ 297,90, só durante a live de abertura
+// pra não dar erro de arredondamento. O preço é fixo (não muda com a data).
+export const PRECO_AVISTA = 29790; // R$ 297,90
 export const PARCELAS = 12;
-export const VALOR_PARCELA = 3619; // R$ 36,19
-export const TOTAL_PARCELADO = PARCELAS * VALOR_PARCELA; // R$ 434,28
-// Cupom da live: string (ex.: "LIVE16") ou null pra não mostrar.
-export const CUPOM_LIVE: string | null = null;
+export const VALOR_PARCELA = 3019; // R$ 30,19 (12x com o cupom)
+export const TOTAL_PARCELADO = PARCELAS * VALOR_PARCELA; // R$ 362,28
 
 const brlFormat = new Intl.NumberFormat("pt-BR", { style: "currency", currency: "BRL" });
 // Formata centavos em reais: 29790 -> "R$ 297,90".
@@ -25,59 +19,45 @@ export const pacPricing = {
   accessMonths: 6,
 };
 
-// "12x de R$ 36,19".
+// "12x de R$ 30,19".
 export const pacPriceInstallments = `${PARCELAS}x de ${brl(VALOR_PARCELA)}`;
 // Usado no card de /produtos e no bloco dos pais.
 export const pacPriceCash = `ou ${brl(PRECO_AVISTA)} à vista`;
 
-// Textos da promoção da live de abertura.
-// Antes da live o preço da live NÃO aparece: ele só é mostrado a partir de
-// DATA_ABERTURA_PAC.
-export const pacPromo = {
-  faixaTitulo: "PROMOÇÃO ÚNICA NA LIVE DE ABERTURA.",
-  faixaTextoAntes: "Segunda, 16/11, às 20h. Só durante a live.",
-  faixaTextoLive: `Segunda, 16/11, às 20h: ${brl(PRECO_LIVE)} à vista. Só até ${HORA_FIM_TEXTO}.`,
-  comunidadeCta: "Entrar na comunidade e receber o link da live",
-  selo: "PREÇO DA LIVE",
-  ate: `Só até ${HORA_FIM_TEXTO}`,
-  cupom: (c: string) => `Use o cupom ${c}`,
-};
+// Botão secundário do bloco de preço antes da abertura das inscrições.
+export const pacComunidadeCta = "Entrar na comunidade e receber o link da live";
 
 // Bloco de preço do card da oferta em /pac.
 export const pacOfferPrice = {
   title: `Método PAC, ${pacPricing.cohort}`,
   cash: brl(PRECO_AVISTA),
-  cashLive: brl(PRECO_LIVE),
   installments: pacPriceInstallments,
   installmentsTotal: `(${brl(TOTAL_PARCELADO)} no total)`,
   access: `${pacPricing.accessMonths} meses de acesso a todas as aulas, listas e materiais`,
 };
 
-// Barra fixa do celular, por estado da oferta.
-export const pacMobileBar = {
-  antes: "Live 16/11, 20h: promoção única",
-  live: `Preço da live: ${brl(PRECO_LIVE)} à vista`,
-  depois: `${pacPriceInstallments} ou ${brl(PRECO_AVISTA)} à vista`,
-};
+// Barra fixa do celular.
+export const pacMobileBarPreco = `${brl(PRECO_AVISTA)} à vista ou ${pacPriceInstallments}`;
 
-// Barra de contagem do topo.
-export const pacTopBar = {
-  antesLinha2: "Na live de abertura: promoção única, só nela.",
-  live: `AO VIVO: preço da live ${brl(PRECO_LIVE)} à vista até ${HORA_FIM_TEXTO}`,
-  depois: "INSCRIÇÕES ABERTAS",
-};
+// Barra de contagem do topo, depois da abertura: com o desconto até
+// PROMO_FIM (src/lib/pac-launch.ts) e só "inscrições abertas" depois.
+export const pacTopBarAberto = "INSCRIÇÕES ABERTAS";
+export const pacTopBarDesconto = `INSCRIÇÕES ABERTAS: ${brl(PRECO_AVISTA)} À VISTA ATÉ QUINTA, 19/11`;
 
-// FAQ "Tem desconto?": a resposta muda por estado (antes sem o preço da live).
+// FAQ "Tem desconto?".
 export const pacFaqDesconto = {
   q: "Tem desconto?",
-  aAntes: `O PAC custa ${pacPriceInstallments} ou ${brl(PRECO_AVISTA)} à vista. Na live de abertura, dia 16/11 às 20h, tem uma condição única, só durante a live.`,
-  aLive: `O PAC custa ${pacPriceInstallments} ou ${brl(PRECO_AVISTA)} à vista. Na live de abertura, dia 16/11 às 20h, tem uma condição única: ${brl(PRECO_LIVE)} à vista, só até ${HORA_FIM_TEXTO}.`,
-  aDepois: `O PAC custa ${pacPriceInstallments} ou ${brl(PRECO_AVISTA)} à vista.`,
+  a: `O PAC custa ${brl(PRECO_AVISTA)} à vista ou ${pacPriceInstallments}.`,
+};
+
+// Aviso do módulo de logaritmo (some sozinho em LOG_FIM, src/lib/pac-launch.ts).
+export const pacAvisoLog = {
+  faixa: "Quem entrar até 23h59 de hoje tem o módulo de logaritmo garantido.",
+  curto: "Logaritmo garantido até 23h59",
 };
 
 // Bloco "Seu filho quer fazer o PAC?" (só com informações que já estão na página).
-// `promo: true` = mostra a linha da live embaixo (só antes/durante a live).
-export const pacParents: { title: string; desc: string; promo?: boolean }[] = [
+export const pacParents: { title: string; desc: string }[] = [
   {
     title: "O que ele vai fazer",
     desc: "Mini-aulas de ~10 minutos que reconstroem a base de matemática do zero, com listas de exercícios por módulo.",
@@ -89,7 +69,6 @@ export const pacParents: { title: string; desc: string; promo?: boolean }[] = [
   {
     title: pacPriceInstallments,
     desc: pacPriceCash,
-    promo: true,
   },
 ];
 
@@ -238,8 +217,7 @@ export const pacFaq: { q: string; a: string; desconto?: boolean }[] = [
     q: "Como recebo o acesso?",
     a: "O pagamento é pela Kiwify (Pix ou cartão). Assim que ele é aprovado, o acesso chega no seu e-mail.",
   },
-  // Resposta muda por estado da oferta (ver pacFaqDesconto).
-  { q: pacFaqDesconto.q, a: pacFaqDesconto.aAntes, desconto: true },
+  { q: pacFaqDesconto.q, a: pacFaqDesconto.a },
   {
     q: "E se eu não gostar?",
     a: "Você tem 7 dias de garantia. Se não fizer sentido para você, é só pedir o reembolso nesse prazo.",

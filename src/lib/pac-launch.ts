@@ -42,7 +42,7 @@ export function getCtaUrl(now: number = Date.now()): string {
 // de 16 pra 17/11). Não reinicia nem prorroga: depois de PROMO_FIM o estado é
 // sempre "depois".
 // ---------------------------------------------------------------------------
-export const PROMO_FIM = "2026-11-17T00:00:00-03:00";
+export const PROMO_FIM = "2026-11-20T00:00:00-03:00"; // fim de quinta, 19/11
 // Hora do fim em texto ("Só até meia-noite").
 export const HORA_FIM_TEXTO = (() => {
   const h = Number(
@@ -66,3 +66,7 @@ export function getEstadoOferta(agora: number = Date.now()): EstadoOferta {
   if (agora < promoFimMs) return "live";
   return "depois";
 }
+
+// Aviso "módulo de logaritmo garantido": aparece até este momento e some
+// sozinho depois (src/components/PacOferta.tsx, PacAvisoLog).
+export const LOG_FIM = "2026-11-17T00:00:00-03:00";
