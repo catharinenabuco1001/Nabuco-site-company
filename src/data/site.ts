@@ -53,6 +53,9 @@ export const siteConfig = {
     // Usado pelo CTA de aula particular em /produtos.
     whatsapp:
       "https://wa.me/5571996025791?text=Oi%2C%20Catharine!%20Vi%20seu%20site%20e%20quero%20saber%20mais%20sobre%20aula%20particular",
+    // Botão flutuante de WhatsApp (canto da tela, todas as páginas).
+    whatsappFlutuante:
+      "https://wa.me/5511927396656?text=Oi%2C%20Cathy!%20Vim%20pelo%20site.",
     // Usado pelo CTA "Levar Catharine para meu evento" em /palestras.
     whatsappPalestras:
       "https://wa.me/5571996025791?text=Oi%2C%20Catharine!%20Quero%20te%20convidar%20para%20uma%20palestra",
