@@ -26,15 +26,14 @@ export function msAteAbertura(now: number = Date.now()): number {
   return Math.max(0, aberturaMs - now);
 }
 
-// Os botões de compra levam ao checkout com o cupom da live a partir de
-// CHECKOUT_DESDE (antecipado, a pedido da Catharine, pra antes da live) até
-// PROMO_FIM; antes disso, pra Comunidade PAC; depois, pro checkout sem cupom.
-export const CHECKOUT_DESDE = "2026-11-16T00:00:00-03:00";
+// Inscrições abertas: os botões de compra levam ao checkout desde o primeiro
+// render. Com cupom (CHECKOUT_LIVE_URL) até PROMO_FIM; depois, sem cupom.
+// A Comunidade PAC só entra se não houver link de checkout.
+export const CTA_PADRAO = CHECKOUT_LIVE_URL || CHECKOUT_URL || COMUNIDADE_URL;
 
 export function getCtaUrl(now: number = Date.now()): string {
-  if (now < Date.parse(CHECKOUT_DESDE)) return COMUNIDADE_URL;
-  if (now < Date.parse(PROMO_FIM)) return CHECKOUT_LIVE_URL;
-  return CHECKOUT_URL;
+  if (now < Date.parse(PROMO_FIM)) return CTA_PADRAO;
+  return CHECKOUT_URL || COMUNIDADE_URL;
 }
 
 // ---------------------------------------------------------------------------

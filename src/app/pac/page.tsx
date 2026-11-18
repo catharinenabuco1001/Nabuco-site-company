@@ -36,7 +36,6 @@ import {
   nomeProva,
 } from "@/data/pac-provas";
 import { PacPrintsGrid, PacResultados } from "@/components/PacProvas";
-import { PAC_AVISO_ANTES } from "@/lib/pac-launch";
 
 // Foto abaixo de "O problema não é matemática. É a conta." Troque aqui.
 const FOTO_SECAO_CONTA = {
@@ -56,12 +55,12 @@ const FOTO_BASTIDORES = {
   legenda: "Bastidores da gravação das aulas.",
 };
 
-const ogTitle = `Método PAC: ${PAC_AVISO_ANTES}`;
-const ogDescription = `${PAC_AVISO_ANTES}. Você entende a matéria, mas trava na conta? Recupere a base de matemática em mini-aulas de 10 minutos.`;
+const ogTitle = "Método PAC: recupere a base de matemática em mini-aulas de 10 minutos";
+const ogDescription = "Você entende a matéria, mas trava na conta? Recupere a base de matemática em mini-aulas de 10 minutos.";
 
 export const metadata: Metadata = {
   title: ogTitle,
-  description: `${PAC_AVISO_ANTES}. Você entende a matéria, mas trava na conta? O PAC reconstrói a matemática básica em mini-aulas de 10 minutos, pra você calcular com segurança no ENEM e no vestibular.`,
+  description: "Você entende a matéria, mas trava na conta? O PAC reconstrói a matemática básica em mini-aulas de 10 minutos, pra você calcular com segurança no ENEM e no vestibular.",
   openGraph: {
     title: ogTitle,
     description: ogDescription,

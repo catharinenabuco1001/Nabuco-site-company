@@ -24,9 +24,6 @@ export const pacPriceInstallments = `${PARCELAS}x de ${brl(VALOR_PARCELA)}`;
 // Usado no card de /produtos e no bloco dos pais.
 export const pacPriceCash = `ou ${brl(PRECO_AVISTA)} à vista`;
 
-// Botão secundário do bloco de preço antes da abertura das inscrições.
-export const pacComunidadeCta = "Entrar na comunidade e receber o link da live";
-
 // Bloco de preço do card da oferta em /pac.
 export const pacOfferPrice = {
   title: `Método PAC, ${pacPricing.cohort}`,
@@ -39,10 +36,8 @@ export const pacOfferPrice = {
 // Barra fixa do celular.
 export const pacMobileBarPreco = `${brl(PRECO_AVISTA)} à vista ou ${pacPriceInstallments}`;
 
-// Barra de contagem do topo, depois da abertura: com o desconto até
-// PROMO_FIM (src/lib/pac-launch.ts) e só "inscrições abertas" depois.
-export const pacTopBarAberto = "INSCRIÇÕES ABERTAS";
-export const pacTopBarDesconto = `INSCRIÇÕES ABERTAS: ${brl(PRECO_AVISTA)} À VISTA ATÉ QUINTA, 19/11`;
+// Barra do topo (todas as páginas).
+export const pacTopBarAberto = "INSCRIÇÕES ABERTAS: entre no PAC agora";
 
 // FAQ "Tem desconto?".
 export const pacFaqDesconto = {
@@ -50,11 +45,6 @@ export const pacFaqDesconto = {
   a: `O PAC custa ${brl(PRECO_AVISTA)} à vista ou ${pacPriceInstallments}.`,
 };
 
-// Aviso do módulo de logaritmo (some sozinho em LOG_FIM, src/lib/pac-launch.ts).
-export const pacAvisoLog = {
-  faixa: "Quem entrar até 23h59 de hoje tem o módulo de logaritmo garantido.",
-  curto: "Logaritmo garantido até 23h59",
-};
 
 // Bloco "Seu filho quer fazer o PAC?" (só com informações que já estão na página).
 export const pacParents: { title: string; desc: string }[] = [

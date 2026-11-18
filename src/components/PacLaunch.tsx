@@ -2,42 +2,20 @@
 
 import { useEffect, useState } from "react";
 import { CTA } from "@/components/ui/CTA";
-import {
-  COMUNIDADE_URL,
-  PAC_AVISO_ANTES,
-  PAC_AVISO_DEPOIS,
-  getCtaUrl,
-  getEstadoOferta,
-  type EstadoOferta,
-} from "@/lib/pac-launch";
+import { CTA_PADRAO, PAC_AVISO_DEPOIS, getCtaUrl } from "@/lib/pac-launch";
 
-// As páginas são geradas no build, então a decisão "antes/depois da abertura"
-// é feita no navegador, depois de montar. O primeiro render é sempre o de
-// "antes" (Comunidade PAC), igual ao HTML do build: sem erro de hidratação.
-// Recalcula a cada 15s pra virar sozinho, sem recarregar a página.
-export function useEstadoOferta(): EstadoOferta {
-  const [estado, setEstado] = useState<EstadoOferta>("antes");
+// Destino dos botões de compra. Primeiro render (e HTML do build) = checkout
+// (CTA_PADRAO); depois de montar, recalcula pela hora a cada 15s (getCtaUrl
+// troca pro checkout sem cupom quando o desconto acaba).
+export function useCtaUrl(): string {
+  const [href, setHref] = useState<string>(CTA_PADRAO);
   useEffect(() => {
-    const update = () => setEstado(getEstadoOferta());
+    const update = () => setHref(getCtaUrl());
     update();
     const id = setInterval(update, 15_000);
     return () => clearInterval(id);
   }, []);
-  return estado;
-}
-
-export function usePacAberto(): boolean {
-  return useEstadoOferta() !== "antes";
-}
-
-// Destino dos botões de compra (regra em getCtaUrl). Primeiro render =
-// Comunidade PAC, igual ao HTML do build; depois de montar, decide pela hora.
-// `estado` fica aqui só pra recalcular quando ele muda.
-export function useCtaUrl(): string {
-  const estado = useEstadoOferta();
-  const [montado, setMontado] = useState(false);
-  useEffect(() => setMontado(true), []);
-  return montado && estado ? getCtaUrl() : COMUNIDADE_URL;
+  return href;
 }
 
 type BuyProps = {
@@ -46,7 +24,7 @@ type BuyProps = {
   className?: string;
 };
 
-// Botão de compra: Comunidade PAC antes da abertura, checkout depois.
+// Botão de compra: vai pro checkout.
 export function PacBuyButton({ children, variant = "primary", className }: BuyProps) {
   const href = useCtaUrl();
   return (
@@ -56,14 +34,12 @@ export function PacBuyButton({ children, variant = "primary", className }: BuyPr
   );
 }
 
-// Aviso único da turma: "Nova turma abre dia 16 de novembro, às 20h" antes da
-// abertura e "Inscrições abertas" depois. Com `badge`, vira a pílula do topo.
+// Aviso da turma: "Inscrições abertas". Com `badge`, vira a pílula do topo.
 export function PacNotice({ className, badge = false }: { className?: string; badge?: boolean }) {
-  const aberto = usePacAberto();
   return (
     <span className={className}>
       {badge && <span className="h-1.5 w-1.5 rounded-full bg-gold-500 animate-pulse" />}
-      {aberto ? PAC_AVISO_DEPOIS : PAC_AVISO_ANTES}
+      {PAC_AVISO_DEPOIS}
     </span>
   );
 }
