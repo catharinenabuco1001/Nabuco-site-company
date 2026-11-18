@@ -21,6 +21,7 @@ import {
 } from "@/data/pac";
 import { PacBuyButton, PacNotice } from "@/components/PacLaunch";
 import { PacForWhom } from "@/components/PacForWhom";
+import { PacSecao } from "@/components/PacSecao";
 import {
   PacMobileBarPreco,
   PacOfertaPreco,
@@ -282,7 +283,7 @@ export default function PacPage() {
   return (
     <>
       {/* ------------------------------------------------------------ HERO */}
-      <section className="relative overflow-hidden pt-10 sm:pt-14 pb-16 sm:pb-24">
+      <PacSecao tema="branco" className="relative overflow-hidden pt-10 sm:pt-14 pb-16 sm:pb-24">
         <div
           aria-hidden
           className="pointer-events-none absolute -top-40 right-[-10%] h-[620px] w-[620px] rounded-full opacity-30 blur-3xl"
@@ -351,33 +352,33 @@ export default function PacPage() {
                 {/* Cartões: no desktop por cima das bordas da foto (longe do
                     rosto e das mãos), com fundo sólido; no celular, abaixo dela. */}
                 <div className="mt-4 flex flex-wrap gap-3 lg:mt-0 lg:block">
-                  <div className="rounded-2xl border border-[#C9A24C]/70 bg-[#0F2E22]/[0.92] px-4 py-3 shadow-xl shadow-black/30 lg:absolute lg:-left-10 lg:top-6">
-                    <p className="text-[10px] uppercase tracking-widest2 text-[#C9A24C] font-semibold">
+                  <div className="rounded-2xl border border-[var(--dourado)] bg-white px-4 py-3 shadow-lg shadow-black/10 lg:absolute lg:-left-10 lg:top-6">
+                    <p className="text-[10px] uppercase tracking-widest2 text-[var(--dourado-texto)] font-semibold">
                       Produto notável
                     </p>
-                    <p className="mt-1 font-serif text-base sm:text-lg text-[#F2F0EB] whitespace-nowrap">
-                      (a + b)² = a² + <span className="text-[#C9A24C]">2ab</span> + b²
+                    <p className="mt-1 font-serif text-base sm:text-lg text-[var(--verde)] whitespace-nowrap">
+                      (a + b)² = a² + <span className="text-[var(--dourado-texto)]">2ab</span> + b²
                     </p>
                   </div>
 
-                  <div className="rounded-2xl border border-[#C9A24C]/70 bg-[#0F2E22]/[0.92] px-5 py-4 text-[#F2F0EB] shadow-xl shadow-black/40 lg:absolute lg:-right-8 lg:-bottom-6">
-                    <p className="text-[10px] uppercase tracking-widest2 font-semibold text-[#C9A24C]">
+                  <div className="rounded-2xl border border-[var(--dourado)] bg-white px-5 py-4 text-[var(--verde)] shadow-lg shadow-black/10 lg:absolute lg:-right-8 lg:-bottom-6">
+                    <p className="text-[10px] uppercase tracking-widest2 font-semibold text-[var(--dourado-texto)]">
                       Em 1 mês de PAC
                     </p>
                     <p className="mt-1 font-serif text-3xl leading-none">
-                      5 <span className="text-[#C9A24C]">→</span> 8
+                      5 <span className="text-[var(--dourado-texto)]">→</span> 8
                     </p>
-                    <p className="mt-1 text-[11px] text-[#F2F0EB]/70">nota de uma aluna</p>
+                    <p className="mt-1 text-[11px] text-[rgba(15,46,34,0.75)]">nota de uma aluna</p>
                   </div>
                 </div>
               </div>
             </div>
           </div>
         </Container>
-      </section>
+      </PacSecao>
 
       {/* ------------------------------------------------------------ STATS */}
-      <section className="border-y border-ink-900/10 tema-claro">
+      <PacSecao tema="branco" anterior="branco" className="border-y border-ink-900/10">
         <Container>
           <div className="grid grid-cols-2 lg:grid-cols-4 divide-x divide-ink-900/10">
             {[
@@ -396,11 +397,11 @@ export default function PacPage() {
             ))}
           </div>
         </Container>
-      </section>
+      </PacSecao>
 
       {/* ------------------------------------------------------------ PROVAS (BLOCO A) */}
       {provaCards.length > 0 && (
-        <section className="py-16 sm:py-20 bg-cream">
+        <PacSecao tema="creme" anterior="branco" className="py-16 sm:py-20">
           <Container>
             <h2 className="text-center font-serif text-3xl sm:text-5xl text-ink-900 leading-tight text-balance">
               Não sou eu que tô dizendo. <Destaque>São eles.</Destaque>
@@ -409,11 +410,11 @@ export default function PacPage() {
               <PacResultados cards={provaCards} />
             </div>
           </Container>
-        </section>
+        </PacSecao>
       )}
 
       {/* ------------------------------------------------------------ ERROS */}
-      <section className="py-20 sm:py-28 border-t border-ink-900/10 tema-claro">
+      <PacSecao tema="branco" anterior="creme" className="py-20 sm:py-28 border-t border-ink-900/10">
         <Container>
           <div className="max-w-2xl">
             <Eyebrow>Seja honesto</Eyebrow>
@@ -454,10 +455,10 @@ export default function PacPage() {
             ))}
           </div>
         </Container>
-      </section>
+      </PacSecao>
 
       {/* ------------------------------------------------------------ SERÁ QUE É PRA MIM */}
-      <section id="sera-que-o-pac-e-para-mim" className="scroll-mt-24 py-20 sm:py-28 border-t border-ink-900/10 bg-cream">
+      <PacSecao tema="verde" anterior="branco" id="sera-que-o-pac-e-para-mim" className="scroll-mt-24 pb-20 sm:pb-28">
         <Container>
           <div className="text-center max-w-2xl mx-auto">
             <h2 className="font-serif text-3xl sm:text-5xl text-ink-900 leading-tight text-balance">
@@ -467,10 +468,10 @@ export default function PacPage() {
           </div>
           <PacForWhom foto={fotoBastidores} />
         </Container>
-      </section>
+      </PacSecao>
 
       {/* ------------------------------------------------------------ POR QUE */}
-      <section className="py-20 sm:py-28 border-t border-ink-900/10 tema-claro">
+      <PacSecao tema="branco" anterior="verde" className="pb-20 sm:pb-28">
         <Container>
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-start">
             <div className="lg:col-span-5">
@@ -516,12 +517,14 @@ export default function PacPage() {
             </figure>
           )}
         </Container>
-      </section>
+      </PacSecao>
 
       {/* ------------------------------------------------------------ POR DENTRO */}
-      <section
+      <PacSecao
+        tema="creme"
+        anterior="branco"
         id="por-dentro-do-pac"
-        className="scroll-mt-24 py-20 sm:py-28 border-t border-ink-900/10 bg-cream"
+        className="scroll-mt-24 py-20 sm:py-28 border-t border-ink-900/10"
       >
         <Container>
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-14 lg:gap-16 items-center">
@@ -568,10 +571,10 @@ export default function PacPage() {
             </div>
           </div>
         </Container>
-      </section>
+      </PacSecao>
 
       {/* ------------------------------------------------------------ PRA QUEM É */}
-      <section className="py-20 sm:py-28 border-t border-ink-900/10 tema-claro">
+      <PacSecao tema="branco" anterior="creme" className="py-20 sm:py-28 border-t border-ink-900/10">
         <Container>
           <div className="text-center max-w-2xl mx-auto">
             <Eyebrow>Pra quem é</Eyebrow>
@@ -608,10 +611,10 @@ export default function PacPage() {
             </div>
           </div>
         </Container>
-      </section>
+      </PacSecao>
 
       {/* ------------------------------------------------------------ AUTORA */}
-      <section className="py-20 sm:py-28 border-t border-ink-900/10 bg-cream">
+      <PacSecao tema="verde" anterior="branco" className="pb-20 sm:pb-28">
         <Container>
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
             <div className="lg:col-span-5">
@@ -646,10 +649,10 @@ export default function PacPage() {
             </div>
           </div>
         </Container>
-      </section>
+      </PacSecao>
 
       {/* ------------------------------------------------------------ DEPOIMENTOS (BLOCO B) */}
-      <section id="depoimentos" className="py-20 sm:py-28 border-t border-ink-900/10 tema-claro">
+      <PacSecao tema="creme" anterior="verde" id="depoimentos" className="pb-20 sm:pb-28">
         <Container>
           <div className="text-center max-w-2xl mx-auto">
             <Eyebrow>Quem já está no PAC</Eyebrow>
@@ -709,10 +712,10 @@ export default function PacPage() {
 
           <p className="mt-12 text-center text-xs text-ink-900/60">{PROVAS_RODAPE}</p>
         </Container>
-      </section>
+      </PacSecao>
 
       {/* ------------------------------------------------------------ OFERTA */}
-      <section id="oferta" className="scroll-mt-24 py-20 sm:py-28 border-t border-ink-900/10 bg-cream">
+      <PacSecao tema="verde" anterior="creme" id="oferta" className="scroll-mt-24 pb-20 sm:pb-28">
         <Container>
           <div className="text-center max-w-2xl mx-auto">
             <Eyebrow>Sua vaga</Eyebrow>
@@ -761,10 +764,10 @@ export default function PacPage() {
             <p className="pac-text text-ink-900/75">{pacGuarantee}</p>
           </div>
         </Container>
-      </section>
+      </PacSecao>
 
       {/* ------------------------------------------------------------ PAIS */}
-      <section id="pais" className="scroll-mt-24 py-20 sm:py-28 border-t border-ink-900/10 tema-claro">
+      <PacSecao tema="branco" anterior="verde" id="pais" className="scroll-mt-24 pb-20 sm:pb-28">
         <Container>
           <div className="text-center max-w-2xl mx-auto">
             <Eyebrow>Para pais e responsáveis</Eyebrow>
@@ -786,10 +789,10 @@ export default function PacPage() {
             </PacBuyButton>
           </div>
         </Container>
-      </section>
+      </PacSecao>
 
       {/* ------------------------------------------------------------ FAQ */}
-      <section className="py-20 sm:py-28 border-t border-ink-900/10 bg-cream">
+      <PacSecao tema="creme" anterior="branco" className="py-20 sm:py-28 border-t border-ink-900/10">
         <Container>
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10">
             <div className="lg:col-span-4">
@@ -827,10 +830,10 @@ export default function PacPage() {
             </div>
           </div>
         </Container>
-      </section>
+      </PacSecao>
 
       {/* ------------------------------------------------------------ CTA FINAL */}
-      <section className="pb-28 lg:pb-24 pt-16 sm:pt-20 tema-claro">
+      <PacSecao tema="verde" anterior="creme" className="pb-28 lg:pb-24">
         <Container>
           <div className="tema-escuro relative overflow-hidden rounded-[2rem] border border-gold-500/30 bg-cream-50 px-8 py-16 sm:px-16 sm:py-20 text-center">
             <div
@@ -865,11 +868,11 @@ export default function PacPage() {
                   Entrar no PAC agora
                 </PacBuyButton>
               </div>
-              <p className="mt-4 text-xs text-ink-900/50">Garantia de 7 dias · acesso imediato</p>
+              <p className="mt-4 text-xs text-ink-900/75">Garantia de 7 dias · acesso imediato</p>
             </div>
           </div>
         </Container>
-      </section>
+      </PacSecao>
 
       {/* ------------------------------------------------------------ BARRA FIXA MOBILE */}
       <div className="fixed inset-x-0 bottom-0 z-40 border-t border-ink-900/10 bg-cream/95 backdrop-blur-md lg:hidden">
