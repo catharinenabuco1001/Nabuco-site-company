@@ -241,3 +241,19 @@ input:focus-visible,
     animation: none;
   }
 }
+
+/* Tokens do tema branco/verde do /pac (src/components/PacSecao.tsx). */
+:root {
+  --branco: #ffffff;
+  --creme: #f7f4ec;
+  --verde: #0f2e22;
+  --offwhite: #f2f0eb;
+  --dourado: #c9a24c;
+  --dourado-texto: #8a6a1f;
+}
+
+/* Texto corrido do /pac nas seções claras: #2B3A33. */
+.tema-claro .pac-text,
+.tema-creme .pac-text {
+  color: #2b3a33;
+}

@@ -81,7 +81,7 @@ export function PacResultados({
           return (
             <li
               key={i}
-              className="flex w-[82%] shrink-0 snap-start flex-col self-start rounded-2xl border border-[#C9A24C]/40 bg-cream-50/60 p-5 md:w-auto"
+              className="flex w-[82%] shrink-0 snap-start flex-col self-start rounded-2xl border border-[#C9A24C]/60 bg-cream-50 p-5 md:w-auto"
             >
               <div className="flex items-center gap-3">
                 <Avatar nome={c.nome} semNome={c.semNome} />

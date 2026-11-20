@@ -29,6 +29,8 @@ export function Header() {
     <header
       className={cn(
         "sticky top-0 z-40 w-full transition-all duration-300",
+        // No /pac o cabeçalho é branco (tema branco/verde da página).
+        pathname === "/pac" && "tema-claro",
         scrolled
           ? "bg-cream/90 backdrop-blur-md border-b border-ink-900/10"
           : "bg-transparent border-b border-transparent"
