@@ -2,20 +2,39 @@
 
 import { useEffect, useState } from "react";
 import { CTA } from "@/components/ui/CTA";
-import { CTA_PADRAO, PAC_AVISO_DEPOIS, getCtaUrl } from "@/lib/pac-launch";
+import {
+  CHECKOUT_URL,
+  COMUNIDADE_URL,
+  CTA_PADRAO,
+  ESTADO_INICIAL,
+  PAC_AVISO_DEPOIS,
+  estadoPromo,
+  msAtePromoFim,
+} from "@/lib/pac-launch";
+import type { EstadoPromo } from "@/data/pac";
 
-// Destino dos botões de compra. Primeiro render (e HTML do build) = checkout
-// (CTA_PADRAO); depois de montar, recalcula pela hora a cada 15s (getCtaUrl
-// troca pro checkout sem cupom quando o desconto acaba).
-export function useCtaUrl(): string {
-  const [href, setHref] = useState<string>(CTA_PADRAO);
+// Estado da promoção ("promo" | "cheio") e quanto falta pro fim. O primeiro
+// render usa o estado do build (igual ao HTML); depois de montar, reavalia a
+// cada segundo. `ms` é null até montar (a contagem mostra "--:--:--").
+export function usePromo(): { estado: EstadoPromo; ms: number | null } {
+  const [agora, setAgora] = useState<{ estado: EstadoPromo; ms: number | null }>({
+    estado: ESTADO_INICIAL,
+    ms: null,
+  });
   useEffect(() => {
-    const update = () => setHref(getCtaUrl());
+    const update = () => setAgora({ estado: estadoPromo(), ms: msAtePromoFim() });
     update();
-    const id = setInterval(update, 15_000);
+    const id = setInterval(update, 1000);
     return () => clearInterval(id);
   }, []);
-  return href;
+  return agora;
+}
+
+// Destino dos botões de compra: checkout com cupom na promoção, checkout
+// normal depois. A Comunidade PAC só entra se faltar link de checkout.
+export function useCtaUrl(): string {
+  const { estado } = usePromo();
+  return estado === "promo" ? CTA_PADRAO : CHECKOUT_URL || COMUNIDADE_URL;
 }
 
 type BuyProps = {

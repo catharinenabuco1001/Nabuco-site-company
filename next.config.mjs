@@ -1,6 +1,9 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
+  // Momento do build, igual no servidor e no navegador: decide o estado
+  // inicial da promoção (src/lib/pac-launch.ts) sem erro de hidratação.
+  env: { PAC_BUILD_TIME: String(Date.now()) },
   // Teste "Raio X da Sua Base": página pronta em public/raio-x.html,
   // servida em /raio-x.
   async rewrites() {

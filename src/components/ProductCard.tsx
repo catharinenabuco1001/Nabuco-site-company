@@ -5,7 +5,7 @@ import { CTA } from "@/components/ui/CTA";
 import { formatPrice } from "@/lib/utils";
 import { publicImageExists } from "@/lib/media";
 import { PacNotice } from "@/components/PacLaunch";
-import { pacPriceInstallments, pacPriceCash } from "@/data/pac";
+import { PacTextoPreco } from "@/components/PacOferta";
 
 export function ProductCard({ product }: { product: Product }) {
   const isExternal = product.ctaUrl.startsWith("http");
@@ -44,11 +44,13 @@ export function ProductCard({ product }: { product: Product }) {
 
       <div className="mt-6 flex items-center justify-between">
         <span className="text-sm font-sans font-semibold text-ink-900">
-          {product.id === "pac" ? pacPriceInstallments : formatPrice(product.price)}
+          {product.id === "pac" ? <PacTextoPreco tipo="parcelado" /> : formatPrice(product.price)}
         </span>
       </div>
       {product.id === "pac" && (
-        <p className="mt-1 text-xs text-ink-900/60">{pacPriceCash}</p>
+        <p className="mt-1 text-xs text-ink-900/60">
+          <PacTextoPreco tipo="ouAvista" />
+        </p>
       )}
       {product.id === "pac" && (
         <PacNotice className="mt-2 block text-xs text-plum-500" />

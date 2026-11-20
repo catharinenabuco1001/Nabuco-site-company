@@ -2,13 +2,14 @@
 // estatísticas vieram de um mockup de design aprovado pela Catharine — não
 // são inventados aqui, só centralizados para não ficar solto no JSX.
 
-// Preço do PAC: MUDE SÓ AQUI. Vale pra /pac (oferta, barra do celular,
-// bloco dos pais, FAQ) e pro card em /produtos. Valores em CENTAVOS (inteiros),
-// pra não dar erro de arredondamento. O preço é fixo (não muda com a data).
-export const PRECO_AVISTA = 29790; // R$ 297,90
+// Preço do PAC: MUDE SÓ AQUI. Valores em CENTAVOS (inteiros), pra não dar
+// erro de arredondamento. Dois estados (src/lib/pac-launch.ts):
+//   "promo" = até PROMO_FIM (23h59 de quinta, 19/11) | "cheio" = depois.
+export const PRECO_PROMO = 29790; // R$ 297,90
+export const PARCELA_PROMO = 3019; // R$ 30,19
+export const PRECO_CHEIO = 34990; // R$ 349,90
+export const PARCELA_CHEIA = 3619; // R$ 36,19
 export const PARCELAS = 12;
-export const VALOR_PARCELA = 3019; // R$ 30,19 (12x com o cupom)
-export const TOTAL_PARCELADO = PARCELAS * VALOR_PARCELA; // R$ 362,28
 
 const brlFormat = new Intl.NumberFormat("pt-BR", { style: "currency", currency: "BRL" });
 // Formata centavos em reais: 29790 -> "R$ 297,90".
@@ -19,35 +20,48 @@ export const pacPricing = {
   accessMonths: 6,
 };
 
-// "12x de R$ 30,19".
-export const pacPriceInstallments = `${PARCELAS}x de ${brl(VALOR_PARCELA)}`;
-// Usado no card de /produtos e no bloco dos pais.
-export const pacPriceCash = `ou ${brl(PRECO_AVISTA)} à vista`;
+export type EstadoPromo = "promo" | "cheio";
 
-// Bloco de preço do card da oferta em /pac.
+// Todos os textos de preço, por estado.
+export function textosPreco(estado: EstadoPromo) {
+  const promo = estado === "promo";
+  const avista = promo ? PRECO_PROMO : PRECO_CHEIO;
+  const parcela = promo ? PARCELA_PROMO : PARCELA_CHEIA;
+  const parcelado = `${PARCELAS}x de ${brl(parcela)}`;
+  return {
+    avista: brl(avista),
+    riscado: promo ? brl(PRECO_CHEIO) : null,
+    parcelado,
+    total: `(${brl(PARCELAS * parcela)} no total)`,
+    curto: `${brl(avista)} à vista ou ${parcelado}`,
+    ouAvista: `ou ${brl(avista)} à vista`,
+    faq: promo
+      ? `Até 23h59 de hoje o PAC custa ${brl(PRECO_PROMO)} à vista ou ${PARCELAS}x de ${brl(PARCELA_PROMO)}. A partir de amanhã, ${brl(PRECO_CHEIO)} à vista ou ${PARCELAS}x de ${brl(PARCELA_CHEIA)}.`
+      : `O PAC custa ${brl(PRECO_CHEIO)} à vista ou ${PARCELAS}x de ${brl(PARCELA_CHEIA)}.`,
+  };
+}
+
+// Bloco de preço do card da oferta em /pac (partes que não mudam).
 export const pacOfferPrice = {
   title: `Método PAC, ${pacPricing.cohort}`,
-  cash: brl(PRECO_AVISTA),
-  installments: pacPriceInstallments,
-  installmentsTotal: `(${brl(TOTAL_PARCELADO)} no total)`,
   access: `${pacPricing.accessMonths} meses de acesso a todas as aulas, listas e materiais`,
+  chip: "ACABA HOJE · 23H59",
 };
-
-// Barra fixa do celular.
-export const pacMobileBarPreco = `${brl(PRECO_AVISTA)} à vista ou ${pacPriceInstallments}`;
 
 // Barra do topo (todas as páginas).
-export const pacTopBarAberto = "INSCRIÇÕES ABERTAS: entre no PAC agora";
-
-// FAQ "Tem desconto?".
-export const pacFaqDesconto = {
-  q: "Tem desconto?",
-  a: `O PAC custa ${brl(PRECO_AVISTA)} à vista ou ${pacPriceInstallments}.`,
+export const pacTopBar = {
+  promo: "🔥 ÚLTIMAS HORAS: PREÇO ESPECIAL ATÉ 23H59 DE HOJE",
+  cheio: "✅ INSCRIÇÕES ABERTAS",
 };
+
+// FAQ "Tem desconto?" (a resposta vem de textosPreco(estado).faq).
+export const pacFaqDescontoQ = "Tem desconto?";
+
 
 
 // Bloco "Seu filho quer fazer o PAC?" (só com informações que já estão na página).
-export const pacParents: { title: string; desc: string }[] = [
+// `preco: true` = título e texto vêm do preço do momento (promo ou cheio).
+export const pacParents: { title: string; desc: string; preco?: boolean }[] = [
   {
     title: "O que ele vai fazer",
     desc: "Mini-aulas de ~10 minutos que reconstroem a base de matemática do zero, com listas de exercícios por módulo.",
@@ -57,8 +71,9 @@ export const pacParents: { title: string; desc: string }[] = [
     desc: "Se não for pra ele, é só pedir o reembolso dentro do prazo e você recebe 100% de volta.",
   },
   {
-    title: pacPriceInstallments,
-    desc: pacPriceCash,
+    title: "",
+    desc: "",
+    preco: true,
   },
 ];
 
@@ -178,7 +193,7 @@ export const pacIncludes = [
 export const pacGuarantee =
   "Garantia de 7 dias. Se entrar e sentir que não é pra você, é só pedir o reembolso dentro do prazo e você recebe 100% de volta.";
 
-export const pacFaq: { q: string; a: string; desconto?: boolean }[] = [
+export const pacFaq: { q: string; a: string; preco?: boolean }[] = [
   {
     q: "Pra quem é o PAC?",
     a: "Pra quem está no ensino médio, no cursinho ou se preparando pro ENEM e vestibulares. E também pra universitário que ainda sente buraco na base (costuma aparecer em trigonometria e geometria analítica).",
@@ -207,7 +222,8 @@ export const pacFaq: { q: string; a: string; desconto?: boolean }[] = [
     q: "Como recebo o acesso?",
     a: "O pagamento é pela Kiwify (Pix ou cartão). Assim que ele é aprovado, o acesso chega no seu e-mail.",
   },
-  { q: pacFaqDesconto.q, a: pacFaqDesconto.a },
+  // Resposta muda com o preço do momento (textosPreco).
+  { q: pacFaqDescontoQ, a: "", preco: true },
   {
     q: "E se eu não gostar?",
     a: "Você tem 7 dias de garantia. Se não fizer sentido para você, é só pedir o reembolso nesse prazo.",

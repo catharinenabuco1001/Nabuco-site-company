@@ -1,4 +1,5 @@
 import { siteConfig } from "@/data/site";
+import type { EstadoPromo } from "@/data/pac";
 
 // ---------------------------------------------------------------------------
 // Abertura da turma do PAC: MUDE SÓ AQUI. Esta data controla tudo: a barra de
@@ -69,3 +70,33 @@ export function getEstadoOferta(agora: number = Date.now()): EstadoOferta {
 // Aviso "módulo de logaritmo garantido": aparece até este momento e some
 // sozinho depois (src/components/PacOferta.tsx, PacAvisoLog).
 export const LOG_FIM = "2026-11-17T00:00:00-03:00";
+
+// ---------------------------------------------------------------------------
+// Preço promocional até PROMO_FIM; depois, preço cheio (sozinho, sem
+// prorrogar). Estado inicial = o do momento do build (PAC_BUILD_TIME, igual no
+// servidor e no navegador); no navegador, reavalia a cada segundo.
+// ---------------------------------------------------------------------------
+export function estadoPromo(now: number = Date.now()): EstadoPromo {
+  return now < promoFimMs ? "promo" : "cheio";
+}
+
+export function msAtePromoFim(now: number = Date.now()): number {
+  return Math.max(0, promoFimMs - now);
+}
+
+export const ESTADO_INICIAL: EstadoPromo = estadoPromo(
+  Number(process.env.PAC_BUILD_TIME) || Date.now()
+);
+
+// "HH:MM:SS" (com "Xd " na frente só se faltar mais de um dia).
+export function formatarRestante(ms: number): string {
+  const s = Math.floor(ms / 1000);
+  const d = Math.floor(s / 86400);
+  const hms = [Math.floor((s % 86400) / 3600), Math.floor((s % 3600) / 60), s % 60]
+    .map((n) => String(n).padStart(2, "0"))
+    .join(":");
+  return d > 0 ? `${d}d ${hms}` : hms;
+}
+
+// Destino da bola flutuante da promoção (fácil de trocar).
+export const BOLA_DESTINO = CHECKOUT_LIVE_URL || CHECKOUT_URL;

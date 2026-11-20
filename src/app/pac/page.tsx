@@ -23,6 +23,7 @@ import { PacBuyButton, PacNotice } from "@/components/PacLaunch";
 import { PacForWhom } from "@/components/PacForWhom";
 import {
   PacMobileBarPreco,
+  PacTextoPreco,
   PacOfertaPreco,
 } from "@/components/PacOferta";
 import { publicImageExists, publicImageFiles, publicImageSize } from "@/lib/media";
@@ -774,9 +775,13 @@ export default function PacPage() {
           </div>
           <ul className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-4 max-w-5xl mx-auto">
             {pacParents.map((item) => (
-              <li key={item.title} className="rounded-2xl border border-ink-900/10 bg-cream-50/60 p-6 sm:p-7">
-                <p className="font-serif text-xl text-ink-900 leading-snug">{item.title}</p>
-                <p className="mt-2 pac-text text-ink-900/65">{item.desc}</p>
+              <li key={item.title || "preco"} className="rounded-2xl border border-ink-900/10 bg-cream-50/60 p-6 sm:p-7">
+                <p className="font-serif text-xl text-ink-900 leading-snug">
+                  {item.preco ? <PacTextoPreco tipo="parcelado" /> : item.title}
+                </p>
+                <p className="mt-2 pac-text text-ink-900/65">
+                  {item.preco ? <PacTextoPreco tipo="ouAvista" /> : item.desc}
+                </p>
               </li>
             ))}
           </ul>
@@ -821,7 +826,9 @@ export default function PacPage() {
                       +
                     </span>
                   </summary>
-                  <p className="pb-6 pr-12 pac-text text-ink-900/65">{item.a}</p>
+                  <p className="pb-6 pr-12 pac-text text-ink-900/65">
+                    {item.preco ? <PacTextoPreco tipo="faq" /> : item.a}
+                  </p>
                 </details>
               ))}
             </div>
