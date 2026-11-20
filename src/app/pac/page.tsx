@@ -302,7 +302,7 @@ export default function PacPage() {
                 Você entende a matéria.{" "}
                 <Destaque>Trava na conta.</Destaque>
               </h1>
-              <p className="mt-4 font-serif text-xl sm:text-2xl text-ink-900/80">
+              <p className="mt-4 font-serif text-xl sm:text-2xl text-[var(--verde)]">
                 Trava no enunciado? É aqui que o PAC começa.
               </p>
               <p className="mt-6 pac-text text-ink-700/80">

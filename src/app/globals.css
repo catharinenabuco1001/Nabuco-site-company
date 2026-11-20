@@ -240,6 +240,8 @@ input:focus-visible,
   .pac-bola-anel {
     animation: none;
   }
+}
+
 /* Tokens do tema branco/verde do /pac (src/components/PacSecao.tsx). */
 :root {
   --branco: #ffffff;
