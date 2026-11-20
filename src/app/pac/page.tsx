@@ -21,6 +21,7 @@ import {
 } from "@/data/pac";
 import { PacBuyButton, PacNotice } from "@/components/PacLaunch";
 import { PacForWhom } from "@/components/PacForWhom";
+import { PacPromoBanner, PacPromoBola } from "@/components/PacPromo";
 import {
   PacMobileBarPreco,
   PacTextoPreco,
@@ -377,6 +378,8 @@ export default function PacPage() {
         </Container>
       </section>
 
+      <PacPromoBanner />
+
       {/* ------------------------------------------------------------ STATS */}
       <section className="border-y border-ink-900/10 tema-claro">
         <Container>
@@ -722,6 +725,9 @@ export default function PacPage() {
             </h2>
           </div>
 
+          <div className="mt-12">
+            <PacPromoBanner variant="compacto" />
+          </div>
           <div className="mt-12 mx-auto max-w-xl rounded-[2rem] bg-ink-900 text-cream p-8 sm:p-12 shadow-2xl shadow-black/40">
             <div className="flex items-center justify-between gap-4">
               <p className="font-serif text-2xl">{pacOfferPrice.title}</p>
@@ -877,6 +883,8 @@ export default function PacPage() {
           </div>
         </Container>
       </section>
+
+      <PacPromoBola />
 
       {/* ------------------------------------------------------------ BARRA FIXA MOBILE */}
       <div className="fixed inset-x-0 bottom-0 z-40 border-t border-ink-900/10 bg-cream/95 backdrop-blur-md lg:hidden">
